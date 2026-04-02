@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>April 2, 2026 – English Exercises</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      min-height: 100vh;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      max-width: 750px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.9rem;
+      color: #718096;
+    }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .page-header {
+      max-width: 750px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+
+    /* ── Sections ── */
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .section-num {
+      background: #2b6cb0;
+      color: white;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+
+    /* ── Rule box ── */
+    .rule-box {
+      background: #ebf8ff;
+      border-left: 4px solid #3182ce;
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+      color: #2c5282;
+    }
+    .rule-box strong { color: #2b6cb0; }
+
+    /* ── Question cards (fill-blank) ── */
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+
+    .question-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.1rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .question-text {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+    .blank {
+      display: inline-block;
+      border-bottom: 2px solid #3182ce;
+      min-width: 70px;
+      color: transparent;
+      user-select: none;
+    }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+
+    .option-btn {
+      padding: 0.4rem 1rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 20px;
+      background: white;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #2d3748;
+    }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+
+    /* ── Feedback ── */
+    .feedback {
+      margin-top: 0.7rem;
+      font-size: 0.88rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      display: none;
+      line-height: 1.5;
+    }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+
+    /* ── Section actions ── */
+    .section-actions {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-check, .btn-reset {
+      padding: 0.6rem 1.8rem;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 22px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+
+    /* ── Pronunciation highlights ── */
+    .hl-ed {
+      background: #fefcbf; color: #744210;
+      border-radius: 3px; padding: 0 3px;
+      font-weight: 600; text-decoration: none;
+    }
+    .hl-word {
+      background: #bee3f8; color: #2a4365;
+      border-radius: 3px; padding: 0 3px;
+      font-weight: 600; text-decoration: none;
+    }
+    .hl-ed:hover, .hl-word:hover { text-decoration: underline; }
+
+    .read-sentence {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 0.9rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border-radius: 3px;
+    }
+
+    /* ══════════════════════════════════════
+       REORDER EXERCISE STYLES
+    ══════════════════════════════════════ */
+
+    .reorder-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.1rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-bottom: 1rem;
+    }
+
+    .reorder-card .question-text { margin-bottom: 0.5rem; }
+
+    /* Focus pill */
+    .focus-pill {
+      display: inline-block;
+      padding: 0.18rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+    }
+    .focus-adj  { background: #fefcbf; color: #744210; }
+    .focus-adv  { background: #e9d8fd; color: #553c9a; }
+    .focus-obj  { background: #c6f6d5; color: #22543d; }
+    .focus-mix  { background: #fed7d7; color: #742a2a; }
+
+    /* Answer area */
+    .answer-area {
+      min-height: 48px;
+      border: 2px dashed #bee3f8;
+      border-radius: 10px;
+      background: #f7fbff;
+      padding: 0.5rem 0.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s;
+    }
+    .answer-area:empty::before {
+      content: 'Click the words below to build your sentence…';
+      color: #a0aec0;
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+    .answer-area.has-error  { border-color: #fc8181; background: #fff5f5; }
+    .answer-area.has-success { border-color: #68d391; background: #f0fff4; }
+
+    /* Word chips (pool) */
+    .word-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .word-chip {
+      padding: 0.35rem 0.8rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 8px;
+      background: white;
+      font-size: 0.93rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #2d3748;
+      user-select: none;
+    }
+    .word-chip:hover { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; }
+
+    /* Chips placed in the answer area */
+    .answer-chip {
+      padding: 0.35rem 0.8rem;
+      border: 2px solid #3182ce;
+      border-radius: 8px;
+      background: #ebf8ff;
+      font-size: 0.93rem;
+      cursor: pointer;
+      color: #2b6cb0;
+      font-weight: 600;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .answer-chip:hover { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .answer-chip.locked { cursor: default; pointer-events: none; }
+    .answer-chip.chip-correct { border-color: #38a169; background: #f0fff4; color: #276749; }
+    .answer-chip.chip-wrong   { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+
+    .reorder-feedback {
+      font-size: 0.88rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      display: none;
+      line-height: 1.6;
+    }
+    .reorder-feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .reorder-feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+
+    .correct-sentence {
+      margin-top: 0.3rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    .hl-adj { color: #744210; background: #fefcbf; border-radius: 3px; padding: 0 2px; }
+    .hl-adv { color: #553c9a; background: #e9d8fd; border-radius: 3px; padding: 0 2px; }
+    .hl-obj { color: #22543d; background: #c6f6d5; border-radius: 3px; padding: 0 2px; }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">← Home</a> &nbsp;/&nbsp; April 2, 2026
+</nav>
+
+<div class="page-header">
+  <h1>April 2, 2026</h1>
+  <p>5 exercises · Grammar, Vocabulary &amp; Pronunciation</p>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     EXERCISE 1 — COMFORT vs COMFORTABLE
+═════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>"Comfort" or "Comfortable"?</h2>
+  </div>
+  <div class="rule-box">
+    <strong>comfort</strong> → noun (<em>conforto</em>) or verb (<em>consolare</em>)<br>
+    <strong>comfortable</strong> → adjective only (<em>comodo / a proprio agio</em>)<br>
+    Quick test: can you replace it with <em>cosy</em> or <em>at ease</em>? → <strong>comfortable</strong>.
+    Can you replace it with <em>consolation</em> or <em>to console</em>? → <strong>comfort</strong>.
+  </div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ════════════════════════════════════════
+     EXERCISE 2 — ADJECTIVES vs ADVERBS
+═════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Adjective or Adverb?</h2>
+  </div>
+  <div class="rule-box">
+    Use an <strong>adjective</strong> to describe a <em>noun</em>, or after a linking verb (be, feel, seem, look, smell, taste).<br>
+    Use an <strong>adverb</strong> to modify a <em>verb</em>, an <em>adjective</em>, or another adverb — often ends in <strong>-ly</strong>.<br>
+    <em>She is <strong>careful</strong>.</em> &nbsp;|&nbsp; <em>She drives <strong>carefully</strong>.</em>
+  </div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ════════════════════════════════════════
+     EXERCISE 3 — VERB + PREPOSITION
+═════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Verb + Preposition</h2>
+  </div>
+  <div class="rule-box">
+    In English, many verbs are followed by a <strong>fixed preposition</strong> that cannot be translated literally from Italian.<br>
+    Common traps: <em>pensare a</em> → <strong>think about</strong> (not "think to") &nbsp;·&nbsp;
+    <em>guardare</em> → <strong>look at</strong> (not "look to") &nbsp;·&nbsp;
+    <em>arrivare a</em> → <strong>arrive at / in</strong> (not "arrive to")
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ════════════════════════════════════════
+     EXERCISE 4 — SENTENCE REORDERING
+═════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Build the Sentence</h2>
+  </div>
+  <div class="rule-box">
+    Click the words in the correct order to build a sentence. Click a word already placed to remove it.<br>
+    Pay attention to:
+    <strong style="background:#fefcbf;color:#744210;border-radius:3px;padding:0 3px;">adjective</strong> always before the noun &nbsp;·&nbsp;
+    <strong style="background:#e9d8fd;color:#553c9a;border-radius:3px;padding:0 3px;">adverb</strong> position relative to the verb &nbsp;·&nbsp;
+    <strong style="background:#c6f6d5;color:#22543d;border-radius:3px;padding:0 3px;">object</strong> placement after the verb
+  </div>
+  <div id="reorder-quiz"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-4">Check answers</button>
+    <button class="btn-reset" id="reset-4">Try again</button>
+    <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
+     EXERCISE 5 — PRONUNCIATION: READ ALOUD
+═════════════════════════════════════════ -->
+<section class="exercise-section" id="section-5">
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Pronunciation — Read Aloud</h2>
+  </div>
+
+  <div class="rule-box">
+    Read each sentence out loud. Before you start, <strong>look up the pronunciation</strong> of every highlighted word on
+    <a href="https://www.wordreference.com" target="_blank" rel="noopener" style="color:#2b6cb0;">wordreference.com</a>
+    — type the word in the search bar and click the speaker icon to hear it.<br><br>
+    Pay special attention to:<br>
+    &bull; <strong>-ed endings</strong> — three different sounds: <em>/t/</em> (worked), <em>/d/</em> (called), <em>/ɪd/</em> (visited)<br>
+    &bull; <strong>stress and syllables</strong> in longer words — English stress is very different from Italian
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-dot" style="background:#fefcbf;border:1px solid #d69e2e;"></span>
+      past simple <strong>-ed</strong> verbs
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot" style="background:#bee3f8;border:1px solid #3182ce;"></span>
+      tricky pronunciation words
+    </div>
+  </div>
+
+  <p style="font-weight:600; color:#4a5568; margin-bottom:0.8rem; max-width:750px;">Part A &nbsp;·&nbsp; Past simple <em>-ed</em></p>
+
+  <div class="read-sentence">
+    She <a class="hl-ed" href="https://www.wordreference.com/definition/wash" target="_blank" rel="noopener">washed</a>
+    the dishes, <a class="hl-ed" href="https://www.wordreference.com/definition/pack" target="_blank" rel="noopener">packed</a>
+    her bag, and <a class="hl-ed" href="https://www.wordreference.com/definition/walk" target="_blank" rel="noopener">walked</a> to the station.
+    <span style="font-size:0.78rem;color:#a0aec0;margin-left:0.5rem;">(-ed = /t/)</span>
+  </div>
+
+  <div class="read-sentence">
+    He <a class="hl-ed" href="https://www.wordreference.com/definition/call" target="_blank" rel="noopener">called</a>
+    his sister, <a class="hl-ed" href="https://www.wordreference.com/definition/open" target="_blank" rel="noopener">opened</a>
+    the door, and <a class="hl-ed" href="https://www.wordreference.com/definition/listen" target="_blank" rel="noopener">listened</a> to her story.
+    <span style="font-size:0.78rem;color:#a0aec0;margin-left:0.5rem;">(-ed = /d/)</span>
+  </div>
+
+  <div class="read-sentence">
+    They <a class="hl-ed" href="https://www.wordreference.com/definition/visit" target="_blank" rel="noopener">visited</a>
+    a new city, <a class="hl-ed" href="https://www.wordreference.com/definition/want" target="_blank" rel="noopener">wanted</a>
+    to see everything, and <a class="hl-ed" href="https://www.wordreference.com/definition/need" target="_blank" rel="noopener">needed</a> a map.
+    <span style="font-size:0.78rem;color:#a0aec0;margin-left:0.5rem;">(-ed = /ɪd/ — adds a syllable!)</span>
+  </div>
+
+  <div class="read-sentence">
+    She <a class="hl-ed" href="https://www.wordreference.com/definition/work" target="_blank" rel="noopener">worked</a>
+    all morning, <a class="hl-ed" href="https://www.wordreference.com/definition/arrive" target="_blank" rel="noopener">arrived</a>
+    late, <a class="hl-ed" href="https://www.wordreference.com/definition/wait" target="_blank" rel="noopener">waited</a>
+    for an hour, and finally <a class="hl-ed" href="https://www.wordreference.com/definition/talk" target="_blank" rel="noopener">talked</a> to the manager.
+    <span style="font-size:0.78rem;color:#a0aec0;margin-left:0.5rem;">(mixed: /t/ /d/ /ɪd/ /t/)</span>
+  </div>
+
+  <div class="read-sentence">
+    He <a class="hl-ed" href="https://www.wordreference.com/definition/ask" target="_blank" rel="noopener">asked</a>
+    for help, <a class="hl-ed" href="https://www.wordreference.com/definition/decide" target="_blank" rel="noopener">decided</a>
+    to change his plan, and <a class="hl-ed" href="https://www.wordreference.com/definition/finish" target="_blank" rel="noopener">finished</a> the project on time.
+    <span style="font-size:0.78rem;color:#a0aec0;margin-left:0.5rem;">(mixed: /t/ /ɪd/ /t/)</span>
+  </div>
+
+  <p style="font-weight:600; color:#4a5568; margin:1.5rem 0 0.8rem; max-width:750px;">Part B &nbsp;·&nbsp; Tricky words</p>
+
+  <div class="read-sentence">
+    The <a class="hl-word" href="https://www.wordreference.com/definition/beneficiary" target="_blank" rel="noopener">beneficiary</a>
+    of the insurance policy was <a class="hl-word" href="https://www.wordreference.com/definition/directly" target="_blank" rel="noopener">directly</a>
+    <a class="hl-ed" href="https://www.wordreference.com/definition/contact" target="_blank" rel="noopener">contacted</a> by the bank.
+  </div>
+
+  <div class="read-sentence">
+    She felt <a class="hl-word" href="https://www.wordreference.com/definition/frustrated" target="_blank" rel="noopener">frustrated</a>
+    because no one <a class="hl-ed" href="https://www.wordreference.com/definition/answer" target="_blank" rel="noopener">answered</a>
+    her questions <a class="hl-word" href="https://www.wordreference.com/definition/directly" target="_blank" rel="noopener">directly</a>.
+  </div>
+
+  <div class="read-sentence">
+    The <a class="hl-word" href="https://www.wordreference.com/definition/psychological" target="_blank" rel="noopener">psychological</a>
+    effects of stress are often <a class="hl-word" href="https://www.wordreference.com/definition/underestimated" target="_blank" rel="noopener">underestimated</a>.
+  </div>
+
+  <div class="read-sentence">
+    The doctor <a class="hl-word" href="https://www.wordreference.com/definition/specifically" target="_blank" rel="noopener">specifically</a>
+    <a class="hl-ed" href="https://www.wordreference.com/definition/recommend" target="_blank" rel="noopener">recommended</a>
+    a <a class="hl-word" href="https://www.wordreference.com/definition/psychological" target="_blank" rel="noopener">psychological</a> assessment.
+  </div>
+
+  <div class="read-sentence">
+    The <a class="hl-word" href="https://www.wordreference.com/definition/beneficiary" target="_blank" rel="noopener">beneficiary</a>
+    <a class="hl-word" href="https://www.wordreference.com/definition/particularly" target="_blank" rel="noopener">particularly</a>
+    <a class="hl-ed" href="https://www.wordreference.com/definition/appreciate" target="_blank" rel="noopener">appreciated</a>
+    the <a class="hl-word" href="https://www.wordreference.com/definition/directly" target="_blank" rel="noopener">direct</a> communication.
+  </div>
+
+  <div class="read-sentence">
+    He was <a class="hl-word" href="https://www.wordreference.com/definition/thoroughly" target="_blank" rel="noopener">thoroughly</a>
+    <a class="hl-word" href="https://www.wordreference.com/definition/frustrated" target="_blank" rel="noopener">frustrated</a>
+    and <a class="hl-ed" href="https://www.wordreference.com/definition/decide" target="_blank" rel="noopener">decided</a>
+    to address the issue <a class="hl-word" href="https://www.wordreference.com/definition/directly" target="_blank" rel="noopener">directly</a>.
+  </div>
+
+</section>
+
+<script>
+/* ══════════════════════════════════════════
+   EXERCISES 1–3 DATA
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    { sentence: "This sofa is so ___ — I could sleep on it!", options: ["comfort","comfortable"], answer: "comfortable",
+      hint: "After the linking verb 'is', use an <strong>adjective</strong> to describe the sofa." },
+    { sentence: "She called her mum to find ___ after a difficult day.", options: ["comfort","comfortable"], answer: "comfort",
+      hint: "After 'find', we need a <strong>noun</strong>: <em>trovare conforto</em>." },
+    { sentence: "Are you ___ with the temperature, or should I open the window?", options: ["comfort","comfortable"], answer: "comfortable",
+      hint: "After 'are you', use an <strong>adjective</strong>: <em>ti trovi bene?</em>" },
+    { sentence: "He tried to ___ his friend when she started crying.", options: ["comfort","comfortable"], answer: "comfort",
+      hint: "After 'to', we need a <strong>verb</strong>: <em>consolare</em>." },
+    { sentence: "Talking to her always gives me a sense of ___.", options: ["comfort","comfortable"], answer: "comfort",
+      hint: "After 'a sense of', we need a <strong>noun</strong>: <em>una sensazione di conforto</em>." },
+    { sentence: "I don't feel ___ speaking in front of a large audience.", options: ["comfort","comfortable"], answer: "comfortable",
+      hint: "After 'feel' (linking verb), use an <strong>adjective</strong>: <em>a proprio agio</em>." }
+  ]
+};
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    { sentence: "She felt ___ after hearing the good news.", options: ["happy","happily"], answer: "happy",
+      hint: "After the linking verb 'felt', use an <strong>adjective</strong> to describe the subject." },
+    { sentence: "He ___ finished his homework before dinner.", options: ["quick","quickly"], answer: "quickly",
+      hint: "Modifies the verb 'finished' → <strong>adverb</strong>." },
+    { sentence: "The test was ___ — she passed without any problem.", options: ["easy","easily"], answer: "easy",
+      hint: "After the linking verb 'was', use an <strong>adjective</strong> to describe 'the test'." },
+    { sentence: "She ___ understood the instructions and started right away.", options: ["complete","completely"], answer: "completely",
+      hint: "Modifies the verb 'understood' → <strong>adverb</strong>." },
+    { sentence: "Be ___ when you cross the road.", options: ["careful","carefully"], answer: "careful",
+      hint: "After 'be' (linking verb), use an <strong>adjective</strong> to describe the subject." },
+    { sentence: "The music was ___ loud — I couldn't hear her.", options: ["extreme","extremely"], answer: "extremely",
+      hint: "Modifies the adjective 'loud' → <strong>adverb</strong>." },
+    { sentence: "He gave a ___ answer to the question.", options: ["complete","completely"], answer: "complete",
+      hint: "Describes the noun 'answer' directly → <strong>adjective</strong>." },
+    { sentence: "She speaks ___ in front of large groups.", options: ["nervous","nervously"], answer: "nervously",
+      hint: "Modifies the verb 'speaks' → <strong>adverb</strong>." },
+    { sentence: "The soup smells ___.", options: ["wonderful","wonderfully"], answer: "wonderful",
+      hint: "'Smells' is a linking verb here → <strong>adjective</strong> to describe 'the soup'." },
+    { sentence: "They worked ___ to finish the project on time.", options: ["hard","hardly"], answer: "hard",
+      hint: "<strong>Watch out!</strong> 'Hard' is both adjective and adverb. 'Hardly' means 'almost not at all' — a completely different meaning." }
+  ]
+};
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    { sentence: "We need to think ___ a solution before the meeting.", options: ["to","about","of"], answer: "about",
+      hint: "<strong>think about</strong> = pensare a qualcosa. 'Think to' does not exist in English." },
+    { sentence: "Can you look ___ this document and tell me what you think?", options: ["to","at","for"], answer: "at",
+      hint: "<strong>look at</strong> = guardare. 'Look to' means to rely on someone — a very different meaning." },
+    { sentence: "She arrived ___ the airport two hours before her flight.", options: ["to","at","in"], answer: "at",
+      hint: "<strong>arrive at</strong> for specific locations (airports, stations, buildings). Use <em>in</em> for cities." },
+    { sentence: "They arrived ___ London after a long journey.", options: ["to","at","in"], answer: "in",
+      hint: "<strong>arrive in</strong> for cities and countries. Use <em>at</em> for specific places like airports." },
+    { sentence: "She is really good ___ playing the piano.", options: ["in","at","for"], answer: "at",
+      hint: "<strong>good at</strong> = bravo/a in qualcosa. Italian says 'bravo in' but English always uses <em>at</em>." },
+    { sentence: "I'm very interested ___ learning more about this topic.", options: ["to","about","in"], answer: "in",
+      hint: "<strong>interested in</strong> = interessato/a a. Always followed by <em>in</em>, not 'to'." },
+    { sentence: "He was listening ___ music when I called.", options: ["to","at","about"], answer: "to",
+      hint: "<strong>listen to</strong> = ascoltare. You always listen <em>to</em> something — never 'listen at'." },
+    { sentence: "The final result will depend ___ how hard you study.", options: ["of","from","on"], answer: "on",
+      hint: "<strong>depend on</strong> = dipendere da. Italian uses 'da' but English uses <em>on</em>." },
+    { sentence: "Are you looking ___ a new flat?", options: ["at","to","for"], answer: "for",
+      hint: "<strong>look for</strong> = cercare. Don't confuse with <em>look at</em> (guardare)." },
+    { sentence: "He talked ___ his worries openly for the first time.", options: ["of","to","about"], answer: "about",
+      hint: "<strong>talk about</strong> = parlare di qualcosa. 'Talk to' means speaking <em>to a person</em>, not about a topic." }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 4 DATA — SENTENCE REORDERING
+   focus types: "adj" | "adv" | "obj" | "mix"
+   highlight: array of {word, type} for feedback
+══════════════════════════════════════════ */
+
+const reorderQuestions = [
+  {
+    words:   ["She", "always", "drinks", "coffee", "in", "the", "morning"],
+    answer:  ["She", "always", "drinks", "coffee", "in", "the", "morning"],
+    focus:   "adv",
+    focusLabel: "Adverb of frequency",
+    hint:    "Adverbs of frequency (<em>always, never, usually, often</em>) go <strong>before the main verb</strong> but after the verb 'be'.",
+    highlights: { "always": "adv", "coffee": "obj" }
+  },
+  {
+    words:   ["bought", "a", "He", "new", "beautiful", "bag"],
+    answer:  ["He", "bought", "a", "beautiful", "new", "bag"],
+    focus:   "adj",
+    focusLabel: "Adjective order",
+    hint:    "In English, adjectives come <strong>before the noun</strong>. When there are two, opinion comes first: <em>beautiful</em> (opinion) → <em>new</em> (age).",
+    highlights: { "beautiful": "adj", "new": "adj", "bag": "obj" }
+  },
+  {
+    words:   ["the", "She", "exercises", "all", "very", "quickly", "finished"],
+    answer:  ["She", "finished", "all", "the", "exercises", "very", "quickly"],
+    focus:   "adv",
+    focusLabel: "Adverb of manner",
+    hint:    "Adverbs of manner (<em>quickly, carefully, well</em>) go <strong>after the verb and its object</strong>, not between them.",
+    highlights: { "very quickly": "adv", "exercises": "obj" }
+  },
+  {
+    words:   ["carefully", "He", "the", "old", "on", "placed", "vase", "the", "table"],
+    answer:  ["He", "carefully", "placed", "the", "old", "vase", "on", "the", "table"],
+    focus:   "mix",
+    focusLabel: "Adverb + adjective",
+    hint:    "<em>Carefully</em> can go <strong>before the verb</strong> or after the object. <em>Old</em> goes <strong>before the noun</strong> it describes.",
+    highlights: { "carefully": "adv", "old": "adj", "vase": "obj" }
+  },
+  {
+    words:   ["sent", "She", "friend", "a", "long", "message", "yesterday", "her"],
+    answer:  ["She", "sent", "her", "friend", "a", "long", "message", "yesterday"],
+    focus:   "mix",
+    focusLabel: "Object order + adjective + time adverb",
+    hint:    "With two objects: <strong>indirect object first</strong> (her friend), then direct object (a long message). Time adverbs (<em>yesterday</em>) go at the <strong>end</strong>.",
+    highlights: { "long": "adj", "message": "obj", "yesterday": "adv" }
+  },
+  {
+    words:   ["I", "never", "have", "such", "eaten", "delicious", "food"],
+    answer:  ["I", "have", "never", "eaten", "such", "delicious", "food"],
+    focus:   "adv",
+    focusLabel: "Adverb with auxiliary verb",
+    hint:    "With auxiliary verbs (<em>have, will, can</em>), frequency adverbs go <strong>between the auxiliary and the main verb</strong>: have <em>never</em> eaten.",
+    highlights: { "never": "adv", "delicious": "adj", "food": "obj" }
+  },
+  {
+    words:   ["bought", "sister", "small", "My", "a", "elegant", "lamp", "week", "last"],
+    answer:  ["My", "sister", "bought", "a", "small", "elegant", "lamp", "last", "week"],
+    focus:   "mix",
+    focusLabel: "Multiple adjectives + time expression",
+    hint:    "Two adjectives before the noun: size (<em>small</em>) comes before opinion/style (<em>elegant</em>). Time expressions (<em>last week</em>) go at the end.",
+    highlights: { "small": "adj", "elegant": "adj", "lamp": "obj", "last week": "adv" }
+  },
+  {
+    words:   ["usually", "She", "comfortable", "wears", "shoes", "to", "work"],
+    answer:  ["She", "usually", "wears", "comfortable", "shoes", "to", "work"],
+    focus:   "mix",
+    focusLabel: "Frequency adverb + adjective",
+    hint:    "<em>Usually</em> goes <strong>before the main verb</strong>. <em>Comfortable</em> goes directly <strong>before the noun</strong> it describes.",
+    highlights: { "usually": "adv", "comfortable": "adj", "shoes": "obj" }
+  }
+];
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — EXERCISES 1-3
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — EXERCISE 4 (REORDER)
+══════════════════════════════════════════ */
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const focusMeta = {
+  adj: { label: "Adjective placement", cls: "focus-adj" },
+  adv: { label: "Adverb placement",    cls: "focus-adv" },
+  obj: { label: "Object placement",    cls: "focus-obj" },
+  mix: { label: "Mixed",               cls: "focus-mix" }
+};
+
+function buildReorder(questions, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'reorder-card';
+    card.dataset.index = i;
+
+    const meta = focusMeta[q.focus];
+    const poolWords = shuffle(q.words);
+
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> Build the sentence using all the words.</p>
+      <span class="focus-pill ${meta.cls}">${q.focusLabel}</span>
+      <div class="answer-area" id="answer-${i}"></div>
+      <div class="word-pool" id="pool-${i}"></div>
+      <div class="reorder-feedback" id="rfb-${i}"></div>`;
+
+    container.appendChild(card);
+
+    // Fill pool
+    const pool = card.querySelector(`#pool-${i}`);
+    const answerArea = card.querySelector(`#answer-${i}`);
+
+    poolWords.forEach(word => {
+      const chip = makeChip(word, 'word-chip');
+      chip.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        pool.removeChild(chip);
+        const aChip = makeChip(word, 'answer-chip');
+        aChip.addEventListener('click', () => {
+          if (card.dataset.answered) return;
+          answerArea.removeChild(aChip);
+          pool.appendChild(chip);
+        });
+        answerArea.appendChild(aChip);
+      });
+      pool.appendChild(chip);
+    });
+  });
+}
+
+function makeChip(word, cls) {
+  const btn = document.createElement('button');
+  btn.className = cls;
+  btn.textContent = word;
+  btn.dataset.word = word;
+  return btn;
+}
+
+function checkReorder(questions, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .reorder-card`);
+  let allAnswered = true, score = 0;
+
+  cards.forEach((card, i) => {
+    const answerArea = card.querySelector(`#answer-${i}`);
+    const chips = answerArea.querySelectorAll('.answer-chip');
+    if (chips.length === 0) { allAnswered = false; return; }
+    if (chips.length !== questions[i].words.length) { allAnswered = false; return; }
+
+    const userAnswer = Array.from(chips).map(c => c.dataset.word);
+    const correct    = questions[i].answer;
+    const isCorrect  = userAnswer.join(' ') === correct.join(' ');
+
+    card.dataset.answered = true;
+
+    // Lock pool chips
+    card.querySelectorAll('.word-chip').forEach(c => { c.disabled = true; c.style.opacity = '0.4'; });
+
+    // Colour answer chips
+    chips.forEach((chip, j) => {
+      chip.classList.add('locked');
+      chip.classList.add(chip.dataset.word === correct[j] ? 'chip-correct' : 'chip-wrong');
+    });
+
+    const fb = card.querySelector(`#rfb-${i}`);
+    if (isCorrect) {
+      score++;
+      answerArea.classList.add('has-success');
+      fb.className = 'reorder-feedback correct';
+      fb.innerHTML = `✔ Perfect! &nbsp; ${questions[i].hint}`;
+    } else {
+      answerArea.classList.add('has-error');
+      fb.className = 'reorder-feedback wrong';
+      // Build correct sentence with highlights
+      const highlighted = correct.map(w => {
+        const type = questions[i].highlights[w];
+        if (type === 'adj') return `<span class="hl-adj">${w}</span>`;
+        if (type === 'adv') return `<span class="hl-adv">${w}</span>`;
+        if (type === 'obj') return `<span class="hl-obj">${w}</span>`;
+        return w;
+      }).join(' ');
+      fb.innerHTML = `✘ Not quite. ${questions[i].hint}
+        <div class="correct-sentence">Correct order: ${highlighted}</div>`;
+    }
+  });
+
+  if (!allAnswered) { alert('Please place all words before checking.'); return; }
+
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${questions.length}</span>`;
+  if (score === questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetReorder(questions, containerId, checkId, resetId, scoreId) {
+  buildReorder(questions, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1');
+buildFillBlank(exercise2, 'quiz-2');
+buildFillBlank(exercise3, 'quiz-3');
+buildReorder(reorderQuestions, 'reorder-quiz');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+
+document.getElementById('check-4').addEventListener('click', () =>
+  checkReorder(reorderQuestions, 'reorder-quiz', 'check-4', 'reset-4', 'score-4', 'section-4'));
+document.getElementById('reset-4').addEventListener('click', () =>
+  resetReorder(reorderQuestions, 'reorder-quiz', 'check-4', 'reset-4', 'score-4'));
+</script>
+</body>
+</html>

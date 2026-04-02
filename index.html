@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>English Exercises</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #2b6cb0;
+      margin-bottom: 0.3rem;
+    }
+
+    header p {
+      color: #718096;
+      font-size: 1rem;
+    }
+
+    /* ── Topic filter ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.35rem 1rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 20px;
+      background: white;
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: #4a5568;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: #2b6cb0;
+      background: #2b6cb0;
+      color: white;
+    }
+
+    /* ── Session cards ── */
+    .sessions {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .session-card {
+      background: white;
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-left: 5px solid #2b6cb0;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+
+    .session-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+
+    .session-card.hidden { display: none; }
+
+    .session-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .session-date {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2b6cb0;
+    }
+
+    .session-label {
+      font-size: 0.85rem;
+      color: #a0aec0;
+    }
+
+    .session-exercises {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .tag.grammar    { background: #ebf8ff; color: #2b6cb0; }
+    .tag.vocabulary { background: #f0fff4; color: #276749; }
+    .tag.pronunciation { background: #faf5ff; color: #6b46c1; }
+
+    .session-arrow {
+      float: right;
+      font-size: 1.3rem;
+      color: #a0aec0;
+      margin-top: -1.8rem;
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: #a0aec0;
+      font-size: 1rem;
+      padding: 2rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>English Exercises</h1>
+  <p>Select a session by date, or filter by topic.</p>
+</header>
+
+<div class="filter-bar" id="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="grammar">Grammar</button>
+  <button class="filter-btn" data-filter="vocabulary">Vocabulary</button>
+  <button class="filter-btn" data-filter="pronunciation">Pronunciation</button>
+</div>
+
+<div class="sessions" id="sessions-list"></div>
+<p class="empty-msg" id="empty-msg">No sessions found for this topic yet.</p>
+
+<div style="max-width:800px;margin:3rem auto 0;border-top:2px dashed #e2e8f0;padding-top:2rem;">
+  <h2 style="font-size:1rem;color:#718096;font-weight:600;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;">Further resources — Listening &amp; UK Pronunciation</h2>
+  <div style="display:flex;flex-direction:column;gap:0.8rem;">
+
+    <a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener"
+       style="background:white;border-radius:12px;padding:1rem 1.4rem;box-shadow:0 2px 8px rgba(0,0,0,0.07);text-decoration:none;color:inherit;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.5rem;">🎙</span>
+      <div>
+        <div style="font-weight:700;color:#2b6cb0;">BBC Learning English</div>
+        <div style="font-size:0.88rem;color:#718096;">Videos, podcasts and pronunciation guides in authentic BBC British English. The most complete free resource.</div>
+      </div>
+    </a>
+
+    <a href="https://learnenglish.britishcouncil.org" target="_blank" rel="noopener"
+       style="background:white;border-radius:12px;padding:1rem 1.4rem;box-shadow:0 2px 8px rgba(0,0,0,0.07);text-decoration:none;color:inherit;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.5rem;">📘</span>
+      <div>
+        <div style="font-weight:700;color:#2b6cb0;">British Council — LearnEnglish</div>
+        <div style="font-size:0.88rem;color:#718096;">Listening exercises from A1 to C1 with transcripts. Official British Council material, well structured by level.</div>
+      </div>
+    </a>
+
+    <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener"
+       style="background:white;border-radius:12px;padding:1rem 1.4rem;box-shadow:0 2px 8px rgba(0,0,0,0.07);text-decoration:none;color:inherit;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.5rem;">🎧</span>
+      <div>
+        <div style="font-weight:700;color:#2b6cb0;">6 Minute English — BBC</div>
+        <div style="font-size:0.88rem;color:#718096;">Short weekly episodes (~6 min) with two UK speakers and a full transcript. Perfect for daily listening practice.</div>
+      </div>
+    </a>
+
+    <a href="https://youglish.com/pronounce//uk" target="_blank" rel="noopener"
+       style="background:white;border-radius:12px;padding:1rem 1.4rem;box-shadow:0 2px 8px rgba(0,0,0,0.07);text-decoration:none;color:inherit;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.5rem;">🔍</span>
+      <div>
+        <div style="font-weight:700;color:#2b6cb0;">YouGlish — UK</div>
+        <div style="font-size:0.88rem;color:#718096;">Type any word and instantly hear it used in real YouTube videos by British speakers. Ideal for checking how a word sounds in natural, everyday speech — not just in a dictionary.</div>
+      </div>
+    </a>
+
+    <a href="https://youglish.com/pronounce//us" target="_blank" rel="noopener"
+       style="background:white;border-radius:12px;padding:1rem 1.4rem;box-shadow:0 2px 8px rgba(0,0,0,0.07);text-decoration:none;color:inherit;display:flex;align-items:center;gap:1rem;">
+      <span style="font-size:1.5rem;">🇺🇸</span>
+      <div>
+        <div style="font-weight:700;color:#2b6cb0;">YouGlish — US</div>
+        <div style="font-size:0.88rem;color:#718096;">Same as above but filtered for American English speakers. Useful for comparing US vs UK pronunciation of the same word.</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<script>
+/*
+ ╔══════════════════════════════════════════════════╗
+ ║  HOW TO ADD A NEW SESSION                        ║
+ ║  Add a new object to the sessions array below.   ║
+ ║  • date:     YYYY-MM-DD                          ║
+ ║  • label:    human-readable date                 ║
+ ║  • topics:   short exercise titles               ║
+ ║  • tags:     "grammar" | "vocabulary" |          ║
+ ║               "pronunciation"  (one or more)     ║
+ ║  • file:     path to the session HTML file       ║
+ ╚══════════════════════════════════════════════════╝
+*/
+const sessions = [
+  {
+    date:   "2026-04-02",
+    label:  "April 2, 2026",
+    topics: ["Comfort vs Comfortable", "Adjectives & Adverbs", "Verb + Preposition", "Build the Sentence", "Read Aloud"],
+    tags:   ["grammar", "vocabulary", "pronunciation"],
+    file:   "2026-04-02.html"
+  }
+  /* add new sessions here ↓ */
+];
+
+// Sort newest first
+sessions.sort((a, b) => b.date.localeCompare(a.date));
+
+const tagClass = { grammar: "grammar", vocabulary: "vocabulary", pronunciation: "pronunciation" };
+
+function renderSessions(filter) {
+  const list = document.getElementById('sessions-list');
+  const empty = document.getElementById('empty-msg');
+  list.innerHTML = '';
+  let visible = 0;
+
+  sessions.forEach(s => {
+    const match = filter === 'all' || s.tags.includes(filter);
+    if (!match) return;
+    visible++;
+
+    const a = document.createElement('a');
+    a.className = 'session-card';
+    a.href = s.file;
+
+    const header = `
+      <div class="session-header">
+        <span class="session-date">${s.label}</span>
+        <span class="session-label">${s.topics.length} exercise${s.topics.length > 1 ? 's' : ''}</span>
+      </div>`;
+
+    const tags = s.tags.map(t =>
+      `<span class="tag ${tagClass[t] || ''}">${t.charAt(0).toUpperCase() + t.slice(1)}</span>`
+    ).join('');
+
+    const topicList = s.topics.map(t =>
+      `<span class="tag grammar" style="background:#f7fafc;color:#4a5568;">${t}</span>`
+    ).join('');
+
+    a.innerHTML = header +
+      `<div class="session-exercises">${tags}&nbsp;&nbsp;${topicList}</div>` +
+      `<span class="session-arrow">›</span>`;
+
+    list.appendChild(a);
+  });
+
+  empty.style.display = visible === 0 ? 'block' : 'none';
+}
+
+document.getElementById('filter-bar').addEventListener('click', e => {
+  if (!e.target.classList.contains('filter-btn')) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderSessions(e.target.dataset.filter);
+});
+
+renderSessions('all');
+</script>
+</body>
+</html>

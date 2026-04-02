@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adjectives vs Adverbs – English Exercise</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: #2b6cb0;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: #718096;
+      font-size: 1rem;
+    }
+
+    .rule-box {
+      background: #ebf8ff;
+      border-left: 4px solid #3182ce;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .rule-box strong { color: #2b6cb0; }
+
+    .quiz {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .question-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: box-shadow 0.2s;
+    }
+
+    .question-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+
+    .question-text {
+      font-size: 1.05rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .blank {
+      display: inline-block;
+      border-bottom: 2px solid #3182ce;
+      min-width: 120px;
+      color: transparent;
+      user-select: none;
+    }
+
+    .options {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .option-btn {
+      padding: 0.45rem 1.1rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 20px;
+      background: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: #2d3748;
+    }
+
+    .option-btn:hover { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+
+    .feedback {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+
+    .actions {
+      max-width: 700px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #submit-btn, #reset-btn {
+      padding: 0.75rem 2.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    #submit-btn {
+      background: #2b6cb0;
+      color: white;
+    }
+    #submit-btn:hover { background: #2c5282; }
+    #submit-btn:disabled { background: #a0aec0; cursor: default; }
+
+    #reset-btn {
+      background: white;
+      color: #2b6cb0;
+      border: 2px solid #2b6cb0;
+      display: none;
+    }
+    #reset-btn:hover { background: #ebf8ff; }
+
+    #score-box {
+      display: none;
+      text-align: center;
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 700px;
+    }
+
+    #score-box .score-number { font-size: 2.5rem; font-weight: 700; color: #2b6cb0; }
+    #score-box .score-label  { color: #718096; font-size: 1rem; margin-top: 0.3rem; }
+    #score-box .score-msg    { margin-top: 0.8rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Adjectives vs Adverbs</h1>
+  <p>Choose the correct form for each sentence.</p>
+</header>
+
+<div class="rule-box">
+  <strong>Quick rule:</strong><br>
+  Use an <strong>adjective</strong> to describe a <em>noun</em> or after a linking verb (be, feel, seem, look).<br>
+  Use an <strong>adverb</strong> to modify a <em>verb</em>, an <em>adjective</em>, or another <em>adverb</em> — often ends in <strong>-ly</strong>.
+  <br><br>
+  <em>She is <strong>careful</strong>.</em> (adjective — describes "she") &nbsp;|&nbsp;
+  <em>She drives <strong>carefully</strong>.</em> (adverb — modifies the verb "drives")
+</div>
+
+<div class="quiz" id="quiz"></div>
+
+<div class="actions">
+  <div id="score-box">
+    <div class="score-number" id="score-number"></div>
+    <div class="score-label">correct answers</div>
+    <div class="score-msg" id="score-msg"></div>
+  </div>
+  <button id="submit-btn">Check answers</button>
+  <button id="reset-btn">Try again</button>
+</div>
+
+<script>
+const questions = [
+  {
+    sentence: "She felt ___ after hearing the good news.",
+    options: ["happy", "happily"],
+    answer: "happy",
+    hint: "After a linking verb (felt), use an <strong>adjective</strong> to describe the subject."
+  },
+  {
+    sentence: "He ___ finished his homework before dinner.",
+    options: ["quick", "quickly"],
+    answer: "quickly",
+    hint: "Modifies the verb 'finished' → use an <strong>adverb</strong>."
+  },
+  {
+    sentence: "The test was ___ — she passed without any problem.",
+    options: ["easy", "easily"],
+    answer: "easy",
+    hint: "After the linking verb 'was', use an <strong>adjective</strong> to describe 'the test'."
+  },
+  {
+    sentence: "She ___ understood the instructions and started right away.",
+    options: ["complete", "completely"],
+    answer: "completely",
+    hint: "Modifies the verb 'understood' → use an <strong>adverb</strong>."
+  },
+  {
+    sentence: "Be ___ when you cross the road.",
+    options: ["careful", "carefully"],
+    answer: "careful",
+    hint: "After 'be' (linking verb), use an <strong>adjective</strong> to describe the subject."
+  },
+  {
+    sentence: "The music was ___ loud — I couldn't hear her.",
+    options: ["extreme", "extremely"],
+    answer: "extremely",
+    hint: "Modifies the adjective 'loud' → use an <strong>adverb</strong>."
+  },
+  {
+    sentence: "He gave a ___ answer to the question.",
+    options: ["complete", "completely"],
+    answer: "complete",
+    hint: "Describes the noun 'answer' directly → use an <strong>adjective</strong>."
+  },
+  {
+    sentence: "She speaks ___ in front of large groups.",
+    options: ["nervous", "nervously"],
+    answer: "nervously",
+    hint: "Modifies the verb 'speaks' → use an <strong>adverb</strong>."
+  },
+  {
+    sentence: "The soup smells ___.",
+    options: ["wonderful", "wonderfully"],
+    answer: "wonderful",
+    hint: "'Smells' is a linking verb here → use an <strong>adjective</strong> to describe 'the soup'."
+  },
+  {
+    sentence: "They worked ___ to finish the project on time.",
+    options: ["hard", "hardly"],
+    answer: "hard",
+    hint: "<strong>Watch out!</strong> 'Hard' is both adjective and adverb. 'Hardly' means 'almost not at all' — a different meaning entirely."
+  }
+];
+
+const quiz = document.getElementById('quiz');
+const submitBtn = document.getElementById('submit-btn');
+const resetBtn  = document.getElementById('reset-btn');
+const scoreBox  = document.getElementById('score-box');
+const scoreNum  = document.getElementById('score-number');
+const scoreMsg  = document.getElementById('score-msg');
+
+function buildQuiz() {
+  quiz.innerHTML = '';
+  scoreBox.style.display = 'none';
+  resetBtn.style.display = 'none';
+  submitBtn.style.display = 'inline-block';
+  submitBtn.disabled = false;
+
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+
+    const parts = q.sentence.split('___');
+    const text = document.createElement('p');
+    text.className = 'question-text';
+    text.innerHTML = `<strong>${i + 1}.</strong> ${parts[0]}<span class="blank">______</span>${parts[1]}`;
+    card.appendChild(text);
+
+    const opts = document.createElement('div');
+    opts.className = 'options';
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt;
+      btn.dataset.value = opt;
+      btn.addEventListener('click', () => selectOption(card, btn));
+      opts.appendChild(btn);
+    });
+    card.appendChild(opts);
+
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+    card.appendChild(fb);
+
+    quiz.appendChild(card);
+  });
+}
+
+function selectOption(card, btn) {
+  if (card.dataset.answered) return;
+  card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  card.dataset.selected = btn.dataset.value;
+}
+
+submitBtn.addEventListener('click', () => {
+  let score = 0;
+  let allAnswered = true;
+
+  document.querySelectorAll('.question-card').forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+
+    const q = questions[i];
+    const fb = card.querySelector('.feedback');
+    card.dataset.answered = true;
+
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+
+    if (selected === q.answer) {
+      score++;
+      fb.className = 'feedback correct';
+      fb.innerHTML = '✔ Correct! ' + q.hint;
+    } else {
+      fb.className = 'feedback wrong';
+      fb.innerHTML = `✘ The correct answer is <strong>${q.answer}</strong>. ${q.hint}`;
+    }
+  });
+
+  if (!allAnswered) {
+    alert('Please answer all questions before checking.');
+    return;
+  }
+
+  submitBtn.style.display = 'none';
+  resetBtn.style.display = 'inline-block';
+  scoreBox.style.display = 'block';
+  scoreNum.textContent = `${score} / ${questions.length}`;
+
+  const msgs = [
+    "Keep practising — you'll get there!",
+    "Good effort — review the hints above.",
+    "Not bad! A little more practice and you've got it.",
+    "Well done! Almost perfect.",
+    "Perfect score! Excellent work!"
+  ];
+  const idx = score <= 3 ? 0 : score <= 5 ? 1 : score <= 7 ? 2 : score <= 9 ? 3 : 4;
+  scoreMsg.textContent = msgs[idx];
+});
+
+resetBtn.addEventListener('click', () => {
+  buildQuiz();
+});
+
+buildQuiz();
+</script>
+</body>
+</html>
