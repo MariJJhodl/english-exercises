@@ -138,6 +138,43 @@
       padding: 2rem;
       display: none;
     }
+    /* ── Search bar ── */
+    .search-wrap {
+      max-width: 800px;
+      margin: 0 auto 1.2rem;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 0.7rem 1.1rem 0.7rem 2.6rem;
+      border: 2px solid #cbd5e0;
+      border-radius: 25px;
+      font-size: 1rem;
+      color: #2d3748;
+      background: white;
+      outline: none;
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+    .search-wrap input:focus  { border-color: #3182ce; }
+    .search-wrap input::placeholder { color: #a0aec0; }
+    .search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a0aec0;
+      pointer-events: none;
+      font-size: 1rem;
+    }
+    .match-hint {
+      font-size: 0.8rem;
+      color: #718096;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .match-highlight { background: #fefcbf; border-radius: 2px; padding: 0 2px; font-style: normal; font-weight: 600; color: #744210; }
+
     @media (max-width: 600px) {
       header h1        { font-size: 1.5rem; }
       .session-card    { padding: 1rem 1.1rem; }
@@ -149,8 +186,13 @@
 
 <header>
   <h1>English Exercises</h1>
-  <p>Select a session by date, or filter by topic.</p>
+  <p>Select a session by date, filter by topic, or search for a word.</p>
 </header>
+
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="search-input" placeholder='Search a word, e.g. "comfortable", "preposition"…' autocomplete="off"/>
+</div>
 
 <div class="filter-bar" id="filter-bar">
   <button class="filter-btn active" data-filter="all">All</button>
@@ -233,25 +275,53 @@ const sessions = [
     label:  "April 2, 2026",
     topics: ["Comfort vs Comfortable", "Adjectives & Adverbs", "Verb + Preposition", "Build the Sentence", "Read Aloud"],
     tags:   ["grammar", "vocabulary", "pronunciation"],
-    file:   "2026-04-02.html"
+    file:   "2026-04-02.html",
+    keywords: [
+      "comfort", "comfortable", "adjective", "adverb", "adverbs", "adjectives",
+      "happy", "happily", "careful", "carefully", "quick", "quickly", "easy", "easily",
+      "complete", "completely", "nervous", "nervously", "wonderful", "wonderfully",
+      "hard", "hardly", "extreme", "extremely",
+      "preposition", "think about", "look at", "arrive at", "arrive in",
+      "good at", "interested in", "listen to", "depend on", "look for", "talk about",
+      "beneficiary", "frustrated", "psychological", "directly", "particularly", "thoroughly",
+      "past simple", "ed", "pronunciation", "word order", "sentence",
+      "washed", "called", "visited", "worked", "finished", "decided"
+    ]
   }
   /* add new sessions here ↓ */
 ];
 
-// Sort newest first
 sessions.sort((a, b) => b.date.localeCompare(a.date));
 
 const tagClass = { grammar: "grammar", vocabulary: "vocabulary", pronunciation: "pronunciation" };
 
-function renderSessions(filter) {
-  const list = document.getElementById('sessions-list');
+let activeFilter = 'all';
+
+function renderSessions(filter, query) {
+  activeFilter = filter;
+  const list  = document.getElementById('sessions-list');
   const empty = document.getElementById('empty-msg');
+  const q     = (query || '').trim().toLowerCase();
   list.innerHTML = '';
   let visible = 0;
 
   sessions.forEach(s => {
-    const match = filter === 'all' || s.tags.includes(filter);
-    if (!match) return;
+    const tagMatch = filter === 'all' || s.tags.includes(filter);
+    if (!tagMatch) return;
+
+    // Search match
+    let matchedKeyword = '';
+    if (q) {
+      const searchable = [
+        ...s.topics,
+        ...s.tags,
+        ...(s.keywords || [])
+      ].map(k => k.toLowerCase());
+      matchedKeyword = (s.keywords || []).find(k => k.toLowerCase().includes(q)) ||
+                       s.topics.find(t => t.toLowerCase().includes(q)) || '';
+      if (!searchable.some(k => k.includes(q))) return;
+    }
+
     visible++;
 
     const a = document.createElement('a');
@@ -272,8 +342,17 @@ function renderSessions(filter) {
       `<span class="tag grammar" style="background:#f7fafc;color:#4a5568;">${t}</span>`
     ).join('');
 
+    const highlighted = matchedKeyword
+      ? matchedKeyword.replace(new RegExp(`(${q})`, 'gi'), '<span class="match-highlight">$1</span>')
+      : '';
+
+    const matchHint = matchedKeyword
+      ? `<div class="match-hint">Found: <em>${highlighted}</em></div>`
+      : '';
+
     a.innerHTML = header +
       `<div class="session-exercises">${tags}&nbsp;&nbsp;${topicList}</div>` +
+      matchHint +
       `<span class="session-arrow">›</span>`;
 
     list.appendChild(a);
@@ -286,7 +365,11 @@ document.getElementById('filter-bar').addEventListener('click', e => {
   if (!e.target.classList.contains('filter-btn')) return;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
-  renderSessions(e.target.dataset.filter);
+  renderSessions(e.target.dataset.filter, document.getElementById('search-input').value);
+});
+
+document.getElementById('search-input').addEventListener('input', e => {
+  renderSessions(activeFilter, e.target.value);
 });
 
 renderSessions('all');
