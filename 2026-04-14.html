@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>April 14, 2026 – English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2b6cb0; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .rule-box { background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; color: #2c5282; }
+    .rule-box strong { color: #2b6cb0; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #3182ce; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.7rem; font-size: 0.88rem; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; line-height: 1.5; }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .word-chip   { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .answer-chip { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+      .read-sentence   { font-size: 1rem; }
+    }
+    /* Pronunciation */
+    .hl-ed   { background: #fefcbf; color: #744210; border-radius: 3px; padding: 0 3px; font-weight: 600; text-decoration: none; }
+    .hl-word { background: #bee3f8; color: #2a4365; border-radius: 3px; padding: 0 3px; font-weight: 600; text-decoration: none; }
+    .hl-ed:hover, .hl-word:hover { text-decoration: underline; }
+    .read-sentence { background: white; border-radius: 12px; padding: 1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); font-size: 1.05rem; line-height: 1.8; margin-bottom: 0.9rem; }
+    .legend { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.85rem; margin-bottom: 1.2rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-dot { display: inline-block; width: 14px; height: 14px; border-radius: 3px; }
+    /* Reorder */
+    .reorder-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 1rem; }
+    .reorder-card .question-text { margin-bottom: 0.5rem; }
+    .focus-pill { display: inline-block; padding: 0.18rem 0.7rem; border-radius: 12px; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.9rem; }
+    .focus-adj { background: #fefcbf; color: #744210; }
+    .focus-adv { background: #e9d8fd; color: #553c9a; }
+    .focus-obj { background: #c6f6d5; color: #22543d; }
+    .focus-mix { background: #fed7d7; color: #742a2a; }
+    .answer-area { min-height: 48px; border: 2px dashed #bee3f8; border-radius: 10px; background: #f7fbff; padding: 0.5rem 0.7rem; display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; margin-bottom: 0.8rem; transition: border-color 0.2s; }
+    .answer-area:empty::before { content: 'Click the words below to build your sentence\2026'; color: #a0aec0; font-size: 0.88rem; font-style: italic; }
+    .answer-area.has-error   { border-color: #fc8181; background: #fff5f5; }
+    .answer-area.has-success { border-color: #68d391; background: #f0fff4; }
+    .word-pool { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.3rem; }
+    .word-chip { padding: 0.35rem 0.8rem; border: 2px solid #cbd5e0; border-radius: 8px; background: white; font-size: 0.93rem; cursor: pointer; transition: all 0.15s; color: #2d3748; user-select: none; }
+    .word-chip:hover { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; }
+    .answer-chip { padding: 0.35rem 0.8rem; border: 2px solid #3182ce; border-radius: 8px; background: #ebf8ff; font-size: 0.93rem; cursor: pointer; color: #2b6cb0; font-weight: 600; transition: all 0.15s; user-select: none; }
+    .answer-chip:hover { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .answer-chip.locked { cursor: default; pointer-events: none; }
+    .answer-chip.chip-correct { border-color: #38a169; background: #f0fff4; color: #276749; }
+    .answer-chip.chip-wrong   { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .reorder-feedback { font-size: 0.88rem; padding: 0.5rem 0.8rem; border-radius: 8px; margin-top: 0.5rem; display: none; line-height: 1.6; }
+    .reorder-feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .reorder-feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .correct-sentence { margin-top: 0.3rem; font-weight: 600; color: #2d3748; }
+    .hl-adj { color: #744210; background: #fefcbf; border-radius: 3px; padding: 0 2px; }
+    .hl-adv { color: #553c9a; background: #e9d8fd; border-radius: 3px; padding: 0 2px; }
+    .hl-obj { color: #22543d; background: #c6f6d5; border-radius: 3px; padding: 0 2px; }
+    /* Offline exercise */
+    .offline-card { background: white; border-radius: 12px; padding: 1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 0.8rem; border-left: 4px solid #ed8936; }
+    .offline-card p { font-size: 1rem; line-height: 1.6; color: #2d3748; }
+    .offline-note { background: #fffaf0; border: 1px dashed #ed8936; border-radius: 8px; padding: 0.8rem 1.1rem; font-size: 0.88rem; color: #7b341e; margin-top: 1rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">&larr; Home</a> &nbsp;/&nbsp; April 14, 2026
+</nav>
+
+<div class="page-header">
+  <h1>April 14, 2026</h1>
+  <p>5 exercises &middot; Grammar, Vocabulary &amp; Pronunciation</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 1 — BUILD THE SENTENCE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Build the Sentence</h2>
+  </div>
+  <div class="rule-box">
+    <strong>"also"</strong> — where does it go?<br>
+    &bull; Before the main verb: <em>She <strong>also</strong> speaks French.</em><br>
+    &bull; After <em>be</em>: <em>He is <strong>also</strong> responsible.</em><br>
+    &bull; Between auxiliary and main verb: <em>They have <strong>also</strong> finished.</em><br>
+    &bull; Never after the main verb: <em>She speaks <strong>also</strong> French.</em> &#x2717;<br><br>
+    <strong>"and I" vs "and me"</strong> — remove the other person to test:<br>
+    &bull; Subject &rarr; use <strong>I</strong>: <em>My colleague and <strong>I</strong> attended.</em> (&#8220;I attended&#8221; &#x2713;)<br>
+    &bull; Object &rarr; use <strong>me</strong>: <em>She thanked my colleague and <strong>me</strong>.</em> (&#8220;She thanked me&#8221; &#x2713;)<br><br>
+    <strong>Adjectives</strong> go before the noun. <strong>Adverbs of manner</strong> go after the verb and its object.
+  </div>
+  <div id="reorder-quiz"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 2 — VERB + PREPOSITION
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Verb + Preposition</h2>
+  </div>
+  <div class="rule-box">
+    Verb + preposition collocations must be memorised &mdash; the preposition is often unexpected, and changing it can change the meaning completely.<br><br>
+    <strong>False friends</strong> &mdash; Italian suggests the wrong preposition:<br>
+    &bull; <em>pensare a</em> &rarr; think <strong>about</strong> &nbsp;(not <em>think to</em>)<br>
+    &bull; <em>arrivare a</em> &rarr; arrive <strong>at / in</strong> &nbsp;(not <em>arrive to</em>)<br>
+    &bull; <em>dipendere da</em> &rarr; depend <strong>on</strong> &nbsp;(not <em>depend from</em>)<br><br>
+    Watch out &mdash; similar phrasal verbs, very different meanings:<br>
+    &bull; <em>carry <strong>out</strong></em> (eseguire) &nbsp;vs&nbsp; <em>carry <strong>on</strong></em> (continuare)<br>
+    &bull; <em>result <strong>in</strong></em> (causare) &nbsp;vs&nbsp; <em>result <strong>from</strong></em> (essere causato da)
+  </div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Choose the Formal Word</h2>
+  </div>
+  <div class="rule-box">
+    Each question shows a <strong>colloquial sentence</strong> (in italics), followed by a formal rewrite with one gap.<br>
+    Choose the most appropriate formal word or phrase from the options.
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 4 — OFFLINE WRITING PRACTICE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Offline Writing Practice</h2>
+  </div>
+  <div class="rule-box">
+    Rewrite each sentence in your notebook using <strong>more formal and refined language</strong>. Keep the same meaning but replace colloquial words with precise, professional alternatives.<br><br>
+    There is no single correct answer &mdash; focus on register, vocabulary, and clarity.
+  </div>
+
+  <div class="offline-card"><p><strong>1.</strong> The boss was really mad at the whole team.</p></div>
+  <div class="offline-card"><p><strong>2.</strong> She&rsquo;s super good at her job.</p></div>
+  <div class="offline-card"><p><strong>3.</strong> We need to fix this problem ASAP.</p></div>
+  <div class="offline-card"><p><strong>4.</strong> He talked a lot but didn&rsquo;t really say anything useful.</p></div>
+  <div class="offline-card"><p><strong>5.</strong> The meeting went on forever and I was bored to death.</p></div>
+  <div class="offline-card"><p><strong>6.</strong> They kicked him out of the company last week.</p></div>
+  <div class="offline-card"><p><strong>7.</strong> I can&rsquo;t get my head around this concept.</p></div>
+  <div class="offline-card"><p><strong>8.</strong> The new policy is a total mess.</p></div>
+  <div class="offline-card"><p><strong>9.</strong> She blew everyone away with her presentation.</p></div>
+  <div class="offline-card"><p><strong>10.</strong> We&rsquo;re running out of time to get this done.</p></div>
+  <div class="offline-card"><p><strong>11.</strong> He&rsquo;s always showing off in front of clients.</p></div>
+  <div class="offline-card"><p><strong>12.</strong> The project fell apart because nobody was in charge.</p></div>
+
+  <div class="offline-note">
+    &#9998;&nbsp; Write your answers in your notebook. Try not to look back at exercise 3 first!
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 5 — PRONUNCIATION: READ ALOUD
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-5">
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Pronunciation &mdash; Read Aloud</h2>
+  </div>
+  <div class="rule-box">
+    Read each sentence out loud. Look up every highlighted word on
+    <a href="https://www.wordreference.com" target="_blank" rel="noopener" style="color:#2b6cb0;">wordreference.com</a>
+    before you start.<br><br>
+    <strong>-ed endings &mdash; three pronunciations:</strong><br>
+    &bull; <strong>/t/</strong> after a voiceless consonant: <em>work<strong>ed</strong>, finish<strong>ed</strong>, increas<strong>ed</strong></em><br>
+    &bull; <strong>/d/</strong> after a voiced consonant or vowel: <em>follow<strong>ed</strong>, review<strong>ed</strong>, remain<strong>ed</strong></em><br>
+    &bull; <strong>/&#618;d/</strong> after /t/ or /d/: <em>complet<strong>ed</strong>, suggest<strong>ed</strong>, present<strong>ed</strong></em>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <span class="legend-dot" style="background:#fefcbf;border:1px solid #d69e2e;"></span>
+      -ed verbs
+    </div>
+    <div class="legend-item">
+      <span class="legend-dot" style="background:#bee3f8;border:1px solid #3182ce;"></span>
+      tricky pronunciation
+    </div>
+  </div>
+
+  <div class="read-sentence">
+    She
+    <a class="hl-ed" href="https://www.wordreference.com/definition/follow" target="_blank" rel="noopener">followed</a>
+    the correct
+    <a class="hl-word" href="https://www.wordreference.com/definition/procedures" target="_blank" rel="noopener">procedures</a>
+    and
+    <a class="hl-ed" href="https://www.wordreference.com/definition/complete" target="_blank" rel="noopener">completed</a>
+    the task as
+    <a class="hl-ed" href="https://www.wordreference.com/definition/plan" target="_blank" rel="noopener">planned</a>.
+  </div>
+
+  <div class="read-sentence">
+    The
+    <a class="hl-word" href="https://www.wordreference.com/definition/whole" target="_blank" rel="noopener">whole</a>
+    team
+    <a class="hl-ed" href="https://www.wordreference.com/definition/review" target="_blank" rel="noopener">reviewed</a>
+    the budget and
+    <a class="hl-ed" href="https://www.wordreference.com/definition/suggest" target="_blank" rel="noopener">suggested</a>
+    several improvements.
+  </div>
+
+  <div class="read-sentence">
+    He
+    <a class="hl-ed" href="https://www.wordreference.com/definition/prove" target="_blank" rel="noopener">proved</a>
+    he was
+    <a class="hl-word" href="https://www.wordreference.com/definition/capable" target="_blank" rel="noopener">capable</a>
+    of managing a large
+    <a class="hl-word" href="https://www.wordreference.com/definition/volume" target="_blank" rel="noopener">volume</a>
+    of work.
+  </div>
+
+  <div class="read-sentence">
+    The
+    <a class="hl-word" href="https://www.wordreference.com/definition/volume" target="_blank" rel="noopener">volume</a>
+    of complaints
+    <a class="hl-ed" href="https://www.wordreference.com/definition/increase" target="_blank" rel="noopener">increased</a>
+    after the new
+    <a class="hl-word" href="https://www.wordreference.com/definition/procedures" target="_blank" rel="noopener">procedures</a>
+    were
+    <a class="hl-ed" href="https://www.wordreference.com/definition/introduce" target="_blank" rel="noopener">introduced</a>.
+  </div>
+
+  <div class="read-sentence">
+    She
+    <a class="hl-ed" href="https://www.wordreference.com/definition/identify" target="_blank" rel="noopener">identified</a>
+    the key issues,
+    <a class="hl-ed" href="https://www.wordreference.com/definition/prepare" target="_blank" rel="noopener">prepared</a>
+    a
+    <a class="hl-ed" href="https://www.wordreference.com/definition/detail" target="_blank" rel="noopener">detailed</a>
+    report, and
+    <a class="hl-ed" href="https://www.wordreference.com/definition/present" target="_blank" rel="noopener">presented</a>
+    her findings to the
+    <a class="hl-word" href="https://www.wordreference.com/definition/whole" target="_blank" rel="noopener">whole</a>
+    team.
+  </div>
+
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2b6cb0;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to Home</a>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   EXERCISE 1 — REORDER
+══════════════════════════════════════════ */
+
+const reorderQuestions = [
+  {
+    words:      ["She", "also", "speaks", "French", "fluently"],
+    answer:     ["She", "also", "speaks", "French", "fluently"],
+    focus:      "mix",
+    focusLabel: '"also" + adverb of manner',
+    hint:       '"also" goes <strong>before the main verb</strong>: She also speaks. The adverb of manner "fluently" goes <strong>after the verb and its object</strong>.',
+    highlights: { "also": "adv", "fluently": "adv", "French": "obj" }
+  },
+  {
+    words:      ["He", "is", "also", "responsible", "for", "the", "budget"],
+    answer:     ["He", "is", "also", "responsible", "for", "the", "budget"],
+    focus:      "adv",
+    focusLabel: '"also" after "be"',
+    hint:       'With the verb <em>be</em>, "also" goes <strong>immediately after it</strong>: He is <em>also</em> responsible.',
+    highlights: { "also": "adv" }
+  },
+  {
+    words:      ["My", "colleague", "and", "I", "prepared", "the", "report"],
+    answer:     ["My", "colleague", "and", "I", "prepared", "the", "report"],
+    focus:      "mix",
+    focusLabel: '"and I" — subject pronoun',
+    hint:       'Use <strong>"I"</strong> when the compound phrase is the subject. Test: remove the other person &mdash; <em>"I prepared the report"</em> &#x2713;. So: <em>My colleague and I prepared&hellip;</em>',
+    highlights: {}
+  },
+  {
+    words:      ["The", "client", "thanked", "my", "partner", "and", "me"],
+    answer:     ["The", "client", "thanked", "my", "partner", "and", "me"],
+    focus:      "mix",
+    focusLabel: '"and me" — object pronoun',
+    hint:       'Use <strong>"me"</strong> when the compound phrase is the object. Test: remove the other person &mdash; <em>"The client thanked me"</em> &#x2713;. So: <em>&hellip;thanked my partner and me</em>.',
+    highlights: {}
+  },
+  {
+    words:      ["They", "have", "also", "reduced", "the", "costs"],
+    answer:     ["They", "have", "also", "reduced", "the", "costs"],
+    focus:      "adv",
+    focusLabel: '"also" with auxiliary verb',
+    hint:       'With auxiliary verbs (have, will, can), "also" goes <strong>between the auxiliary and the main verb</strong>: have <em>also</em> reduced.',
+    highlights: { "also": "adv", "costs": "obj" }
+  },
+  {
+    words:      ["She", "also", "delivered", "a", "clear", "and", "concise", "report"],
+    answer:     ["She", "also", "delivered", "a", "clear", "and", "concise", "report"],
+    focus:      "mix",
+    focusLabel: '"also" + adjective order',
+    hint:       '"also" goes <strong>before the main verb</strong> "delivered". Adjectives come <strong>before the noun</strong>: a clear and concise report.',
+    highlights: { "also": "adv", "clear": "adj", "concise": "adj", "report": "obj" }
+  }
+];
+
+/* ══════════════════════════════════════════
+   EXERCISE 2 — VERB + PREPOSITION
+══════════════════════════════════════════ */
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "I&rsquo;ve been thinking ___ your suggestion all week.",
+      options: ["about", "to", "at"],
+      answer: "about",
+      hint: "<strong>think about</strong> = pensare a. Italian uses <em>pensare a</em>, which might suggest <em>to</em> or <em>at</em> &mdash; but in English the preposition is always <strong>about</strong>. <em>Think to</em> does not exist."
+    },
+    {
+      sentence: "Could you look ___ this document before I send it?",
+      options: ["at", "to", "for"],
+      answer: "at",
+      hint: "<strong>look at</strong> = guardare. Italian uses a direct object (<em>guardare qualcosa</em>), but English always needs <strong>at</strong>. Note: <em>look to</em> = aspettarsi / fare affidamento su; <em>look for</em> = cercare."
+    },
+    {
+      sentence: "She arrived ___ the conference centre well before the start.",
+      options: ["at", "to", "in"],
+      answer: "at",
+      hint: "<strong>arrive at</strong> = used for specific places (buildings, stations, airports). <strong>arrive in</strong> = used for cities and countries. <em>Arrive to</em> does not exist in English &mdash; one of the most common mistakes for Italian speakers."
+    },
+    {
+      sentence: "The success of the project will depend ___ effective communication.",
+      options: ["on", "from", "of"],
+      answer: "on",
+      hint: "<strong>depend on</strong> = dipendere da. <em>Da</em> in Italian might suggest <em>from</em> &mdash; but in English it is always <strong>on</strong>: depend on something/someone."
+    },
+    {
+      sentence: "Poor planning can result ___ serious delays.",
+      options: ["in", "from", "to"],
+      answer: "in",
+      hint: "<strong>result in</strong> = causare, portare a (X causes Y). <strong>result from</strong> = essere causato da (X is caused by Y). Here poor planning <em>causes</em> the delays &rarr; <strong>result in</strong>."
+    },
+    {
+      sentence: "We look forward ___ receiving your feedback.",
+      options: ["to", "for", "at"],
+      answer: "to",
+      hint: "<strong>look forward to</strong> = non vedere l&rsquo;ora di. The <em>to</em> here is a <strong>preposition</strong>, not part of an infinitive &mdash; so it is always followed by a noun or an <em>-ing</em> verb: look forward to <em>receiving</em>, look forward to <em>the meeting</em>."
+    },
+    {
+      sentence: "The engineers were asked to ___ a thorough inspection of the site.",
+      options: ["carry out", "carry on", "carry through"],
+      answer: "carry out",
+      hint: "<strong>carry out</strong> = eseguire, effettuare (a task, a test, research). <strong>carry on</strong> = continuare. <strong>carry through</strong> = portare a termine nonostante difficolt&agrave;. For conducting a planned activity, use <strong>carry out</strong>."
+    },
+    {
+      sentence: "It took the team weeks to get ___ the disappointment of losing the contract.",
+      options: ["over", "through", "round"],
+      answer: "over",
+      hint: "<strong>get over</strong> = riprendersi da / superare (emotionally or after illness). <strong>get through</strong> = sopravvivere a / riuscire a finire qualcosa di difficile. <strong>get round</strong> = trovare un modo per aggirare qualcosa. Recovering from a feeling &rarr; <strong>get over</strong>."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ */
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "<em>&#x1F4AC; We&rsquo;re gonna need more money for this.</em><br>&rarr; This initiative will ___ additional funding.",
+      options: ["require", "need more", "want"],
+      answer: "require",
+      hint: "<strong>Require</strong> is the formal equivalent of <em>need</em>. It is precise and impersonal, which is ideal for formal reports or proposals. <em>Need more</em> is informal and grammatically weak in this position. <em>Want</em> is too casual."
+    },
+    {
+      sentence: "<em>&#x1F4AC; His ideas are always way out there.</em><br>&rarr; His proposals are often ___.",
+      options: ["unconventional", "very strange", "out there"],
+      answer: "unconventional",
+      hint: "<strong>Unconventional</strong> is a precise, neutral formal adjective &mdash; it describes something that departs from the norm without being judgmental. <em>Very strange</em> is informal and negative. <em>Out there</em> is the colloquial original."
+    },
+    {
+      sentence: "<em>&#x1F4AC; She totally nailed the interview.</em><br>&rarr; She ___ during the interview.",
+      options: ["performed exceptionally well", "did really well", "was amazing"],
+      answer: "performed exceptionally well",
+      hint: "<strong>Performed exceptionally well</strong> is formal and specific. <em>Did really well</em> is informal (<em>really</em> is a colloquial intensifier). <em>Was amazing</em> is too casual for a professional context."
+    },
+    {
+      sentence: "<em>&#x1F4AC; The whole thing was a complete waste of time.</em><br>&rarr; The entire process proved to be ___.",
+      options: ["unproductive", "a total waste", "pretty useless"],
+      answer: "unproductive",
+      hint: "<strong>Unproductive</strong> is a precise formal adjective. <em>A total waste</em> retains informal language (<em>total</em> as a colloquial intensifier). <em>Pretty useless</em> is informal on two levels: <em>pretty</em> as a slang intensifier and <em>useless</em> as a blunt, casual word."
+    },
+    {
+      sentence: "<em>&#x1F4AC; He&rsquo;s just not up to the job.</em><br>&rarr; He appears to ___ the requirements of the role.",
+      options: ["fall short of", "not be good enough for", "struggle with"],
+      answer: "fall short of",
+      hint: "<strong>Fall short of</strong> is a formal and precise expression meaning <em>non essere all&rsquo;altezza di</em>. <em>Not be good enough for</em> is grammatically correct but informal. <em>Struggle with</em> implies difficulty rather than a gap in capability &mdash; a different nuance."
+    },
+    {
+      sentence: "<em>&#x1F4AC; The staff are super stressed out.</em><br>&rarr; The staff are ___ significant levels of pressure.",
+      options: ["experiencing", "feeling", "really suffering from"],
+      answer: "experiencing",
+      hint: "<strong>Experiencing</strong> is formal, objective, and precise. <em>Feeling</em> is more subjective and less formal. <em>Really suffering from</em> is informal (<em>really</em>) and overly emotive for a professional context."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — REORDER
+══════════════════════════════════════════ */
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const focusMeta = {
+  adj: { label: "Adjective placement", cls: "focus-adj" },
+  adv: { label: "Adverb placement",    cls: "focus-adv" },
+  obj: { label: "Object placement",    cls: "focus-obj" },
+  mix: { label: "Mixed",               cls: "focus-mix" }
+};
+
+function buildReorder(questions, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'reorder-card';
+    card.dataset.index = i;
+    const meta = focusMeta[q.focus];
+    const poolWords = shuffle(q.words);
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> Build the sentence using all the words.</p>
+      <div class="answer-area" id="answer-${i}"></div>
+      <div class="word-pool" id="pool-${i}"></div>
+      <div class="reorder-feedback" id="rfb-${i}"></div>`;
+    container.appendChild(card);
+    const pool = card.querySelector(`#pool-${i}`);
+    const answerArea = card.querySelector(`#answer-${i}`);
+    poolWords.forEach(word => {
+      const chip = makeChip(word, 'word-chip');
+      chip.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        pool.removeChild(chip);
+        const aChip = makeChip(word, 'answer-chip');
+        aChip.addEventListener('click', () => {
+          if (card.dataset.answered) return;
+          answerArea.removeChild(aChip);
+          pool.appendChild(chip);
+        });
+        answerArea.appendChild(aChip);
+      });
+      pool.appendChild(chip);
+    });
+  });
+}
+
+function makeChip(word, cls) {
+  const btn = document.createElement('button');
+  btn.className = cls;
+  btn.textContent = word;
+  btn.dataset.word = word;
+  return btn;
+}
+
+function checkReorder(questions, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .reorder-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const answerArea = card.querySelector(`#answer-${i}`);
+    const chips = answerArea.querySelectorAll('.answer-chip');
+    if (chips.length === 0) { allAnswered = false; return; }
+    if (chips.length !== questions[i].words.length) { allAnswered = false; return; }
+    const userAnswer = Array.from(chips).map(c => c.dataset.word);
+    const correct    = questions[i].answer;
+    const isCorrect  = userAnswer.join(' ') === correct.join(' ');
+    card.dataset.answered = true;
+    card.querySelectorAll('.word-chip').forEach(c => { c.disabled = true; c.style.opacity = '0.4'; });
+    chips.forEach((chip, j) => {
+      chip.classList.add('locked');
+      chip.classList.add(chip.dataset.word === correct[j] ? 'chip-correct' : 'chip-wrong');
+    });
+    const fb = card.querySelector(`#rfb-${i}`);
+    if (isCorrect) {
+      score++;
+      answerArea.classList.add('has-success');
+      fb.className = 'reorder-feedback correct';
+      fb.innerHTML = `&#x2714; Perfect! &nbsp; ${questions[i].hint}`;
+    } else {
+      answerArea.classList.add('has-error');
+      fb.className = 'reorder-feedback wrong';
+      const highlighted = correct.map(w => {
+        const type = questions[i].highlights[w];
+        if (type === 'adj') return `<span class="hl-adj">${w}</span>`;
+        if (type === 'adv') return `<span class="hl-adv">${w}</span>`;
+        if (type === 'obj') return `<span class="hl-obj">${w}</span>`;
+        return w;
+      }).join(' ');
+      fb.innerHTML = `&#x2718; Not quite. ${questions[i].hint}
+        <div class="correct-sentence">Correct order: ${highlighted}</div>`;
+    }
+  });
+  if (!allAnswered) { alert('Please place all words before checking.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${questions.length}</span>`;
+  if (score === questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetReorder(questions, containerId, checkId, resetId, scoreId) {
+  buildReorder(questions, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildReorder(reorderQuestions, 'reorder-quiz');
+buildFillBlank(exercise2, 'quiz-2');
+buildFillBlank(exercise3, 'quiz-3');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkReorder(reorderQuestions, 'reorder-quiz', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetReorder(reorderQuestions, 'reorder-quiz', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+</script>
+</body>
+</html>
