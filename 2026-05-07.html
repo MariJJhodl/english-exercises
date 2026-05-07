@@ -90,7 +90,7 @@
 
 <div class="page-header">
   <h1>May 7, 2026</h1>
-  <p>4 exercises &middot; Grammar</p>
+  <p>5 exercises &middot; Grammar &amp; Vocabulary</p>
 </div>
 
 
@@ -200,6 +200,28 @@
     <button class="btn-check" id="check-4">Check answers</button>
     <button class="btn-reset" id="reset-4">Try again</button>
     <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 5 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-5">
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Choose the Formal Word</h2>
+  </div>
+  <div class="rule-box">
+    Each question shows a <strong>colloquial sentence</strong> (in italics), followed by a formal rewrite with one gap.<br>
+    Choose the most appropriate formal word or phrase from the options.
+  </div>
+  <div class="quiz" id="quiz-5"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-5">Check answers</button>
+    <button class="btn-reset" id="reset-5">Try again</button>
+    <span class="section-score" id="score-5"></span>
   </div>
 </section>
 
@@ -455,6 +477,52 @@ const exercise4 = {
 };
 
 /* ══════════════════════════════════════════
+   EXERCISE 5 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ */
+
+const exercise5 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "<em>&#x1F4AC; She&rsquo;s been off sick a lot lately.</em><br>&rarr; She has been ___ on numerous occasions in recent weeks.",
+      options: ["absent", "off work", "away a lot"],
+      answer: "absent",
+      hint: "<strong>Absent</strong> is the formal adjective for not being present. <em>Off work</em> is colloquial. <em>Away a lot</em> is informal and grammatically weak in this position — it cannot follow <em>been</em> in a formal report."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We need to sort out this budget problem.</em><br>&rarr; It is necessary to ___ the budgetary issue without delay.",
+      options: ["address", "sort out", "look into"],
+      answer: "address",
+      hint: "<strong>Address</strong> = deal with formally and directly. <em>Sort out</em> is informal. <em>Look into</em> means <em>investigate</em> — it implies examining the problem, not resolving it. Here the sentence calls for action, not analysis."
+    },
+    {
+      sentence: "<em>&#x1F4AC; The manager shot down every idea we had.</em><br>&rarr; The manager ___ all proposals put forward by the team.",
+      options: ["rejected", "shot down", "said no to"],
+      answer: "rejected",
+      hint: "<strong>Rejected</strong> is precise and neutral. <em>Shot down</em> is an informal idiom. <em>Said no to</em> is too conversational — it has no place in a formal report or email."
+    },
+    {
+      sentence: "<em>&#x1F4AC; Things have been pretty hectic around here.</em><br>&rarr; The workload has been ___ in recent weeks.",
+      options: ["considerable", "really crazy", "pretty high"],
+      answer: "considerable",
+      hint: "<strong>Considerable</strong> = large in size or amount; formal and neutral. <em>Really crazy</em> uses two informal intensifiers. <em>Pretty high</em> uses <em>pretty</em> as a slang intensifier — always avoid it in formal writing."
+    },
+    {
+      sentence: "<em>&#x1F4AC; He keeps missing deadlines.</em><br>&rarr; He ___ to meet deadlines on a consistent basis.",
+      options: ["fails", "keeps missing", "can&rsquo;t manage"],
+      answer: "fails",
+      hint: "<strong>Fails to + infinitive</strong> is precise, formal, and objective. <em>Keeps missing</em> is informal. <em>Can&rsquo;t manage</em> is vague and too casual — it belongs in conversation, not in professional communication."
+    },
+    {
+      sentence: "<em>&#x1F4AC; I&rsquo;ll get back to you as soon as I can.</em><br>&rarr; I will ___ your message at the earliest opportunity.",
+      options: ["respond to", "get back about", "reply back to"],
+      answer: "respond to",
+      hint: "<strong>Respond to</strong> is the formal verb. <em>Get back about</em> is colloquial. <em>Reply back to</em> is redundant &mdash; <em>reply</em> already implies going back &mdash; and informal. In formal emails: <em>respond to, reply to, acknowledge</em>."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
    BUILD FUNCTIONS — FILL-BLANK
 ══════════════════════════════════════════ */
 
@@ -646,6 +714,7 @@ buildFillBlank(exercise1, 'quiz-1');
 buildReorder(reorderQuestions, 'reorder-quiz');
 buildFillBlank(exercise3, 'quiz-3');
 buildFillBlank(exercise4, 'quiz-4');
+buildFillBlank(exercise5, 'quiz-5');
 
 document.getElementById('check-1').addEventListener('click', () =>
   checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
@@ -666,6 +735,11 @@ document.getElementById('check-4').addEventListener('click', () =>
   checkFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4', 'section-4'));
 document.getElementById('reset-4').addEventListener('click', () =>
   resetFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4'));
+
+document.getElementById('check-5').addEventListener('click', () =>
+  checkFillBlank(exercise5, 'quiz-5', 'check-5', 'reset-5', 'score-5', 'section-5'));
+document.getElementById('reset-5').addEventListener('click', () =>
+  resetFillBlank(exercise5, 'quiz-5', 'check-5', 'reset-5', 'score-5'));
 </script>
 </body>
 </html>
