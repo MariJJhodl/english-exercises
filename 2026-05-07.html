@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>May 7, 2026 – English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2b6cb0; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .rule-box { background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; color: #2c5282; }
+    .rule-box strong { color: #2b6cb0; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #3182ce; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.7rem; font-size: 0.88rem; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; line-height: 1.5; }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .word-chip   { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .answer-chip { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+    }
+    /* Reorder */
+    .reorder-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 1rem; }
+    .reorder-card .question-text { margin-bottom: 0.5rem; }
+    .focus-pill { display: inline-block; padding: 0.18rem 0.7rem; border-radius: 12px; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.9rem; }
+    .focus-adj { background: #fefcbf; color: #744210; }
+    .focus-adv { background: #e9d8fd; color: #553c9a; }
+    .focus-obj { background: #c6f6d5; color: #22543d; }
+    .focus-mix { background: #fed7d7; color: #742a2a; }
+    .answer-area { min-height: 48px; border: 2px dashed #bee3f8; border-radius: 10px; background: #f7fbff; padding: 0.5rem 0.7rem; display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; margin-bottom: 0.8rem; transition: border-color 0.2s; }
+    .answer-area:empty::before { content: 'Click the words below to build your sentence\2026'; color: #a0aec0; font-size: 0.88rem; font-style: italic; }
+    .answer-area.has-error   { border-color: #fc8181; background: #fff5f5; }
+    .answer-area.has-success { border-color: #68d391; background: #f0fff4; }
+    .word-pool { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.3rem; }
+    .word-chip { padding: 0.35rem 0.8rem; border: 2px solid #cbd5e0; border-radius: 8px; background: white; font-size: 0.93rem; cursor: pointer; transition: all 0.15s; color: #2d3748; user-select: none; }
+    .word-chip:hover { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; }
+    .answer-chip { padding: 0.35rem 0.8rem; border: 2px solid #3182ce; border-radius: 8px; background: #ebf8ff; font-size: 0.93rem; cursor: pointer; color: #2b6cb0; font-weight: 600; transition: all 0.15s; user-select: none; }
+    .answer-chip:hover { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .answer-chip.locked { cursor: default; pointer-events: none; }
+    .answer-chip.chip-correct { border-color: #38a169; background: #f0fff4; color: #276749; }
+    .answer-chip.chip-wrong   { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .reorder-feedback { font-size: 0.88rem; padding: 0.5rem 0.8rem; border-radius: 8px; margin-top: 0.5rem; display: none; line-height: 1.6; }
+    .reorder-feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .reorder-feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .correct-sentence { margin-top: 0.3rem; font-weight: 600; color: #2d3748; }
+    .hl-adj { color: #744210; background: #fefcbf; border-radius: 3px; padding: 0 2px; }
+    .hl-adv { color: #553c9a; background: #e9d8fd; border-radius: 3px; padding: 0 2px; }
+    .hl-obj { color: #22543d; background: #c6f6d5; border-radius: 3px; padding: 0 2px; }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">&larr; Home</a> &nbsp;/&nbsp; May 7, 2026
+</nav>
+
+<div class="page-header">
+  <h1>May 7, 2026</h1>
+  <p>4 exercises &middot; Grammar</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 1 — FEW / A FEW / LITTLE / A LITTLE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Few, A Few, Little, A Little</h2>
+  </div>
+  <div class="rule-box">
+    <strong>few</strong> / <strong>little</strong> &rarr; not many / not much &mdash; <em>negative</em> meaning (not enough)<br>
+    <strong>a few</strong> / <strong>a little</strong> &rarr; some &mdash; <em>positive</em> meaning (enough for something)<br><br>
+    <strong>few</strong> / <strong>a few</strong> &rarr; countable nouns: <em>friends, people, minutes, ideas</em><br>
+    <strong>little</strong> / <strong>a little</strong> &rarr; uncountable nouns: <em>time, money, advice, information, patience</em><br><br>
+    Examples:<br>
+    &bull; <em>I have <strong>a little</strong> time.</em> (= some time, enough) &nbsp;&bull;&nbsp; <em>I have <strong>little</strong> time.</em> (= almost none, not enough)<br>
+    &bull; <em>She has <strong>a few</strong> friends.</em> (= some, positive) &nbsp;&bull;&nbsp; <em>She has <strong>few</strong> friends.</em> (= not many, negative)
+  </div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 2 — OBJECT PLACEMENT
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Build the Sentence &mdash; Object Placement</h2>
+  </div>
+  <div class="rule-box">
+    In English, the <strong>direct object always goes directly after the verb</strong> &mdash; never after a complement or adverb.<br><br>
+    &bull; <em>I find <strong>[receiving off-topic messages]</strong> very frustrating.</em> &#x2713;<br>
+    &bull; <em>I find very frustrating <strong>receiving off-topic messages</strong>.</em> &#x2717;<br><br>
+    When the object is a long clause (<em>when&hellip;, to&hellip;, that&hellip;</em>), use <strong>it</strong> as a placeholder directly after the verb, and put the real content at the end:<br>
+    &bull; <em>I find <strong>it</strong> very frustrating <strong>when people arrive late</strong>.</em> &#x2713;<br>
+    &bull; <em>She finds <strong>it</strong> difficult <strong>to concentrate in noisy places</strong>.</em> &#x2713;<br>
+    &bull; <em>He considers <strong>it</strong> essential <strong>to review the document carefully</strong>.</em> &#x2713;<br><br>
+    The same rule applies to prepositional objects:<br>
+    &bull; <em>She shared <strong>the content</strong> with me.</em> &#x2713;<br>
+    &bull; <em>She shared with me <strong>the content</strong>.</em> &#x2717; (only acceptable with very long objects)
+  </div>
+  <div id="reorder-quiz"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 3 — TO-INFINITIVE vs -ING
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Verb + to-infinitive or -ing?</h2>
+  </div>
+  <div class="rule-box">
+    Some verbs are always followed by <strong>-ing</strong>:<br>
+    &emsp;<em>avoid, enjoy, finish, keep, mind, consider, suggest, practise, stop, quit</em><br><br>
+    Others always take <strong>to + infinitive</strong>:<br>
+    &emsp;<em>want, decide, hope, manage, refuse, promise, plan, agree, expect, fail, need</em><br><br>
+    There is no shortcut &mdash; these must be memorised.<br>
+    Common mistake: <em>avoid <strong>to waste</strong></em> &#x2717; &rarr; <em>avoid <strong>wasting</strong></em> &#x2713;
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 4 — HOW + ADVERB
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>How + Adverb</h2>
+  </div>
+  <div class="rule-box">
+    <strong>how</strong> alone = in what way / manner &mdash; but it needs an adjective or adverb to ask about specific things:<br><br>
+    &bull; <strong>how long</strong> &rarr; duration or length: <em>How long will it take?</em><br>
+    &bull; <strong>how much</strong> &rarr; quantity (uncountable): <em>How much does it cost?</em><br>
+    &bull; <strong>how many</strong> &rarr; quantity (countable): <em>How many people attended?</em><br>
+    &bull; <strong>how often</strong> &rarr; frequency: <em>How often do you travel?</em><br>
+    &bull; <strong>how far</strong> &rarr; distance: <em>How far is the office?</em><br>
+    &bull; <strong>how soon</strong> &rarr; time until something happens: <em>How soon can you finish?</em><br><br>
+    Common mistake: <em><strong>How</strong> it will take&hellip;</em> &#x2717; &rarr; <em><strong>How long</strong> it will take&hellip;</em> &#x2713;
+  </div>
+  <div class="quiz" id="quiz-4"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-4">Check answers</button>
+    <button class="btn-reset" id="reset-4">Try again</button>
+    <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2b6cb0;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to Home</a>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════
+   EXERCISE 1 — FEW / A FEW / LITTLE / A LITTLE
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "I have ___ money left, so I can buy a coffee.",
+      options: ["little", "a little"],
+      answer: "a little",
+      hint: "<strong>A little</strong> = some (positive: enough for something). <em>Little</em> alone would mean 'almost none' — a negative meaning. Money is uncountable, so we use <em>little/a little</em>, not <em>few/a few</em>."
+    },
+    {
+      sentence: "___ people came to the event — it was almost empty.",
+      options: ["Few", "A few"],
+      answer: "Few",
+      hint: "<strong>Few</strong> (no article) = not many — a negative meaning. <em>A few</em> would mean 'some people came', which contradicts 'almost empty'. People is countable &rarr; few/a few."
+    },
+    {
+      sentence: "She has ___ friends here, so she doesn't feel lonely.",
+      options: ["few", "a few"],
+      answer: "a few",
+      hint: "<strong>A few</strong> = some friends — a positive meaning (enough to not feel lonely). <em>Few</em> alone would mean she has almost no friends, which contradicts the second part of the sentence."
+    },
+    {
+      sentence: "There is ___ time before the deadline — we need to hurry.",
+      options: ["little", "a little"],
+      answer: "little",
+      hint: "<strong>Little</strong> (no article) = almost no time — a negative meaning. 'We need to hurry' confirms there isn't enough. Time is uncountable &rarr; little/a little."
+    },
+    {
+      sentence: "He gave me ___ advice that was actually useful.",
+      options: ["little", "a little"],
+      answer: "a little",
+      hint: "<strong>A little</strong> advice = some advice (positive: it was useful). <em>Little</em> would mean almost none, which conflicts with 'actually useful'. Advice is uncountable &rarr; little/a little."
+    },
+    {
+      sentence: "___ students passed the exam — most of them failed.",
+      options: ["Few", "A few"],
+      answer: "Few",
+      hint: "<strong>Few</strong> = not many — negative meaning. 'Most of them failed' confirms this. <em>A few</em> would suggest a positive outlook ('some did pass'), but the sentence emphasises failure."
+    },
+    {
+      sentence: "Could you give me ___ more time to finish this?",
+      options: ["little", "a little"],
+      answer: "a little",
+      hint: "<strong>A little</strong> more time = some extra time (a request, so positive). You would never ask for <em>little</em> time — that would mean 'not much', which is the opposite of what you're asking for."
+    },
+    {
+      sentence: "___ colleagues attended the training — enough to have a good discussion.",
+      options: ["Few", "A few"],
+      answer: "A few",
+      hint: "<strong>A few</strong> = some (positive: enough for a discussion). <em>Few</em> would suggest a problem — not enough people. The second clause confirms the positive interpretation."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 2 — OBJECT PLACEMENT (REORDER)
+══════════════════════════════════════════ */
+
+const reorderQuestions = [
+  {
+    words:      ["I", "find", "receiving", "off-topic", "messages", "very", "frustrating"],
+    answer:     ["I", "find", "receiving", "off-topic", "messages", "very", "frustrating"],
+    focus:      "obj",
+    focusLabel: "Object before complement",
+    hint:       'With <em>find + object + adjective</em>, the object comes <strong>directly after the verb</strong>: find [receiving off-topic messages] [very frustrating]. Never put the adjective first.',
+    highlights: { "receiving": "obj", "messages": "obj", "frustrating": "adj" }
+  },
+  {
+    words:      ["She", "shared", "the", "content", "with", "me"],
+    answer:     ["She", "shared", "the", "content", "with", "me"],
+    focus:      "obj",
+    focusLabel: "Direct object before indirect",
+    hint:       'The direct object ("the content") goes <strong>directly after the verb</strong>. The prepositional phrase ("with me") comes after: shared [the content] [with me].',
+    highlights: { "content": "obj" }
+  },
+  {
+    words:      ["I", "consider", "this", "approach", "very", "effective"],
+    answer:     ["I", "consider", "this", "approach", "very", "effective"],
+    focus:      "obj",
+    focusLabel: "Consider + object + adjective",
+    hint:       'Pattern: <em>consider + [object] + [adjective]</em>. The object ("this approach") must come before the adjective ("very effective").',
+    highlights: { "approach": "obj", "effective": "adj" }
+  },
+  {
+    words:      ["He", "finds", "working", "overtime", "quite", "exhausting"],
+    answer:     ["He", "finds", "working", "overtime", "quite", "exhausting"],
+    focus:      "obj",
+    focusLabel: "Gerund phrase as object",
+    hint:       'The object can be a gerund phrase: <em>finds + [working overtime] + [quite exhausting]</em>. The whole gerund phrase ("working overtime") comes before the adjective.',
+    highlights: { "working": "obj", "overtime": "obj", "exhausting": "adj" }
+  },
+  {
+    words:      ["She", "sent", "the", "report", "to", "the", "manager", "yesterday"],
+    answer:     ["She", "sent", "the", "report", "to", "the", "manager", "yesterday"],
+    focus:      "mix",
+    focusLabel: "Object + prepositional phrase + time",
+    hint:       'Order: verb + [direct object] + [to + recipient] + [time adverb]. Direct object goes first, then the prepositional phrase, then yesterday.',
+    highlights: { "report": "obj", "yesterday": "adv" }
+  },
+  {
+    words:      ["I", "find", "it", "very", "frustrating", "when", "people", "arrive", "late"],
+    answer:     ["I", "find", "it", "very", "frustrating", "when", "people", "arrive", "late"],
+    focus:      "obj",
+    focusLabel: "Placeholder 'it' + when-clause",
+    hint:       'Use <strong>it</strong> directly after the verb as a placeholder, then the adjective, then the real content: find <strong>it</strong> [very frustrating] [when people arrive late]. <em>It</em> holds the object position so the long clause can go at the end.',
+    highlights: { "it": "obj", "frustrating": "adj" }
+  },
+  {
+    words:      ["She", "finds", "it", "difficult", "to", "concentrate", "in", "noisy", "environments"],
+    answer:     ["She", "finds", "it", "difficult", "to", "concentrate", "in", "noisy", "environments"],
+    focus:      "obj",
+    focusLabel: "Placeholder 'it' + to-infinitive",
+    hint:       'Pattern: find/consider <strong>it</strong> + [adjective] + [to + infinitive]. <em>It</em> goes directly after the verb; the to-infinitive clause comes last.',
+    highlights: { "it": "obj", "difficult": "adj" }
+  },
+  {
+    words:      ["He", "considers", "it", "essential", "to", "review", "the", "document", "carefully"],
+    answer:     ["He", "considers", "it", "essential", "to", "review", "the", "document", "carefully"],
+    focus:      "obj",
+    focusLabel: "Consider it + adjective + to-infinitive",
+    hint:       '<em>Consider</em> works exactly like <em>find</em>: considers <strong>it</strong> [essential] [to review&hellip;]. <em>It</em> is the placeholder object; the real content is the to-infinitive clause at the end.',
+    highlights: { "it": "obj", "essential": "adj" }
+  }
+];
+
+/* ══════════════════════════════════════════
+   EXERCISE 3 — TO-INFINITIVE vs -ING
+══════════════════════════════════════════ */
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "I avoid ___ time on tasks that aren't urgent.",
+      options: ["to waste", "wasting"],
+      answer: "wasting",
+      hint: "<strong>Avoid</strong> is always followed by <strong>-ing</strong>. <em>Avoid to waste</em> ✗ is the most common mistake — remember: <em>avoid, enjoy, finish, keep, mind, suggest</em> all take -ing."
+    },
+    {
+      sentence: "She decided ___ the company after five years.",
+      options: ["to leave", "leaving"],
+      answer: "to leave",
+      hint: "<strong>Decide</strong> takes <strong>to + infinitive</strong>. Other verbs in this group: want, hope, manage, refuse, promise, plan, agree, expect, fail."
+    },
+    {
+      sentence: "He enjoys ___ for the whole team.",
+      options: ["to cook", "cooking"],
+      answer: "cooking",
+      hint: "<strong>Enjoy</strong> always takes <strong>-ing</strong>. You can never say <em>enjoy to cook</em> ✗."
+    },
+    {
+      sentence: "They managed ___ the report before the deadline.",
+      options: ["to finish", "finishing"],
+      answer: "to finish",
+      hint: "<strong>Manage</strong> takes <strong>to + infinitive</strong>. It implies effort: <em>manage to do something</em> = succeed in doing it despite difficulty."
+    },
+    {
+      sentence: "Do you mind ___ a few minutes?",
+      options: ["to wait", "waiting"],
+      answer: "waiting",
+      hint: "<strong>Mind</strong> takes <strong>-ing</strong>. The question <em>Do you mind waiting?</em> = Does it bother you to wait? <em>Mind to wait</em> ✗ does not exist."
+    },
+    {
+      sentence: "I hope ___ you at the next conference.",
+      options: ["to see", "seeing"],
+      answer: "to see",
+      hint: "<strong>Hope</strong> takes <strong>to + infinitive</strong>. Note: <em>I'm looking forward to seeing you</em> uses -ing — because <em>to</em> there is a preposition, not part of the infinitive."
+    },
+    {
+      sentence: "We suggest ___ the document carefully before sending.",
+      options: ["to review", "reviewing"],
+      answer: "reviewing",
+      hint: "<strong>Suggest</strong> takes <strong>-ing</strong>. Also correct: <em>suggest that someone (should) review</em> — but never <em>suggest to review</em> ✗."
+    },
+    {
+      sentence: "She refused ___ the contract without reading it first.",
+      options: ["to sign", "signing"],
+      answer: "to sign",
+      hint: "<strong>Refuse</strong> takes <strong>to + infinitive</strong>. <em>Refuse</em> expresses a deliberate decision not to do something: <em>refuse to sign, refuse to cooperate</em>."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 4 — HOW + ADVERB
+══════════════════════════════════════════ */
+
+const exercise4 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "___ will it take to complete the project?",
+      options: ["How long", "How much", "How many"],
+      answer: "How long",
+      hint: "<strong>How long</strong> asks about duration (time). <em>How much</em> asks about quantity (uncountable). <em>How many</em> asks about countable things. Time duration &rarr; <strong>how long</strong>."
+    },
+    {
+      sentence: "___ does this service cost per month?",
+      options: ["How much", "How long", "How often"],
+      answer: "How much",
+      hint: "<strong>How much</strong> asks about price or quantity of uncountable things. Money is uncountable &rarr; <strong>how much</strong>."
+    },
+    {
+      sentence: "___ employees work in your department?",
+      options: ["How many", "How much", "How far"],
+      answer: "How many",
+      hint: "<strong>How many</strong> asks about countable things. Employees are countable &rarr; <strong>how many</strong>."
+    },
+    {
+      sentence: "___ do you have team meetings?",
+      options: ["How often", "How long", "How far"],
+      answer: "How often",
+      hint: "<strong>How often</strong> asks about frequency (every week, twice a month, etc.). Not to be confused with <em>how long</em> (duration) or <em>how many times</em> (total count)."
+    },
+    {
+      sentence: "___ is the nearest airport from here?",
+      options: ["How far", "How many", "How often"],
+      answer: "How far",
+      hint: "<strong>How far</strong> asks about distance. Common mistake: using <em>how much</em> for distance — distance is not uncountable quantity. <em>How far</em> is the correct form."
+    },
+    {
+      sentence: "___ experience do you have in this field?",
+      options: ["How much", "How many", "How long"],
+      answer: "How much",
+      hint: "<strong>How much</strong> because <em>experience</em> is uncountable. Compare: <em>how many <strong>years</strong> of experience</em> (years are countable) vs <em>how much <strong>experience</strong></em> (the noun itself is uncountable)."
+    },
+    {
+      sentence: "___ can you send me the updated version?",
+      options: ["How soon", "How long", "How often"],
+      answer: "How soon",
+      hint: "<strong>How soon</strong> asks how much time until something happens (in the future). <em>How long</em> asks about duration. <em>How soon can you do it?</em> = When will it be ready?"
+    },
+    {
+      sentence: "___ it will take depends on the complexity of the task.",
+      options: ["How long", "How much", "How far"],
+      answer: "How long",
+      hint: "<strong>How long it will take</strong> — here 'how long' introduces a noun clause (the subject of the sentence). The mistake is to say <em>how it will take</em> ✗. Always add <strong>long</strong> when asking or talking about duration."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — REORDER
+══════════════════════════════════════════ */
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const focusMeta = {
+  adj: { label: "Adjective placement", cls: "focus-adj" },
+  adv: { label: "Adverb placement",    cls: "focus-adv" },
+  obj: { label: "Object placement",    cls: "focus-obj" },
+  mix: { label: "Mixed",               cls: "focus-mix" }
+};
+
+function buildReorder(questions, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'reorder-card';
+    card.dataset.index = i;
+    const meta = focusMeta[q.focus];
+    const poolWords = shuffle(q.words);
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> Build the sentence using all the words.</p>
+      <span class="focus-pill ${meta.cls}">${q.focusLabel}</span>
+      <div class="answer-area" id="answer-${i}"></div>
+      <div class="word-pool" id="pool-${i}"></div>
+      <div class="reorder-feedback" id="rfb-${i}"></div>`;
+    container.appendChild(card);
+    const pool = card.querySelector(`#pool-${i}`);
+    const answerArea = card.querySelector(`#answer-${i}`);
+    poolWords.forEach(word => {
+      const chip = makeChip(word, 'word-chip');
+      chip.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        pool.removeChild(chip);
+        const aChip = makeChip(word, 'answer-chip');
+        aChip.addEventListener('click', () => {
+          if (card.dataset.answered) return;
+          answerArea.removeChild(aChip);
+          pool.appendChild(chip);
+        });
+        answerArea.appendChild(aChip);
+      });
+      pool.appendChild(chip);
+    });
+  });
+}
+
+function makeChip(word, cls) {
+  const btn = document.createElement('button');
+  btn.className = cls;
+  btn.textContent = word;
+  btn.dataset.word = word;
+  return btn;
+}
+
+function checkReorder(questions, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .reorder-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const answerArea = card.querySelector(`#answer-${i}`);
+    const chips = answerArea.querySelectorAll('.answer-chip');
+    if (chips.length === 0) { allAnswered = false; return; }
+    if (chips.length !== questions[i].words.length) { allAnswered = false; return; }
+    const userAnswer = Array.from(chips).map(c => c.dataset.word);
+    const correct    = questions[i].answer;
+    const isCorrect  = userAnswer.join(' ') === correct.join(' ');
+    card.dataset.answered = true;
+    card.querySelectorAll('.word-chip').forEach(c => { c.disabled = true; c.style.opacity = '0.4'; });
+    chips.forEach((chip, j) => {
+      chip.classList.add('locked');
+      chip.classList.add(chip.dataset.word === correct[j] ? 'chip-correct' : 'chip-wrong');
+    });
+    const fb = card.querySelector(`#rfb-${i}`);
+    if (isCorrect) {
+      score++;
+      answerArea.classList.add('has-success');
+      fb.className = 'reorder-feedback correct';
+      fb.innerHTML = `&#x2714; Perfect! &nbsp; ${questions[i].hint}`;
+    } else {
+      answerArea.classList.add('has-error');
+      fb.className = 'reorder-feedback wrong';
+      const highlighted = correct.map(w => {
+        const type = questions[i].highlights[w];
+        if (type === 'adj') return `<span class="hl-adj">${w}</span>`;
+        if (type === 'adv') return `<span class="hl-adv">${w}</span>`;
+        if (type === 'obj') return `<span class="hl-obj">${w}</span>`;
+        return w;
+      }).join(' ');
+      fb.innerHTML = `&#x2718; Not quite. ${questions[i].hint}
+        <div class="correct-sentence">Correct order: ${highlighted}</div>`;
+    }
+  });
+  if (!allAnswered) { alert('Please place all words before checking.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${questions.length}</span>`;
+  if (score === questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetReorder(questions, containerId, checkId, resetId, scoreId) {
+  buildReorder(questions, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1');
+buildReorder(reorderQuestions, 'reorder-quiz');
+buildFillBlank(exercise3, 'quiz-3');
+buildFillBlank(exercise4, 'quiz-4');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkReorder(reorderQuestions, 'reorder-quiz', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetReorder(reorderQuestions, 'reorder-quiz', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+
+document.getElementById('check-4').addEventListener('click', () =>
+  checkFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4', 'section-4'));
+document.getElementById('reset-4').addEventListener('click', () =>
+  resetFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4'));
+</script>
+</body>
+</html>
