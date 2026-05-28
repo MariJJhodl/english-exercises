@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>May 28, 2026 – English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2b6cb0; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .rule-box { background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; color: #2c5282; }
+    .rule-box strong { color: #2b6cb0; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #3182ce; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.7rem; font-size: 0.88rem; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; line-height: 1.5; }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">&larr; Home</a> &nbsp;/&nbsp; May 28, 2026
+</nav>
+
+<div class="page-header">
+  <h1>May 28, 2026</h1>
+  <p>4 exercises &middot; Grammar &amp; Vocabulary</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 1 — VERB / ADJECTIVE + PREPOSITION
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Verb &amp; Adjective + Preposition</h2>
+  </div>
+  <div class="rule-box">
+    In English, many verbs and adjectives are always followed by a <strong>fixed preposition</strong>. You cannot translate directly from Italian &mdash; the preposition must be memorised.<br><br>
+    Common examples:<br>
+    &bull; <em>think <strong>about</strong></em> (not <em>think to</em>) &nbsp;&bull;&nbsp; <em>used <strong>by</strong></em> in passive (not <em>used from</em>)<br>
+    &bull; <em>good <strong>at</strong></em> &nbsp;&bull;&nbsp; <em>interested <strong>in</strong></em> &nbsp;&bull;&nbsp; <em>afraid <strong>of</strong></em> &nbsp;&bull;&nbsp; <em>depend <strong>on</strong></em><br>
+    &bull; <em>arrive <strong>at</strong></em> (a specific place: office, station) &nbsp;&bull;&nbsp; <em>important <strong>to</strong> + infinitive</em>
+  </div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 2 — PHRASAL VERBS
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Phrasal Verbs</h2>
+  </div>
+  <div class="rule-box">
+    A <strong>phrasal verb</strong> is a verb combined with a particle (preposition or adverb) that creates a new, often idiomatic meaning. The meaning is usually very different from the original verb.<br><br>
+    &bull; <em>give <strong>up</strong></em> = stop trying or quit a habit &nbsp;&bull;&nbsp; <em>look <strong>up</strong></em> = search for information<br>
+    &bull; <em>put <strong>off</strong></em> = postpone &nbsp;&bull;&nbsp; <em>turn <strong>up</strong></em> = arrive (often unexpectedly or late)<br>
+    &bull; <em>carry <strong>on</strong></em> = continue &nbsp;&bull;&nbsp; <em>break <strong>down</strong></em> = stop working (machine) or lose control emotionally<br>
+    &bull; <em>bring <strong>up</strong></em> = mention a topic (or raise a child) &nbsp;&bull;&nbsp; <em>find <strong>out</strong></em> = discover information<br><br>
+    Read each sentence carefully &mdash; the context will help you choose the right one.
+  </div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Choose the Formal Word</h2>
+  </div>
+  <div class="rule-box">
+    Formal writing avoids colloquial verbs and informal intensifiers. Each question shows a <strong>colloquial sentence</strong> (in italics), followed by a formal rewrite with one gap.<br><br>
+    Key pairs to know:<br>
+    &bull; <em>start</em> &rarr; <strong>commence</strong> &nbsp;&bull;&nbsp; <em>show</em> &rarr; <strong>demonstrate / indicate</strong><br>
+    &bull; <em>tell</em> &rarr; <strong>notify / inform</strong> &nbsp;&bull;&nbsp; <em>help</em> &rarr; <strong>assist</strong><br>
+    &bull; <em>ask for</em> &rarr; <strong>request</strong> &nbsp;&bull;&nbsp; <em>end</em> &rarr; <strong>conclude</strong> &nbsp;&bull;&nbsp; <em>use</em> &rarr; <strong>employ / utilise</strong>
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 4 — VERB + TO-INFINITIVE OR -ING (MEANING CHANGE)
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Verb + to-infinitive or -ing? (Meaning Change)</h2>
+  </div>
+  <div class="rule-box">
+    Some verbs can be followed by either form, but the <strong>meaning changes completely</strong>:<br><br>
+    &bull; <strong>remember <em>to do</em></strong> = don&rsquo;t forget to do it (future action) &nbsp;&rarr;&nbsp; <em>Remember to lock the door.</em><br>
+    &bull; <strong>remember <em>doing</em></strong> = have a memory of doing it (past) &nbsp;&rarr;&nbsp; <em>I remember meeting her once.</em><br><br>
+    &bull; <strong>stop <em>doing</em></strong> = quit the habit / cease &nbsp;&rarr;&nbsp; <em>He stopped smoking.</em><br>
+    &bull; <strong>stop <em>to do</em></strong> = pause in order to do something &nbsp;&rarr;&nbsp; <em>He stopped to buy a coffee.</em><br><br>
+    &bull; <strong>try <em>to do</em></strong> = attempt (may or may not succeed) &nbsp;&rarr;&nbsp; <em>I tried to fix it but couldn&rsquo;t.</em><br>
+    &bull; <strong>try <em>doing</em></strong> = experiment with doing something &nbsp;&rarr;&nbsp; <em>Try adding less salt.</em><br><br>
+    &bull; <strong>forget <em>to do</em></strong> = fail to do it &nbsp;&rarr;&nbsp; <em>She forgot to reply.</em><br>
+    &bull; <strong>forget <em>doing</em></strong> = have no memory of it (past) &nbsp;&rarr;&nbsp; <em>I&rsquo;ll never forget meeting him.</em>
+  </div>
+  <div class="quiz" id="quiz-4"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-4">Check answers</button>
+    <button class="btn-reset" id="reset-4">Try again</button>
+    <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2b6cb0;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to Home</a>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════
+   EXERCISE 1 — VERB / ADJECTIVE + PREPOSITION
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "She is very good ___ explaining complex ideas clearly.",
+      options: ["at", "in", "on"],
+      answer: "at",
+      hint: "<strong>Good at</strong> is fixed. In Italian you say <em>bravo in</em>, but in English it is always <em>good <strong>at</strong> something</em>. Other adjectives with <em>at</em>: <em>terrible at, skilled at, bad at</em>."
+    },
+    {
+      sentence: "This technique can be used ___ any writer who wants to improve their style.",
+      options: ["by", "from", "with"],
+      answer: "by",
+      hint: "In passive sentences, the agent (the person or thing doing the action) is always introduced with <strong>by</strong>: <em>used <strong>by</strong> writers, written <strong>by</strong> the author</em>. <em>From</em> ✗ is a direct translation of Italian <em>da</em> — it does not work here."
+    },
+    {
+      sentence: "I often think ___ changing careers, but I never actually do anything about it.",
+      options: ["about", "to", "for"],
+      answer: "about",
+      hint: "<strong>Think about</strong> = consider, reflect on. <em>Think to</em> ✗ does not exist in English. Also correct: <em>think <strong>of</strong> doing</em> (same meaning, slightly more formal). Never <em>think to do</em> ✗."
+    },
+    {
+      sentence: "The final outcome will depend ___ several factors, including the budget.",
+      options: ["on", "from", "to"],
+      answer: "on",
+      hint: "<strong>Depend on</strong> is always fixed. <em>From</em> ✗ and <em>to</em> ✗ are common mistakes. Related: <em>rely <strong>on</strong>, count <strong>on</strong></em> — all use <em>on</em>."
+    },
+    {
+      sentence: "Are you interested ___ joining our team for the new project?",
+      options: ["in", "for", "to"],
+      answer: "in",
+      hint: "<strong>Interested in</strong> is fixed. Notice: after <em>interested in</em>, use <strong>-ing</strong>, not a to-infinitive: <em>interested <strong>in joining</strong></em>, not <em>interested to join</em> ✗."
+    },
+    {
+      sentence: "She arrived ___ the office before everyone else that morning.",
+      options: ["at", "to", "in"],
+      answer: "at",
+      hint: "<strong>Arrive at</strong> is used for specific, enclosed places: <em>arrive <strong>at</strong> the office, the station, the airport</em>. Use <em>arrive <strong>in</strong></em> for cities and countries: <em>arrive <strong>in</strong> Rome</em>. Never <em>arrive <strong>to</strong></em> ✗."
+    },
+    {
+      sentence: "He is afraid ___ making mistakes when speaking in front of the class.",
+      options: ["of", "from", "about"],
+      answer: "of",
+      hint: "<strong>Afraid of</strong> is fixed. <em>From</em> ✗ is the Italian <em>da</em> interference. After <em>afraid of</em>, use <strong>-ing</strong>: <em>afraid <strong>of making</strong></em>, not <em>afraid of to make</em> ✗."
+    },
+    {
+      sentence: "It is important ___ listen carefully before you respond.",
+      options: ["to", "about", "of"],
+      answer: "to",
+      hint: "After adjectives like <em>important, necessary, essential, difficult, easy</em>, use <strong>to + infinitive</strong>: <em>important <strong>to listen</strong></em>. <em>Important having</em> ✗ is a common mistake — the -ing form does not work here."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 2 — PHRASAL VERBS
+══════════════════════════════════════════ */
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "After failing the exam three times, she finally decided to ___ and chose a completely different career path.",
+      options: ["give up", "carry on", "put off"],
+      answer: "give up",
+      hint: "<strong>Give up</strong> = stop trying, quit permanently. <em>Carry on</em> would mean the opposite (continue). <em>Put off</em> means postpone — you can put off an exam, not a career decision."
+    },
+    {
+      sentence: "I came across the word &ldquo;ephemeral&rdquo; in the article but had no idea what it meant, so I decided to ___ it ___ in the dictionary.",
+      options: ["look up", "find out", "bring up"],
+      answer: "look up",
+      hint: "<strong>Look up</strong> = search for information in a reference (dictionary, website). <em>Find out</em> is used when you discover something through experience or investigation, not a dictionary. <em>Bring up</em> = mention a topic."
+    },
+    {
+      sentence: "The renovation work was ___ until spring because the weather was too cold to start.",
+      options: ["put off", "broke down", "gave up"],
+      answer: "put off",
+      hint: "<strong>Put off</strong> = postpone. Note: this is a <em>separable</em> phrasal verb — you can say <em>put the renovation off</em> or <em>put off the renovation</em>. <em>Broke down</em> means stopped working (machine). <em>Gave up</em> means quit permanently."
+    },
+    {
+      sentence: "We had been waiting for over an hour when Marco finally ___ with no explanation for being late.",
+      options: ["turned up", "carried on", "found out"],
+      answer: "turned up",
+      hint: "<strong>Turn up</strong> = arrive, especially unexpectedly or late. It is slightly informal and often implies the person arriving caused some inconvenience. <em>Show up</em> is a very close synonym."
+    },
+    {
+      sentence: "Despite the noise from the street below, she managed to ___ working and finished the report on time.",
+      options: ["carry on", "put off", "give up"],
+      answer: "carry on",
+      hint: "<strong>Carry on</strong> = continue doing something. It is often used to express persistence in the face of difficulty, as here. <em>Give up</em> would be the opposite. <em>Put off</em> means postpone, not continue."
+    },
+    {
+      sentence: "They were halfway to the airport when the car ___, and they had to call a taxi to make it in time.",
+      options: ["broke down", "gave up", "turned up"],
+      answer: "broke down",
+      hint: "<strong>Break down</strong> = stop working (used for machines: car, computer, lift). It can also mean lose emotional control: <em>She broke down in tears</em>. Context here is clearly mechanical."
+    },
+    {
+      sentence: "During the budget meeting, the finance director ___ the issue of rising costs, which surprised everyone.",
+      options: ["brought up", "looked up", "found out"],
+      answer: "brought up",
+      hint: "<strong>Bring up</strong> = introduce a topic into a conversation. It is separable: <em>brought the issue up</em> or <em>brought up the issue</em>. <em>Find out</em> = discover. <em>Look up</em> = search in a reference."
+    },
+    {
+      sentence: "She only ___ about the job offer after the deadline had already passed.",
+      options: ["found out", "carried on", "turned up"],
+      answer: "found out",
+      hint: "<strong>Find out</strong> = discover a piece of information, often by accident or too late. Compare with <em>look up</em> (active search) — <em>find out</em> is often passive or accidental. It is separable: <em>find out the truth</em> or <em>find the truth out</em>."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ */
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "<em>&#x1F4AC; We need to start the renovation next month.</em><br>&rarr; We need to ___ the renovation work no later than next month.",
+      options: ["commence", "start up", "kick off"],
+      answer: "commence",
+      hint: "<strong>Commence</strong> is the formal equivalent of <em>start/begin</em>. <em>Start up</em> is informal and usually refers to engines or businesses. <em>Kick off</em> is a colloquial idiom &mdash; completely out of place in formal writing."
+    },
+    {
+      sentence: "<em>&#x1F4AC; She showed that the results were wrong.</em><br>&rarr; She ___ that the results were incorrect.",
+      options: ["demonstrated", "showed off", "pointed out"],
+      answer: "demonstrated",
+      hint: "<strong>Demonstrate</strong> = show through evidence or argument (formal). <em>Showed off</em> means displaying something to impress others. <em>Pointed out</em> is acceptable but more informal and implies correcting someone, rather than presenting evidence."
+    },
+    {
+      sentence: "<em>&#x1F4AC; Please tell me when the order arrives.</em><br>&rarr; Please ___ me as soon as the order arrives.",
+      options: ["notify", "tell about", "inform of"],
+      answer: "notify",
+      hint: "<strong>Notify</strong> is the most concise formal option. <em>Tell about</em> is grammatically off in this context. <em>Inform of</em> is also formal and correct (<em>inform me of the arrival</em>), but when the object is just a person, <em>notify</em> is cleaner and more precise."
+    },
+    {
+      sentence: "<em>&#x1F4AC; Can you help me with this report?</em><br>&rarr; Could you ___ me with this report?",
+      options: ["assist", "give a hand", "help out"],
+      answer: "assist",
+      hint: "<strong>Assist</strong> is the formal equivalent of <em>help</em>. <em>Give a hand</em> is idiomatic and informal. <em>Help out</em> adds <em>out</em> unnecessarily &mdash; in formal writing, stick to the bare formal verb."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We asked for more funding from the board.</em><br>&rarr; We ___ additional funding from the board.",
+      options: ["requested", "asked about", "looked for"],
+      answer: "requested",
+      hint: "<strong>Request</strong> = formally ask for something. <em>Asked about</em> implies asking for information, not for a resource. <em>Looked for</em> means searched for &mdash; it does not imply making a formal request."
+    },
+    {
+      sentence: "<em>&#x1F4AC; The data shows that sales have gone up.</em><br>&rarr; The data ___ that sales have increased significantly.",
+      options: ["indicates", "tells", "shows off"],
+      answer: "indicates",
+      hint: "<strong>Indicate</strong> is precise and neutral in formal/academic writing. <em>Tell</em> is used with a person as the subject, not data. <em>Shows off</em> means displaying something proudly &mdash; completely wrong here."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We need to end the meeting soon.</em><br>&rarr; We will need to ___ the meeting shortly.",
+      options: ["conclude", "finish up", "stop"],
+      answer: "conclude",
+      hint: "<strong>Conclude</strong> = bring to a formal close. It implies a proper ending, often with a summary. <em>Finish up</em> is informal. <em>Stop</em> is abrupt and neutral &mdash; it does not carry the formal nuance of a planned ending."
+    },
+    {
+      sentence: "<em>&#x1F4AC; The company uses this software for accounting.</em><br>&rarr; The company ___ this software for all accounting operations.",
+      options: ["employs", "makes use of", "uses up"],
+      answer: "employs",
+      hint: "<strong>Employ</strong> can mean both <em>hire someone</em> and <em>make use of a tool or method</em> &mdash; the second meaning is formal and common in reports. <em>Makes use of</em> is long-winded. <em>Uses up</em> means consume entirely (e.g. <em>uses up all the paper</em>) &mdash; wrong here."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 4 — VERB + TO-INFINITIVE OR -ING (MEANING CHANGE)
+══════════════════════════════════════════ */
+
+const exercise4 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "Did you remember ___ the lights before leaving the office?",
+      options: ["to turn off", "turning off"],
+      answer: "to turn off",
+      hint: "<strong>Remember to do</strong> = don&rsquo;t forget to do it (future/unfulfilled action). The question is asking whether the person remembered to perform an action before leaving. Compare: <em>I remember turning off the lights</em> = I have a memory of doing it."
+    },
+    {
+      sentence: "I clearly remember ___ the lights before I left &mdash; I&rsquo;m absolutely sure I did it.",
+      options: ["to turn off", "turning off"],
+      answer: "turning off",
+      hint: "<strong>Remember doing</strong> = have a memory of a past action. The speaker is recalling something they already did. <em>To turn off</em> ✗ would imply a future action, but the past context ('before I left') makes -ing the only correct choice."
+    },
+    {
+      sentence: "After twenty years, he finally stopped ___ and his health improved almost immediately.",
+      options: ["to smoke", "smoking"],
+      answer: "smoking",
+      hint: "<strong>Stop doing</strong> = quit, cease a habit permanently. <em>Stop to smoke</em> ✗ would mean he paused (something else he was doing) in order to have a cigarette &mdash; the opposite meaning!"
+    },
+    {
+      sentence: "She was in the middle of a phone call when she stopped ___ a quick note.",
+      options: ["to take", "taking"],
+      answer: "to take",
+      hint: "<strong>Stop to do</strong> = pause what you are doing in order to do something else. She interrupted her phone call so that she could take a note. <em>Stop taking</em> ✗ would mean she quit the habit of taking notes."
+    },
+    {
+      sentence: "I tried ___ the problem for an hour, but I couldn&rsquo;t figure it out.",
+      options: ["to fix", "fixing"],
+      answer: "to fix",
+      hint: "<strong>Try to do</strong> = attempt, but not necessarily succeed. The second clause 'couldn&rsquo;t figure it out' confirms the attempt failed. <em>Try fixing</em> would mean experimenting with fixing as a possible solution."
+    },
+    {
+      sentence: "The coffee machine isn&rsquo;t working properly &mdash; have you tried ___ it off and on again?",
+      options: ["to turn", "turning"],
+      answer: "turning",
+      hint: "<strong>Try doing</strong> = experiment with something as a possible solution. The suggestion is: &lsquo;try this as a possible fix.&rsquo; <em>Try to turn</em> ✗ would imply an attempt that might fail, but here the speaker is simply suggesting an action to test."
+    },
+    {
+      sentence: "Don&rsquo;t forget ___ your passport &mdash; you&rsquo;ll need it at the border.",
+      options: ["to bring", "bringing"],
+      answer: "to bring",
+      hint: "<strong>Forget to do</strong> = fail to do something (future action). The speaker is reminding someone to perform an action. <em>Forget bringing</em> would mean having no memory of a past action: <em>I forgot bringing it</em> = I have no memory of bringing it."
+    },
+    {
+      sentence: "I&rsquo;ll never forget ___ her for the first time &mdash; it was at a conference in Berlin.",
+      options: ["to meet", "meeting"],
+      answer: "meeting",
+      hint: "<strong>Forget doing</strong> = have no memory of a past event &mdash; but when used with <em>never forget</em>, it means the event is <strong>unforgettable</strong>. This always refers to the past. <em>To meet</em> ✗ would mean she hasn&rsquo;t met the person yet."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1');
+buildFillBlank(exercise2, 'quiz-2');
+buildFillBlank(exercise3, 'quiz-3');
+buildFillBlank(exercise4, 'quiz-4');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+
+document.getElementById('check-4').addEventListener('click', () =>
+  checkFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4', 'section-4'));
+document.getElementById('reset-4').addEventListener('click', () =>
+  resetFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4'));
+</script>
+</body>
+</html>
