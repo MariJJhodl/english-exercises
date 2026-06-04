@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>June 4, 2026 – English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2b6cb0; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .rule-box { background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; color: #2c5282; }
+    .rule-box strong { color: #2b6cb0; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #3182ce; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.7rem; font-size: 0.88rem; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; line-height: 1.5; }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">&larr; Home</a> &nbsp;/&nbsp; June 4, 2026
+</nav>
+
+<div class="page-header">
+  <h1>June 4, 2026</h1>
+  <p>6 exercises &middot; Grammar &amp; Vocabulary</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 1 — VERB / ADJECTIVE + PREPOSITION
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Verb &amp; Adjective + Preposition</h2>
+  </div>
+  <div class="rule-box">
+    Many verbs and adjectives are always followed by a <strong>fixed preposition</strong> &mdash; you cannot translate directly from Italian.<br><br>
+    New pairs to know today:<br>
+    &bull; <em>responsible <strong>for</strong></em> &nbsp;&bull;&nbsp; <em>capable <strong>of</strong></em> &nbsp;&bull;&nbsp; <em>familiar <strong>with</strong></em><br>
+    &bull; <em>concentrate <strong>on</strong></em> &nbsp;&bull;&nbsp; <em>result <strong>in</strong></em> &nbsp;&bull;&nbsp; <em>apply <strong>for</strong></em><br>
+    &bull; <em>believe <strong>in</strong></em> &nbsp;&bull;&nbsp; <em>worry <strong>about</strong></em>
+  </div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 2 — PHRASAL VERBS
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Phrasal Verbs</h2>
+  </div>
+  <div class="rule-box">
+    Focus today: the <strong>give</strong> family and other common phrasal verbs.<br><br>
+    &bull; <em>give <strong>off</strong></em> = emit (smell, heat, smoke, light) &nbsp;&bull;&nbsp; <em>give <strong>in</strong></em> = surrender, stop resisting<br>
+    &bull; <em>give <strong>away</strong></em> = reveal a secret / give for free &nbsp;&bull;&nbsp; <em>run out <strong>of</strong></em> = have no more of something<br>
+    &bull; <em>take <strong>over</strong></em> = assume control &nbsp;&bull;&nbsp; <em>come <strong>across</strong></em> = find or encounter by chance<br>
+    &bull; <em>set <strong>up</strong></em> = create, establish &nbsp;&bull;&nbsp; <em>make <strong>up</strong></em> = invent / reconcile
+  </div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Choose the Formal Word</h2>
+  </div>
+  <div class="rule-box">
+    Formal writing avoids colloquial verbs, informal intensifiers, and vague expressions. Each question shows a <strong>colloquial sentence</strong> (in italics), followed by a formal rewrite with one gap.<br><br>
+    New pairs today:<br>
+    &bull; <em>get</em> &rarr; <strong>obtain</strong> &nbsp;&bull;&nbsp; <em>hand in</em> &rarr; <strong>submit</strong> &nbsp;&bull;&nbsp; <em>enough</em> &rarr; <strong>sufficient</strong><br>
+    &bull; <em>give out</em> &rarr; <strong>allocate</strong> &nbsp;&bull;&nbsp; <em>not allow</em> &rarr; <strong>prohibit</strong> &nbsp;&bull;&nbsp; <em>keep</em> &rarr; <strong>retain</strong><br>
+    &bull; <em>agree</em> &rarr; <strong>consent</strong> &nbsp;&bull;&nbsp; <em>before</em> &rarr; <strong>prior to</strong>
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 4 — VERB + TO-INFINITIVE OR -ING?
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Verb + to-infinitive or -ing?</h2>
+  </div>
+  <div class="rule-box">
+    Some verbs always take <strong>to + infinitive</strong>; others always take <strong>-ing</strong>. The form is fixed &mdash; it does not change the meaning.<br><br>
+    <strong>Always to + infinitive:</strong> <em>need, want, expect, plan, promise, decide, manage, hope, refuse, agree</em><br>
+    <strong>Always -ing:</strong> <em>keep, practise, enjoy, avoid, finish, consider, mind, suggest, miss, can&rsquo;t help</em><br><br>
+    Special case &mdash; <strong>look forward to + -ing</strong>: the word <em>to</em> here is a preposition, not part of the infinitive, so it is followed by the <strong>-ing</strong> form, not the base verb.
+  </div>
+  <div class="quiz" id="quiz-4"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-4">Check answers</button>
+    <button class="btn-reset" id="reset-4">Try again</button>
+    <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 5 — PRESENT PERFECT vs PAST SIMPLE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-5">
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Present Perfect vs Past Simple</h2>
+  </div>
+  <div class="rule-box">
+    <strong>Present Perfect</strong> (have/has + past participle): the exact time is unknown, unimportant, or unfinished &mdash; the focus is on the <em>result now</em> or the <em>experience</em>.<br>
+    <strong>Past Simple</strong>: there is a specific, finished point in time.<br><br>
+    <strong>Present Perfect triggers:</strong> <em>already, yet, just, ever, never, recently, for (up to now), since, this week/month/year</em><br>
+    <strong>Past Simple triggers:</strong> <em>yesterday, last week/year, in + year, ago, when, on Monday, at that moment</em><br><br>
+    Key rule: once you say <strong>when</strong> it happened, use Past Simple &mdash; even if it feels recent.
+  </div>
+  <div class="quiz" id="quiz-5"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-5">Check answers</button>
+    <button class="btn-reset" id="reset-5">Try again</button>
+    <span class="section-score" id="score-5"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 6 — PAST SIMPLE vs PAST CONTINUOUS
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-6">
+  <div class="section-title">
+    <div class="section-num">6</div>
+    <h2>Past Simple vs Past Continuous</h2>
+  </div>
+  <div class="rule-box">
+    <strong>Past Continuous</strong> (was/were + -ing): an action <em>in progress</em> at a specific moment in the past &mdash; used for background, interrupted actions, or simultaneous activities.<br>
+    <strong>Past Simple</strong>: a completed action, a sudden event, or a sequence of events.<br><br>
+    Classic pattern: <em>I <strong>was reading</strong> when the phone <strong>rang</strong>.</em> &nbsp;&rarr;&nbsp; ongoing (PC) + interruption (PS)<br>
+    Also: <em>While she <strong>was sleeping</strong>, he <strong>arrived</strong>.</em><br><br>
+    Use Past Simple for: a completed fact, a specific count, a finished habit, a result &mdash; not for what was in progress.
+  </div>
+  <div class="quiz" id="quiz-6"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-6">Check answers</button>
+    <button class="btn-reset" id="reset-6">Try again</button>
+    <span class="section-score" id="score-6"></span>
+  </div>
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2b6cb0;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to Home</a>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════
+   EXERCISE 1 — VERB / ADJECTIVE + PREPOSITION
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "She is responsible ___ managing the entire communications team.",
+      options: ["for", "of", "about"],
+      answer: "for",
+      hint: "<strong>Responsible for</strong> is always fixed. In Italian <em>responsabile di</em> maps to <em>responsible <strong>for</strong></em> in English, not <em>of</em>. Same pattern: <em>in charge <strong>of</strong></em>, <em>accountable <strong>for</strong></em>."
+    },
+    {
+      sentence: "It is very hard to concentrate ___ your work when the office is so noisy.",
+      options: ["on", "in", "at"],
+      answer: "on",
+      hint: "<strong>Concentrate on</strong> = direct your focus towards something. Same family: <em>focus <strong>on</strong>, rely <strong>on</strong>, depend <strong>on</strong>, insist <strong>on</strong></em> &mdash; all use <em>on</em>. Never <em>concentrate in</em> ✗ or <em>concentrate at</em> ✗."
+    },
+    {
+      sentence: "She has always believed ___ the importance of lifelong learning.",
+      options: ["in", "about", "for"],
+      answer: "in",
+      hint: "<strong>Believe in</strong> = have faith in, think something is right or exists. <em>About</em> ✗ is a very common mistake. Compare: <em>I believe <strong>in</strong> you</em> (I have faith in you) vs <em>I believe <strong>that</strong> you are right</em> (I think it is true)."
+    },
+    {
+      sentence: "Don&rsquo;t worry ___ making mistakes &mdash; it&rsquo;s how everyone learns.",
+      options: ["about", "for", "of"],
+      answer: "about",
+      hint: "<strong>Worry about</strong> is fixed. In Italian <em>preoccuparsi di</em>, but in English always <em>worry <strong>about</strong></em>. Same group: <em>think <strong>about</strong>, talk <strong>about</strong>, care <strong>about</strong>, complain <strong>about</strong></em>."
+    },
+    {
+      sentence: "He is fully capable ___ handling this project completely on his own.",
+      options: ["of", "for", "to"],
+      answer: "of",
+      hint: "<strong>Capable of</strong> + -ing. After <em>capable of</em>, always use the <strong>-ing</strong> form: <em>capable <strong>of handling</strong></em>, never <em>capable to handle</em> ✗. Italian <em>capace di</em> maps correctly: <em>di</em> &rarr; <em>of</em>."
+    },
+    {
+      sentence: "Working long hours without rest can result ___ serious burnout.",
+      options: ["in", "from", "to"],
+      answer: "in",
+      hint: "<strong>Result in</strong> = cause something to happen. <em>From</em> is different: <em>result <strong>from</strong></em> = be caused by something: <em>&ldquo;His success resulted <strong>from</strong> hard work.&rdquo;</em> The meanings are reversed, so the choice of preposition is critical."
+    },
+    {
+      sentence: "Are you familiar ___ the new data protection regulations?",
+      options: ["with", "about", "of"],
+      answer: "with",
+      hint: "<strong>Familiar with</strong> = knowing something well. In Italian <em>familiare con</em> &mdash; the preposition maps correctly here. Same group: <em>satisfied <strong>with</strong>, happy <strong>with</strong>, pleased <strong>with</strong>, comfortable <strong>with</strong></em>."
+    },
+    {
+      sentence: "She applied ___ the senior editor position as soon as she saw it advertised.",
+      options: ["for", "to", "at"],
+      answer: "for",
+      hint: "<strong>Apply for</strong> = make a request for a job, grant, visa, etc. Compare: <em>apply <strong>to</strong></em> = submit an application to a place: <em>&ldquo;She applied <strong>to</strong> three universities.&rdquo;</em> You apply <strong>for</strong> the thing you want; you apply <strong>to</strong> the place you send it."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 2 — PHRASAL VERBS
+══════════════════════════════════════════ */
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "The factory ___ thick black smoke that was visible from several kilometres away.",
+      options: ["gives off", "gives in", "gives away"],
+      answer: "gives off",
+      hint: "<strong>Give off</strong> = emit, produce something that spreads outward (smell, heat, light, smoke, gas). You cannot give off a physical object &mdash; only something that radiates or emanates. <em>Give in</em> = surrender. <em>Give away</em> = reveal or give for free."
+    },
+    {
+      sentence: "After hours of negotiation, the union finally ___ and accepted the revised terms.",
+      options: ["gave in", "gave off", "gave away"],
+      answer: "gave in",
+      hint: "<strong>Give in</strong> = surrender, stop resisting, yield to pressure. Compare with <em>give <strong>up</strong></em>: both express quitting, but <em>give in</em> implies yielding to someone else&rsquo;s pressure, while <em>give up</em> means abandoning an effort or habit entirely."
+    },
+    {
+      sentence: "He accidentally ___ the surprise party by mentioning it in front of Emma.",
+      options: ["gave away", "gave in", "gave off"],
+      answer: "gave away",
+      hint: "<strong>Give away</strong> has two main meanings: 1) reveal a secret or information unintentionally (as here), and 2) give something for free: <em>&ldquo;They&rsquo;re giving away free samples.&rdquo;</em> The verb is separable: <em>gave the secret away</em> or <em>gave away the secret</em>."
+    },
+    {
+      sentence: "We&rsquo;ve completely ___ coffee &mdash; could you pick some up on your way home?",
+      options: ["run out of", "come across", "set up"],
+      answer: "run out of",
+      hint: "<strong>Run out of</strong> = have no more of something (it has been used up). This phrasal verb is <em>inseparable</em>: you cannot say <em>run coffee out of</em> ✗. Compare with <em>use up</em> (= deliberately consume something completely): <em>&ldquo;I&rsquo;ve used up all the paper.&rdquo;</em>"
+    },
+    {
+      sentence: "When the CEO retired, her deputy ___ management of the entire organisation.",
+      options: ["took over", "came across", "made up"],
+      answer: "took over",
+      hint: "<strong>Take over</strong> = assume control or responsibility of something (a company, a role, a conversation). Separable: <em>take over the company</em> or <em>take the company over</em>. Also used in business: <em>a hostile takeover</em> (compound noun)."
+    },
+    {
+      sentence: "While going through some old boxes in the attic, she ___ her grandmother&rsquo;s wartime letters.",
+      options: ["came across", "set up", "ran out of"],
+      answer: "came across",
+      hint: "<strong>Come across</strong> = find or encounter something or someone by chance, without looking for it. Close synonym: <em>stumble upon</em> (more literary). Different from: <em>find out</em> (= discover a fact) and <em>look up</em> (= actively search for information)."
+    },
+    {
+      sentence: "They decided to ___ a small committee to investigate the complaints properly.",
+      options: ["set up", "take over", "make up"],
+      answer: "set up",
+      hint: "<strong>Set up</strong> = create, establish, or organise something (a meeting, a company, a system, a committee). Synonyms in formal writing: <em>establish</em> (for organisations) and <em>found</em> (for companies). Separable: <em>set up a committee</em> or <em>set a committee up</em>."
+    },
+    {
+      sentence: "She completely ___ an excuse for being late &mdash; there had been no traffic at all.",
+      options: ["made up", "took over", "came across"],
+      answer: "made up",
+      hint: "<strong>Make up</strong> has several meanings: 1) invent a story or excuse (as here), 2) reconcile after an argument: <em>&ldquo;They argued but made up the next day.&rdquo;</em>, 3) constitute/form: <em>&ldquo;Women make up 60% of the workforce.&rdquo;</em> Context always determines the meaning."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 3 — CHOOSE THE FORMAL WORD
+══════════════════════════════════════════ */
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "<em>&#x1F4AC; I need to get more information before I decide.</em><br>&rarr; I need to ___ further information before making a decision.",
+      options: ["obtain", "get hold of", "pick up"],
+      answer: "obtain",
+      hint: "<strong>Obtain</strong> = acquire or get, used in formal and professional contexts. Common in reports, legal documents, and academic writing: <em>obtain permission, obtain funding, obtain a certificate</em>. <em>Get hold of</em> is idiomatic and informal. <em>Pick up</em> is too casual."
+    },
+    {
+      sentence: "<em>&#x1F4AC; Please hand in your application by Friday.</em><br>&rarr; Please ___ your application no later than 5 pm on Friday.",
+      options: ["submit", "hand in", "drop off"],
+      answer: "submit",
+      hint: "<strong>Submit</strong> = formally present a document, application, or report. It is the standard verb in professional and academic contexts: <em>submit a proposal, submit an application, submit a report</em>. <em>Hand in</em> is acceptable but informal. <em>Drop off</em> is too colloquial."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We don&rsquo;t have enough time to complete this stage.</em><br>&rarr; There is not ___ time to complete this stage of the process.",
+      options: ["sufficient", "enough", "a lot of"],
+      answer: "sufficient",
+      hint: "<strong>Sufficient</strong> = formal for <em>enough</em>. It means the right amount, meeting the required level. Compare: <em>adequate</em> (= meeting a minimum standard, but not necessarily ideal). In formal writing, prefer <em>sufficient</em> over <em>enough</em>."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We should give more money to the IT department.</em><br>&rarr; We recommend ___ additional resources to the IT department.",
+      options: ["allocating", "giving out", "putting aside"],
+      answer: "allocating",
+      hint: "<strong>Allocate</strong> = formally assign or distribute resources (money, time, staff) for a specific purpose. Used in business, finance, and official documents: <em>allocate funding, allocate tasks, allocate time</em>. <em>Give out</em> is informal. <em>Put aside</em> means saving something for later use."
+    },
+    {
+      sentence: "<em>&#x1F4AC; You can&rsquo;t do that here.</em><br>&rarr; The regulations ___ this practice on the premises.",
+      options: ["prohibit", "don't allow", "stop"],
+      answer: "prohibit",
+      hint: "<strong>Prohibit</strong> = formally forbid, ban. It is stronger and more official than <em>not allow</em> or <em>forbid</em>. Common in legal and regulatory language: <em>smoking is prohibited, the use of mobile phones is prohibited during the examination</em>. Related noun: <em>prohibition</em>."
+    },
+    {
+      sentence: "<em>&#x1F4AC; We need to keep all records for five years.</em><br>&rarr; It is a legal requirement to ___ all records for a minimum of five years.",
+      options: ["retain", "keep hold of", "hold onto"],
+      answer: "retain",
+      hint: "<strong>Retain</strong> = keep, maintain possession of. Formal in business and legal contexts: <em>retain records, retain a lawyer, retain staff</em>. <em>Keep</em> is perfectly correct but its register is informal or neutral. <em>Keep hold of</em> and <em>hold onto</em> are informal idioms."
+    },
+    {
+      sentence: "<em>&#x1F4AC; She agreed to take part in the study.</em><br>&rarr; She ___ to participate in the research study.",
+      options: ["consented", "was happy to", "said she would"],
+      answer: "consented",
+      hint: "<strong>Consent to</strong> = give formal permission or voluntary agreement, especially in legal, medical, or ethical contexts. Related forms: <em>informed consent, consent form, parental consent</em>. <em>Was happy to</em> expresses attitude, not formal agreement. <em>Said she would</em> is too informal and indirect."
+    },
+    {
+      sentence: "<em>&#x1F4AC; Before signing the contract, she checked all the details.</em><br>&rarr; ___ signing the contract, she reviewed all the details carefully.",
+      options: ["Prior to", "Before", "At the time of"],
+      answer: "Prior to",
+      hint: "<strong>Prior to</strong> = formal for <em>before</em>. Common in contracts, official reports, and professional communication: <em>prior to the meeting, prior to signing, prior to departure</em>. Its opposite is <em>subsequent to</em> (= after). <em>At the time of</em> means during, not before &mdash; a completely different meaning."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 4 — VERB + TO-INFINITIVE OR -ING?
+══════════════════════════════════════════ */
+
+const exercise4 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "I need ___ you about an important change in the schedule before the meeting.",
+      options: ["to tell", "telling"],
+      answer: "to tell",
+      hint: "<strong>Need</strong> always takes <strong>to + infinitive</strong>. <em>&ldquo;I need to tell you&rdquo;</em> ✓ &mdash; never <em>&ldquo;I need telling&rdquo;</em> ✗ or <em>&ldquo;I need having&rdquo;</em> ✗. The Italian <em>ho bisogno di + infinito</em> maps to <em>I need <strong>to</strong> + base verb</em>, not to the -ing form."
+    },
+    {
+      sentence: "She wants ___ a new position before the end of the year.",
+      options: ["to find", "finding"],
+      answer: "to find",
+      hint: "<strong>Want</strong> always takes <strong>to + infinitive</strong>. Never <em>&ldquo;want + -ing&rdquo;</em> ✗. The same rule applies to: <em>need, would like, wish, expect, hope, plan, decide</em> &mdash; all followed by <em>to + base verb</em>."
+    },
+    {
+      sentence: "He keeps ___ the same mistake in his written reports despite regular feedback.",
+      options: ["making", "to make"],
+      answer: "making",
+      hint: "<strong>Keep</strong> + <strong>-ing</strong> = continue doing something, repeatedly. <em>&ldquo;Keep to make&rdquo;</em> ✗ does not exist. Also: <em>keep <strong>on</strong> doing</em> = same meaning, slightly more emphatic: <em>&ldquo;She kept on asking questions.&rdquo;</em>"
+    },
+    {
+      sentence: "You should practise ___ these expressions in full sentences every day.",
+      options: ["using", "to use"],
+      answer: "using",
+      hint: "<strong>Practise</strong> takes <strong>-ing</strong>. This is a fixed rule in British English: you practise <em>doing</em> something, not <em>to do</em> it. Same group: <em>enjoy, avoid, finish, consider, suggest, mind, miss, keep, can&rsquo;t help</em> &mdash; all followed by -ing."
+    },
+    {
+      sentence: "We expect ___ the final results from the lab by next Tuesday morning.",
+      options: ["to receive", "receiving"],
+      answer: "to receive",
+      hint: "<strong>Expect</strong> takes <strong>to + infinitive</strong>. Same group: <em>expect, hope, plan, decide, refuse, manage, promise, agree, arrange, offer, fail</em> &mdash; all followed by <em>to + base verb</em>. <em>&ldquo;Expect receiving&rdquo;</em> ✗ is not correct."
+    },
+    {
+      sentence: "I can&rsquo;t help ___ nervous before every important presentation.",
+      options: ["feeling", "to feel"],
+      answer: "feeling",
+      hint: "<strong>Can&rsquo;t help</strong> + <strong>-ing</strong> = cannot stop yourself from doing something. It is a fixed expression: <em>&ldquo;I can&rsquo;t help laughing,&rdquo; &ldquo;I can&rsquo;t help thinking about it.&rdquo;</em> <em>&ldquo;Can&rsquo;t help to feel&rdquo;</em> ✗ does not exist in English."
+    },
+    {
+      sentence: "I&rsquo;m really looking forward to ___ you all at the conference next month.",
+      options: ["seeing", "see"],
+      answer: "seeing",
+      hint: "<strong>Look forward to</strong> + <strong>-ing</strong>. The word <em>to</em> here is a <strong>preposition</strong>, not part of the to-infinitive &mdash; so it must be followed by the <em>-ing</em> form. <em>&ldquo;Looking forward to see&rdquo;</em> ✗ is a very common mistake. Same rule: <em>be used to <strong>doing</strong>, object to <strong>doing</strong>, in addition to <strong>doing</strong></em>."
+    },
+    {
+      sentence: "She really misses ___ her morning walks along the seafront since moving to the city.",
+      options: ["taking", "to take"],
+      answer: "taking",
+      hint: "<strong>Miss</strong> + <strong>-ing</strong> = feel sad about not doing something you used to do. Always past-looking: <em>&ldquo;I miss living in Rome,&rdquo; &ldquo;He misses working with her.&rdquo;</em> <em>&ldquo;Miss to take&rdquo;</em> ✗ does not exist. Compare: <em>want to do, hope to do</em> (future-looking) vs <em>miss doing</em> (past-looking)."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 5 — PRESENT PERFECT vs PAST SIMPLE
+══════════════════════════════════════════ */
+
+const exercise5 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "I ___ in this company for three years now and I still love my job.",
+      options: ["have worked", "worked"],
+      answer: "have worked",
+      hint: "<strong>For + period up to now</strong> = Present Perfect. The action started in the past and is still true now. <em>&ldquo;Worked&rdquo;</em> ✗ (Past Simple) would imply the job is over. Test: can you add <em>and I still do it</em>? If yes, use Present Perfect."
+    },
+    {
+      sentence: "She ___ to Tokyo in 2019 for a business conference.",
+      options: ["flew", "has flown"],
+      answer: "flew",
+      hint: "<strong>In 2019</strong> = specific finished point in time = Past Simple. Rule: once you state <em>when</em> something happened (in 2019, last year, yesterday, on Monday), use Past Simple, not Present Perfect. <em>&ldquo;Has flown&rdquo;</em> ✗ would leave the time open and unspecified."
+    },
+    {
+      sentence: "This is the best film I ___ this year.",
+      options: ["have seen", "saw"],
+      answer: "have seen",
+      hint: "<strong>This year</strong> = an unfinished time period = Present Perfect. The year is still ongoing, so any action within it uses Present Perfect. Compare: <em>&ldquo;the best film I <strong>saw</strong> last year&rdquo;</em> &mdash; last year is finished &rarr; Past Simple."
+    },
+    {
+      sentence: "___ you ever eaten sushi? I think you&rsquo;d really love it.",
+      options: ["Have", "Did"],
+      answer: "Have",
+      hint: "<strong>Ever</strong> = at any point in your life = Present Perfect for experience questions. <em>&ldquo;Have you <strong>ever</strong> + past participle?&rdquo;</em> is the fixed structure. <em>&ldquo;Did you ever eat?&rdquo;</em> ✗ is grammatically possible but unnatural in modern British English for a life-experience question."
+    },
+    {
+      sentence: "I can&rsquo;t find my wallet &mdash; I think I ___ it at the restaurant.",
+      options: ["have left", "left"],
+      answer: "have left",
+      hint: "Use Present Perfect when a past action has a clear <strong>result now</strong> (I can&rsquo;t find my wallet = the result is happening right now). <em>&ldquo;I left it&rdquo;</em> ✓ is also possible but focuses only on the past event. <em>&ldquo;I have left it&rdquo;</em> connects the past action directly to the present problem."
+    },
+    {
+      sentence: "They ___ in that house for twenty years before finally moving to the coast.",
+      options: ["lived", "have lived"],
+      answer: "lived",
+      hint: "<strong>Before moving</strong> = they moved away, so the period is <em>finished</em>. Finished situations use Past Simple, even with <em>for + period</em>: <em>&ldquo;they lived there for 20 years&rdquo;</em> = over. If they still live there: <em>&ldquo;they <strong>have</strong> lived there for 20 years&rdquo;</em>."
+    },
+    {
+      sentence: "I&rsquo;ve already ___ to him about it, so he knows.",
+      options: ["spoken", "spoke"],
+      answer: "spoken",
+      hint: "<strong>Already</strong> with Present Perfect = the action is complete and relevant to the present. The past participle of <em>speak</em> is <strong>spoken</strong>, not <em>spoke</em>. <em>&ldquo;I&rsquo;ve already spoke&rdquo;</em> ✗ is a very common mistake &mdash; <em>spoke</em> is the Past Simple form, not the past participle."
+    },
+    {
+      sentence: "He ___ the company from scratch in 1995 and retired as CEO twenty years later.",
+      options: ["built", "has built"],
+      answer: "built",
+      hint: "<strong>In 1995</strong> = specific past time = Past Simple. Both verbs describe a completed sequence of events: he <em>built</em> the company, then he <em>retired</em>. Sequences of finished past actions always use Past Simple. <em>&ldquo;Has built&rdquo;</em> ✗ would leave the time open, but 1995 closes it."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 6 — PAST SIMPLE vs PAST CONTINUOUS
+══════════════════════════════════════════ */
+
+const exercise6 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "When I arrived at the office, she ___ on the phone.",
+      options: ["was talking", "talked"],
+      answer: "was talking",
+      hint: "<strong>When I arrived</strong> = my arrival (Past Simple) interrupted an ongoing activity. She was <em>in the middle of</em> a call when I came in &rarr; Past Continuous. Classic pattern: <em>I arrived</em> (PS, the interruption) + <em>she was talking</em> (PC, the ongoing background action)."
+    },
+    {
+      sentence: "She ___ carefully when she suddenly noticed a mistake in the data.",
+      options: ["was reading", "read"],
+      answer: "was reading",
+      hint: "<strong>Suddenly noticed</strong> = the interrupting event (Past Simple). The reading was already in progress when the noticing happened &rarr; Past Continuous. Pattern: <em>was reading</em> (ongoing background) + <em>suddenly noticed</em> (interruption). <em>&ldquo;She read carefully when she noticed&rdquo;</em> ✗ describes two completed actions, not an interruption."
+    },
+    {
+      sentence: "I ___ yoga every morning for a year but then I stopped.",
+      options: ["did", "was doing"],
+      answer: "did",
+      hint: "<strong>For a year... then I stopped</strong> = a completed, finished habit with a clear endpoint = Past Simple. Past Continuous describes a temporary ongoing action at a specific moment, not a finished regular habit. Compare: <em>&ldquo;At that time I was doing yoga every day&rdquo;</em> (PC = temporary habit in a context, no endpoint stated)."
+    },
+    {
+      sentence: "This time last week, we ___ through the Alps on our way to Zurich.",
+      options: ["were driving", "drove"],
+      answer: "were driving",
+      hint: "<strong>This time last week</strong> = a specific moment in the past. At that moment, the journey was in progress = Past Continuous. Compare: <em>&ldquo;We drove through the Alps last week&rdquo;</em> (Past Simple) = the journey as a completed event, not what was happening at a particular moment."
+    },
+    {
+      sentence: "While she ___ dinner, she got a call from an old friend.",
+      options: ["was cooking", "cooked"],
+      answer: "was cooking",
+      hint: "<strong>While</strong> + Past Continuous introduces the background action. The phone call (<em>got a call</em> = Past Simple) is the interrupting event. Structure: <em>WHILE she <strong>was cooking</strong></em> (ongoing) + <em>she <strong>got</strong> a call</em> (interruption). <em>&ldquo;While she cooked&rdquo;</em> ✗ breaks the pattern — <em>while</em> normally introduces the ongoing action."
+    },
+    {
+      sentence: "He ___ the report in just three hours &mdash; much faster than expected.",
+      options: ["finished", "was finishing"],
+      answer: "finished",
+      hint: "<strong>In just three hours</strong> + a result = Past Simple. This focuses on the completed achievement. <em>&ldquo;He was finishing the report&rdquo;</em> ✗ means he was in the middle of it &mdash; no completion is implied. When there is a clear result or completion, use Past Simple."
+    },
+    {
+      sentence: "It ___ heavily when we arrived, so we decided to take a taxi.",
+      options: ["was raining", "rained"],
+      answer: "was raining",
+      hint: "Weather as a <strong>background condition</strong> at a specific past moment = Past Continuous. The rain was already happening when we arrived. <em>&ldquo;It rained&rdquo;</em> (Past Simple) would describe rainfall as a completed event with a start and end. Here it is the ongoing situation we found on arrival."
+    },
+    {
+      sentence: "The children ___ TV when their parents came home.",
+      options: ["were watching", "watched"],
+      answer: "were watching",
+      hint: "<strong>When their parents came home</strong> = Past Simple (the arrival). The children were <em>in the middle of</em> watching TV at that moment = Past Continuous. Classic structure: <em>SUBJECT + was/were + -ing + WHEN + Past Simple</em>. <em>&ldquo;The children watched TV when their parents came home&rdquo;</em> ✗ makes both actions sound equally completed, losing the sense of interruption."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1');
+buildFillBlank(exercise2, 'quiz-2');
+buildFillBlank(exercise3, 'quiz-3');
+buildFillBlank(exercise4, 'quiz-4');
+buildFillBlank(exercise5, 'quiz-5');
+buildFillBlank(exercise6, 'quiz-6');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+
+document.getElementById('check-4').addEventListener('click', () =>
+  checkFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4', 'section-4'));
+document.getElementById('reset-4').addEventListener('click', () =>
+  resetFillBlank(exercise4, 'quiz-4', 'check-4', 'reset-4', 'score-4'));
+
+document.getElementById('check-5').addEventListener('click', () =>
+  checkFillBlank(exercise5, 'quiz-5', 'check-5', 'reset-5', 'score-5', 'section-5'));
+document.getElementById('reset-5').addEventListener('click', () =>
+  resetFillBlank(exercise5, 'quiz-5', 'check-5', 'reset-5', 'score-5'));
+
+document.getElementById('check-6').addEventListener('click', () =>
+  checkFillBlank(exercise6, 'quiz-6', 'check-6', 'reset-6', 'score-6', 'section-6'));
+document.getElementById('reset-6').addEventListener('click', () =>
+  resetFillBlank(exercise6, 'quiz-6', 'check-6', 'reset-6', 'score-6'));
+</script>
+</body>
+</html>
