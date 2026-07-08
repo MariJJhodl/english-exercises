@@ -80,7 +80,11 @@
     .alt-card { background: #f7fbff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.93rem; line-height: 1.65; color: #2d3748; }
     .alt-card .alt-label { display: block; font-weight: 700; color: #2b6cb0; margin-bottom: 0.4rem; }
     .alt-card.student-card { background: #f7f7f8; border-left-color: #718096; }
-    .alt-card.student-card .alt-label { color: #4a5568; }
+    .alt-card.student-card .alt-label { color: #4a5568; margin-bottom: 0; }
+    .alt-header { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.4rem; }
+    .btn-copy { padding: 0.25rem 0.7rem; border: 2px solid #a0aec0; border-radius: 14px; background: white; font-size: 0.8rem; color: #4a5568; cursor: pointer; transition: all 0.15s; flex-shrink: 0; }
+    .btn-copy:hover { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .btn-copy.copied { border-color: #38a169; color: #276749; background: #f0fff4; }
     @media (max-width: 600px) {
       .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
       .word-chip   { padding: 0.6rem 1rem;    font-size: 1rem; }
@@ -221,7 +225,10 @@
   </div>
   <div class="rewrite-alternatives" id="alternatives-5">
     <div class="alt-card student-card" id="student-answer-card">
-      <span class="alt-label">Your version</span>
+      <div class="alt-header">
+        <span class="alt-label">Your version</span>
+        <button class="btn-copy" id="copy-student-answer">&#128203; Copy</button>
+      </div>
       <span id="student-answer-text"></span>
     </div>
     <div class="alt-card">
@@ -654,7 +661,7 @@ function resetReorder(questions, containerId, checkId, resetId, scoreId) {
    EXERCISE 5 — REWRITE (formal rewriting, reveal-only)
 ══════════════════════════════════════════ */
 
-function initRewrite(textareaId, submitId, alternativesId, studentTextId) {
+function initRewrite(textareaId, submitId, alternativesId, studentTextId, copyBtnId) {
   document.getElementById(submitId).addEventListener('click', () => {
     const textarea = document.getElementById(textareaId);
     if (!textarea.value.trim()) { alert('Please write your version first.'); return; }
@@ -662,6 +669,19 @@ function initRewrite(textareaId, submitId, alternativesId, studentTextId) {
     textarea.disabled = true;
     document.getElementById(submitId).style.display = 'none';
     document.getElementById(alternativesId).style.display = 'flex';
+  });
+  const copyBtn = document.getElementById(copyBtnId);
+  copyBtn.addEventListener('click', () => {
+    const text = document.getElementById(studentTextId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const original = copyBtn.textContent;
+      copyBtn.textContent = '✔ Copied';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = original;
+        copyBtn.classList.remove('copied');
+      }, 1500);
+    });
   });
 }
 
@@ -673,7 +693,7 @@ buildFillBlank(exercise1, 'quiz-1');
 buildReorder(reorderQuestions, 'reorder-quiz');
 buildFillBlank(exercise3, 'quiz-3');
 buildFillBlank(exercise4, 'quiz-4');
-initRewrite('rewrite-input', 'submit-5', 'alternatives-5', 'student-answer-text');
+initRewrite('rewrite-input', 'submit-5', 'alternatives-5', 'student-answer-text', 'copy-student-answer');
 
 document.getElementById('check-1').addEventListener('click', () =>
   checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
