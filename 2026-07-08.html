@@ -79,6 +79,8 @@
     .rewrite-alternatives { display: none; flex-direction: column; gap: 1rem; margin-top: 1.2rem; }
     .alt-card { background: #f7fbff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.93rem; line-height: 1.65; color: #2d3748; }
     .alt-card .alt-label { display: block; font-weight: 700; color: #2b6cb0; margin-bottom: 0.4rem; }
+    .alt-card.student-card { background: #f7f7f8; border-left-color: #718096; }
+    .alt-card.student-card .alt-label { color: #4a5568; }
     @media (max-width: 600px) {
       .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
       .word-chip   { padding: 0.6rem 1rem;    font-size: 1rem; }
@@ -207,7 +209,8 @@
   </div>
   <div class="rule-box">
     Read the informal text below (topic: law and legislation) and rewrite it in a more formal register &mdash; formal vocabulary, no contractions, no vague expressions like <em>a lot of</em> or <em>maybe</em>.<br><br>
-    &#9888;&#65039; <strong>Spelling reminder:</strong> the verb <em>become</em> is irregular &mdash; <strong>it becomes</strong> (never <em>it becames</em>), <strong>it&rsquo;s becoming</strong> (never <em>it&rsquo;s becaming</em>).
+    &#9888;&#65039; <strong>Spelling reminder:</strong> the verb <em>become</em> is irregular &mdash; <strong>it becomes</strong> (never <em>it becames</em>), <strong>it&rsquo;s becoming</strong> (never <em>it&rsquo;s becaming</em>).<br><br>
+    &#8505;&#65039; This exercise is <strong>not automatically corrected</strong>: after you submit, your own version will be shown together with two possible formal alternatives, so you can compare your choices and see other valid ways to express the same ideas.
   </div>
   <div class="rewrite-source">
     &ldquo;A lot of people think the new law is a good idea, but some say it doesn&rsquo;t work well in real life. The government needs to look into it more and maybe change a few things, because right now it&rsquo;s causing problems for small businesses. If they don&rsquo;t do something soon, it could become a much bigger issue for everyone.&rdquo;
@@ -217,6 +220,10 @@
     <button class="btn-check" id="submit-5">Submit</button>
   </div>
   <div class="rewrite-alternatives" id="alternatives-5">
+    <div class="alt-card student-card" id="student-answer-card">
+      <span class="alt-label">Your version</span>
+      <span id="student-answer-text"></span>
+    </div>
     <div class="alt-card">
       <span class="alt-label">Alternative 1</span>
       Many stakeholders regard the new legislation favourably; however, some argue that it is not effective in practice. The government must examine the matter further and consider implementing amendments, as the current provisions are creating significant difficulties for small businesses. Failure to act promptly could result in a considerably more serious issue for the sector as a whole.
@@ -647,10 +654,11 @@ function resetReorder(questions, containerId, checkId, resetId, scoreId) {
    EXERCISE 5 — REWRITE (formal rewriting, reveal-only)
 ══════════════════════════════════════════ */
 
-function initRewrite(textareaId, submitId, alternativesId) {
+function initRewrite(textareaId, submitId, alternativesId, studentTextId) {
   document.getElementById(submitId).addEventListener('click', () => {
     const textarea = document.getElementById(textareaId);
     if (!textarea.value.trim()) { alert('Please write your version first.'); return; }
+    document.getElementById(studentTextId).textContent = textarea.value.trim();
     textarea.disabled = true;
     document.getElementById(submitId).style.display = 'none';
     document.getElementById(alternativesId).style.display = 'flex';
@@ -665,7 +673,7 @@ buildFillBlank(exercise1, 'quiz-1');
 buildReorder(reorderQuestions, 'reorder-quiz');
 buildFillBlank(exercise3, 'quiz-3');
 buildFillBlank(exercise4, 'quiz-4');
-initRewrite('rewrite-input', 'submit-5', 'alternatives-5');
+initRewrite('rewrite-input', 'submit-5', 'alternatives-5', 'student-answer-text');
 
 document.getElementById('check-1').addEventListener('click', () =>
   checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
