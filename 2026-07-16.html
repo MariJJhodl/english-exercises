@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>July 16, 2026 – English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2b6cb0; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2b6cb0; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2b6cb0; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .rule-box { background: #ebf8ff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; color: #2c5282; }
+    .rule-box strong { color: #2b6cb0; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #3182ce; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .option-btn.selected { border-color: #3182ce; background: #ebf8ff; color: #2b6cb0; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.7rem; font-size: 0.88rem; padding: 0.45rem 0.8rem; border-radius: 8px; display: none; line-height: 1.5; }
+    .feedback.correct { background: #f0fff4; color: #276749; display: block; }
+    .feedback.wrong   { background: #fff5f5; color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2b6cb0; color: white; }
+    .btn-check:hover  { background: #2c5282; }
+    .btn-reset        { background: white; color: #2b6cb0; border: 2px solid #2b6cb0; display: none; }
+    .btn-reset:hover  { background: #ebf8ff; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2b6cb0; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    /* ── Rewrite (formal rewriting) ── */
+    .rewrite-source { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); font-size: 0.97rem; line-height: 1.7; font-style: italic; color: #4a5568; margin-bottom: 1rem; }
+    .rewrite-textarea { width: 100%; min-height: 140px; padding: 0.8rem 1rem; border: 2px solid #cbd5e0; border-radius: 10px; font-family: inherit; font-size: 0.95rem; line-height: 1.6; color: #2d3748; resize: vertical; }
+    .rewrite-textarea:focus { outline: none; border-color: #3182ce; }
+    .rewrite-alternatives { display: none; flex-direction: column; gap: 1rem; margin-top: 1.2rem; }
+    .alt-card { background: #f7fbff; border-left: 4px solid #3182ce; border-radius: 8px; padding: 1rem 1.2rem; font-size: 0.93rem; line-height: 1.65; color: #2d3748; }
+    .alt-card .alt-label { display: block; font-weight: 700; color: #2b6cb0; margin-bottom: 0.4rem; }
+    .alt-card.student-card { background: #f7f7f8; border-left-color: #718096; }
+    .alt-card.student-card .alt-label { color: #4a5568; margin-bottom: 0; }
+    .alt-header { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.4rem; }
+    .btn-copy { padding: 0.25rem 0.7rem; border: 2px solid #a0aec0; border-radius: 14px; background: white; font-size: 0.8rem; color: #4a5568; cursor: pointer; transition: all 0.15s; flex-shrink: 0; }
+    .btn-copy:hover { border-color: #3182ce; color: #2b6cb0; background: #ebf8ff; }
+    .btn-copy.copied { border-color: #38a169; color: #276749; background: #f0fff4; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">&larr; Home</a> &nbsp;/&nbsp; July 16, 2026
+</nav>
+
+<div class="page-header">
+  <h1>July 16, 2026</h1>
+  <p>4 exercises &middot; Grammar &amp; Vocabulary</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 1 — NEVER OR EVER?
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Never or Ever?</h2>
+  </div>
+  <div class="rule-box">
+    <strong>Ever</strong> = at any point in time. Used in questions (<em>Have you ever&hellip;?</em>), after superlatives with the present perfect (<em>the best/worst&hellip; I&rsquo;ve ever&hellip;</em>), and after words that are already negative (<em>nothing, nobody, hardly</em>) &mdash; English does not stack two negatives.<br><br>
+    <strong>Never</strong> = at no point in time. It already means &ldquo;not ever&rdquo;, so it replaces <em>not&hellip;ever</em> in an affirmative-looking sentence: <em>&ldquo;I&rsquo;ve never met her&rdquo;</em> ✓ (not <em>&ldquo;I haven&rsquo;t never met her&rdquo;</em> ✗).
+  </div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 2 — FORMAL WORD CHOICE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Formal Word Choice</h2>
+  </div>
+  <div class="rule-box">
+    In formal writing (reports, memos, official letters) English prefers Latinate words over everyday ones. New pairs today:<br><br>
+    &bull; <strong>commence</strong> (vs. <em>start</em>) &nbsp;&bull;&nbsp; <strong>inform</strong> (vs. <em>tell</em>) &nbsp;&bull;&nbsp; <strong>sufficient</strong> (vs. <em>enough</em>) &nbsp;&bull;&nbsp; <strong>prior to</strong> (vs. <em>before</em>)<br>
+    &bull; <strong>regarding</strong> (vs. <em>about</em>) &nbsp;&bull;&nbsp; <strong>demonstrate</strong> (vs. <em>show</em>) &nbsp;&bull;&nbsp; <strong>rectify</strong> (vs. <em>fix</em>) &nbsp;&bull;&nbsp; <strong>obtain</strong> (vs. <em>get</em>)
+  </div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 3 — PHRASAL VERBS
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Phrasal Verbs</h2>
+  </div>
+  <div class="rule-box">
+    New phrasal verbs today, common in everyday and workplace English:<br><br>
+    &bull; <em>look <strong>into</strong></em> = investigate &nbsp;&bull;&nbsp; <em>put up <strong>with</strong></em> = tolerate<br>
+    &bull; <em>get away <strong>with</strong></em> = do something wrong without punishment &nbsp;&bull;&nbsp; <em>catch up <strong>on</strong></em> = do something you fell behind on<br>
+    &bull; <em>fall <strong>behind</strong></em> = fail to keep pace &nbsp;&bull;&nbsp; <em>sort <strong>out</strong></em> = resolve, organize<br>
+    &bull; <em>call <strong>off</strong></em> = cancel &nbsp;&bull;&nbsp; <em>look forward <strong>to</strong></em> = anticipate with pleasure
+  </div>
+  <div class="quiz" id="quiz-3"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     EXERCISE 4 — REWRITE IN A FORMAL STYLE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Rewrite in a Formal Style</h2>
+  </div>
+  <div class="rule-box">
+    Read the informal text below (topic: workplace announcement) and rewrite it in a more formal register &mdash; formal vocabulary, no contractions, no vague expressions like <em>gonna</em> or <em>ASAP</em>.<br><br>
+    &#9888;&#65039; <strong>Reminder:</strong> the verb <em>become</em> is irregular &mdash; <strong>it becomes</strong> (never <em>it becames</em>), <strong>it&rsquo;s becoming</strong> (never <em>it&rsquo;s becaming</em>).<br><br>
+    &#8505;&#65039; This exercise is <strong>not automatically corrected</strong>: after you submit, your own version will be shown together with two possible formal alternatives, so you can compare your choices and see other valid ways to express the same ideas.
+  </div>
+  <div class="rewrite-source">
+    &ldquo;Hey, just wanted to let you know that the new rules are gonna kick in from next month, so you guys need to sort out your paperwork ASAP or you might get in trouble. Let me know if you&rsquo;re stuck on anything.&rdquo;
+  </div>
+  <textarea class="rewrite-textarea" id="rewrite-input" placeholder="Write your formal version here..."></textarea>
+  <div class="section-actions">
+    <button class="btn-check" id="submit-4">Submit</button>
+  </div>
+  <div class="rewrite-alternatives" id="alternatives-4">
+    <div class="alt-card student-card" id="student-answer-card">
+      <div class="alt-header">
+        <span class="alt-label">Your version</span>
+        <button class="btn-copy" id="copy-student-answer">&#128203; Copy</button>
+      </div>
+      <span id="student-answer-text"></span>
+    </div>
+    <div class="alt-card">
+      <span class="alt-label">Alternative 1</span>
+      Please be advised that the new regulations will come into effect from next month. You are therefore required to complete the necessary paperwork as soon as possible, as failure to do so may result in penalties. Do not hesitate to contact me should you require any assistance.
+    </div>
+    <div class="alt-card">
+      <span class="alt-label">Alternative 2</span>
+      This message is to inform you that the updated regulations will take effect next month. Accordingly, all outstanding documentation must be finalized promptly, as non-compliance may lead to consequences. Please feel free to reach out if you encounter any difficulties.
+    </div>
+  </div>
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2b6cb0;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to Home</a>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════
+   EXERCISE 1 — NEVER OR EVER?
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "She&rsquo;s one of the smartest people I&rsquo;ve ___ met.",
+      options: ["never", "ever"],
+      answer: "ever",
+      hint: "After a superlative (<em>the smartest&hellip;</em>) with the present perfect, English uses <strong>ever</strong>, not <em>never</em>: &ldquo;the smartest person I&rsquo;ve ever met&rdquo;."
+    },
+    {
+      sentence: "I&rsquo;ve ___ shared this secret with anyone.",
+      options: ["never", "ever"],
+      answer: "never",
+      hint: "<strong>Never</strong> = at no point in time; it makes the sentence negative on its own, so no extra <em>not</em> is needed."
+    },
+    {
+      sentence: "Have you ___ visited New York?",
+      options: ["ever", "never"],
+      answer: "ever",
+      hint: "In questions asking about experience at any point in time, English uses <strong>ever</strong>: &ldquo;Have you ever&hellip;?&rdquo;"
+    },
+    {
+      sentence: "Nothing this unusual has ___ happened to me before.",
+      options: ["never", "ever"],
+      answer: "ever",
+      hint: "<em>Nothing</em> is already negative, so the sentence needs <strong>ever</strong>, not a second negative word. &ldquo;Nothing has never happened&rdquo; ✗ would be a double negative."
+    },
+    {
+      sentence: "It was the worst film I&rsquo;ve ___ seen.",
+      options: ["ever", "never"],
+      answer: "ever",
+      hint: "Same pattern as question 1: superlative + present perfect + <strong>ever</strong>."
+    },
+    {
+      sentence: "He has ___ missed a deadline in five years.",
+      options: ["ever", "never"],
+      answer: "never",
+      hint: "An affirmative-looking sentence describing something that has not happened at any point uses <strong>never</strong>."
+    },
+    {
+      sentence: "I don&rsquo;t think I&rsquo;ve ___ laughed so hard.",
+      options: ["never", "ever"],
+      answer: "ever",
+      hint: "The sentence is already negative (<em>don&rsquo;t think</em>), so it takes <strong>ever</strong>, not a second negative &mdash; the same rule as with <em>nothing/nobody</em>."
+    },
+    {
+      sentence: "She&rsquo;s ___ been to Japan, but she&rsquo;d love to go.",
+      options: ["never", "ever"],
+      answer: "never",
+      hint: "A plain affirmative statement describing something that has not happened uses <strong>never</strong>."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 2 — FORMAL WORD CHOICE
+══════════════════════════════════════════ */
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "The meeting will ___ at 10 a.m. sharp.",
+      options: ["start", "commence"],
+      answer: "commence",
+      hint: "<strong>Commence</strong> is the formal equivalent of <em>start/begin</em>, typical of official agendas and legal documents."
+    },
+    {
+      sentence: "Please ___ us know if you have any questions.",
+      options: ["inform", "tell"],
+      answer: "inform",
+      hint: "<strong>Inform</strong> is the formal equivalent of <em>tell</em>, standard in business correspondence: &ldquo;please inform us&hellip;&rdquo;"
+    },
+    {
+      sentence: "We need ___ evidence before making a decision.",
+      options: ["sufficient", "enough"],
+      answer: "sufficient",
+      hint: "<strong>Sufficient</strong> is the formal equivalent of <em>enough</em>, common in reports and legal writing."
+    },
+    {
+      sentence: "The report will be reviewed ___ the deadline.",
+      options: ["before", "prior to"],
+      answer: "prior to",
+      hint: "<strong>Prior to</strong> is the formal equivalent of <em>before</em>. Note it is always followed by a noun or -ing form, never a full clause with a conjugated verb."
+    },
+    {
+      sentence: "This memo concerns the policy change ___ remote work.",
+      options: ["regarding", "about"],
+      answer: "regarding",
+      hint: "<strong>Regarding</strong> is the formal equivalent of <em>about</em>, common in memos and emails: &ldquo;regarding your request&hellip;&rdquo;"
+    },
+    {
+      sentence: "The results ___ a significant improvement.",
+      options: ["show", "demonstrate"],
+      answer: "demonstrate",
+      hint: "<strong>Demonstrate</strong> is the formal equivalent of <em>show</em>, typical of reports presenting data or findings."
+    },
+    {
+      sentence: "The technician will ___ the fault before shipping.",
+      options: ["fix", "rectify"],
+      answer: "rectify",
+      hint: "<strong>Rectify</strong> is the formal equivalent of <em>fix</em>, common in technical and business writing: &ldquo;rectify the issue&rdquo;."
+    },
+    {
+      sentence: "The company plans to ___ additional office space.",
+      options: ["obtain", "get"],
+      answer: "obtain",
+      hint: "<strong>Obtain</strong> is the formal equivalent of <em>get</em>, standard in business and legal contexts: &ldquo;obtain permission/approval/space&rdquo;."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   EXERCISE 3 — PHRASAL VERBS
+══════════════════════════════════════════ */
+
+const exercise3 = {
+  type: "fill-blank",
+  questions: [
+    {
+      sentence: "The manager promised to ___ the complaint and get back to us by Friday.",
+      options: ["catch up on", "sort out", "look into"],
+      answer: "look into",
+      hint: "<strong>Look into</strong> = investigate a problem or complaint. Formal synonym: <em>investigate, examine</em>."
+    },
+    {
+      sentence: "I don&rsquo;t know how she can ___ his constant complaining.",
+      options: ["put up with", "fall behind", "call off"],
+      answer: "put up with",
+      hint: "<strong>Put up with</strong> = tolerate something unpleasant without complaining. Formal synonym: <em>tolerate, endure</em>."
+    },
+    {
+      sentence: "He thought he could ___ cheating on the exam, but the teacher noticed immediately.",
+      options: ["look into", "get away with", "look forward to"],
+      answer: "get away with",
+      hint: "<strong>Get away with</strong> = do something wrong or risky without being caught or punished for it."
+    },
+    {
+      sentence: "I spent the whole weekend trying to ___ my emails after the holiday.",
+      options: ["catch up on", "put up with", "sort out"],
+      answer: "catch up on",
+      hint: "<strong>Catch up on</strong> = do something you should have done earlier because you fell behind (emails, sleep, news)."
+    },
+    {
+      sentence: "If you miss too many classes, you&rsquo;ll ___ the rest of the group.",
+      options: ["call off", "get away with", "fall behind"],
+      answer: "fall behind",
+      hint: "<strong>Fall behind</strong> = fail to keep pace with others or with a schedule."
+    },
+    {
+      sentence: "It took hours to ___ the confusion about the schedule.",
+      options: ["fall behind", "sort out", "look forward to"],
+      answer: "sort out",
+      hint: "<strong>Sort out</strong> = resolve a problem or organize something that is in disorder."
+    },
+    {
+      sentence: "The organizers had to ___ the event because of the storm.",
+      options: ["catch up on", "call off", "put up with"],
+      answer: "call off",
+      hint: "<strong>Call off</strong> = cancel something that was planned. Formal synonym: <em>cancel</em>."
+    },
+    {
+      sentence: "I&rsquo;m really ___ seeing you again next month.",
+      options: ["get away with", "sort out", "look forward to"],
+      answer: "look forward to",
+      hint: "<strong>Look forward to</strong> = anticipate something with pleasure. Note it is followed by a noun or -ing form: <em>look forward to seeing you</em>, never <em>look forward to see you</em> ✗."
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${i + 1}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; }
+    else { fb.className = 'feedback wrong'; }
+    fb.innerHTML = q.hint;
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId) {
+  buildFillBlank(exercise, containerId);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   EXERCISE 4 — REWRITE (formal rewriting, reveal-only)
+══════════════════════════════════════════ */
+
+function initRewrite(textareaId, submitId, alternativesId, studentTextId, copyBtnId) {
+  document.getElementById(submitId).addEventListener('click', () => {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea.value.trim()) { alert('Please write your version first.'); return; }
+    document.getElementById(studentTextId).textContent = textarea.value.trim();
+    textarea.disabled = true;
+    document.getElementById(submitId).style.display = 'none';
+    document.getElementById(alternativesId).style.display = 'flex';
+  });
+  const copyBtn = document.getElementById(copyBtnId);
+  copyBtn.addEventListener('click', () => {
+    const text = document.getElementById(studentTextId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const original = copyBtn.textContent;
+      copyBtn.textContent = '✔ Copied';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.textContent = original;
+        copyBtn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1');
+buildFillBlank(exercise2, 'quiz-2');
+buildFillBlank(exercise3, 'quiz-3');
+initRewrite('rewrite-input', 'submit-4', 'alternatives-4', 'student-answer-text', 'copy-student-answer');
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1'));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2'));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetFillBlank(exercise3, 'quiz-3', 'check-3', 'reset-3', 'score-3'));
+</script>
+</body>
+</html>
