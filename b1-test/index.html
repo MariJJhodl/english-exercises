@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>B1 Summer Test — English Exercises</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 2rem 1rem 4rem; }
+    header { text-align: center; margin-bottom: 1rem; max-width: 760px; margin-left: auto; margin-right: auto; }
+    header h1 { font-size: 2rem; color: #2f855a; margin-bottom: 0.4rem; }
+    header p { color: #718096; font-size: 1rem; line-height: 1.6; }
+    .progress-bar-wrap { max-width: 760px; margin: 1.5rem auto 2.5rem; }
+    .progress-track { background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden; }
+    .progress-fill { background: #2f855a; height: 100%; width: 10%; border-radius: 10px; }
+    .progress-label { text-align: center; font-size: 0.85rem; color: #718096; margin-top: 0.5rem; }
+    .pages { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+    .page-card { background: white; border-radius: 14px; padding: 1.3rem 1.6rem; box-shadow: 0 2px 10px rgba(0,0,0,0.07); text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1.1rem; border-left: 5px solid #2f855a; transition: box-shadow 0.2s, transform 0.15s; }
+    .page-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); transform: translateY(-1px); }
+    .page-card.locked { border-left-color: #cbd5e0; cursor: default; opacity: 0.65; }
+    .page-card.locked:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.07); transform: none; }
+    .page-num { background: #2f855a; color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.05rem; flex-shrink: 0; }
+    .page-card.locked .page-num { background: #a0aec0; }
+    .page-info { flex: 1; }
+    .page-info h2 { font-size: 1.08rem; color: #2d3748; margin-bottom: 0.25rem; }
+    .page-info p { font-size: 0.87rem; color: #718096; line-height: 1.5; }
+    .badge { font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 12px; flex-shrink: 0; white-space: nowrap; }
+    .badge-ready { background: #c6f6d5; color: #22543d; }
+    .badge-soon { background: #edf2f7; color: #718096; }
+    footer { max-width: 760px; margin: 3rem auto 0; text-align: center; }
+    footer a { color: #2f855a; text-decoration: none; font-size: 0.9rem; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>☀️ B1 Summer Test</h1>
+  <p>500 domande &middot; 10 pagine da 50 domande &middot; grammatica, vocabolario e Use of English<br>
+  Percorso a difficoltà crescente: scegli la pagina da cui iniziare.</p>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
+  <div class="progress-label">Tutte le 10 pagine disponibili &mdash; 500/500 domande</div>
+</div>
+
+<div class="pages">
+
+  <a class="page-card" href="page-01.html">
+    <div class="page-num">1</div>
+    <div class="page-info">
+      <h2>Present Tenses &amp; Question Words</h2>
+      <p>To be / to have, present simple vs. present continuous, wh-words, yes/no questions, double negatives</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-02.html">
+    <div class="page-num">2</div>
+    <div class="page-info">
+      <h2>Everyday Grammar Basics</h2>
+      <p>Capital letters, your/you're, house/home, plural nouns, object &amp; possessive pronouns, do vs. make</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-03.html">
+    <div class="page-num">3</div>
+    <div class="page-info">
+      <h2>Prepositions &amp; Present Tense Nuances</h2>
+      <p>Prepositions of place &amp; time (in/at/on), from/since, by, gerund as subject</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-04.html">
+    <div class="page-num">4</div>
+    <div class="page-info">
+      <h2>Past Simple &amp; Time Expressions</h2>
+      <p>Regular &amp; irregular verbs, used to, adverbs in -ly, telling the time, numbers, dates</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-05.html">
+    <div class="page-num">5</div>
+    <div class="page-info">
+      <h2>Determiners &amp; Question Forming</h2>
+      <p>Demonstratives, leave/let, forming questions, the weather, already/yet, some/any, everything/all/every, dummy subject, possessive pronouns</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-06.html">
+    <div class="page-num">6</div>
+    <div class="page-info">
+      <h2>Everyday Functional Language</h2>
+      <p>Thanking, greetings, polite requests, apologising, public bathroom phrases, giving directions, imperative, possessive case (genitivo sassone)</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-07.html">
+    <div class="page-num">7</div>
+    <div class="page-info">
+      <h2>Future, Articles &amp; More</h2>
+      <p>Will / going to, articles, &ldquo;one&rdquo;, job &amp; career vocabulary, look at/look, from/for, must/have to, conjunctions</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-08.html">
+    <div class="page-num">8</div>
+    <div class="page-info">
+      <h2>Reported Speech, Comparatives &amp; Modals</h2>
+      <p>Reported speech, say/tell, conjunctions, then/after, -ing/-ed adjectives, comparatives &amp; superlatives, verbs + to/-ing, modal verbs, quantifiers, &ldquo;neither do I&rdquo;</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-09.html">
+    <div class="page-num">9</div>
+    <div class="page-info">
+      <h2>Present Perfect &amp; Passive</h2>
+      <p>Present perfect simple, present perfect vs. past simple, just/ever/never/still/yet/already/so far, passive form, quantifiers, to/for</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+  <a class="page-card" href="page-10.html">
+    <div class="page-num">10</div>
+    <div class="page-info">
+      <h2>Word Order &amp; Fine Distinctions</h2>
+      <p>Adjective/adverb position, reflexive pronouns, adjective order, relative pronouns, spot/point, heritage/inheritance/legacy, at the end/in the end, such, remember/remind, &ldquo;fino a&rdquo;</p>
+    </div>
+    <span class="badge badge-ready">Pronta</span>
+  </a>
+
+</div>
+
+<footer>
+  <a href="../index.html">&larr; English Exercises home</a>
+</footer>
+
+</body>
+</html>

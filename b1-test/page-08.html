@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page 8 — B1 Summer Test</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #2d3748; min-height: 100vh; padding: 1.5rem 1rem 4rem; }
+    .breadcrumb { max-width: 750px; margin: 0 auto 1.5rem; font-size: 0.9rem; color: #718096; }
+    .breadcrumb a { color: #2f855a; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-header { max-width: 750px; margin: 0 auto 2rem; text-align: center; }
+    .page-header h1 { font-size: 1.7rem; color: #2f855a; margin-bottom: 0.3rem; }
+    .page-header p  { color: #718096; font-size: 0.95rem; }
+    .exercise-section { max-width: 750px; margin: 0 auto 3rem; }
+    .section-title { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-num { background: #2f855a; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.2rem; color: #2d3748; }
+    .section-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; padding: 0.2rem 0.6rem; border-radius: 10px; background: #e6f6ea; color: #2f855a; margin-left: auto; flex-shrink: 0; }
+    .section-done .section-num { background: #38a169; }
+    .section-done h2 { color: #38a169; }
+    .task-box { background: #e6f6ea; border-left: 4px solid #38a169; border-radius: 8px; padding: 0.7rem 1.1rem; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.2rem; color: #276749; font-style: italic; }
+    .quiz { display: flex; flex-direction: column; gap: 1rem; }
+    .question-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .question-text { font-size: 1rem; margin-bottom: 0.75rem; line-height: 1.6; }
+    .blank { display: inline-block; border-bottom: 2px solid #38a169; min-width: 70px; color: transparent; user-select: none; }
+    .options { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+    .option-btn { padding: 0.4rem 1rem; border: 2px solid #cbd5e0; border-radius: 20px; background: white; font-size: 0.92rem; cursor: pointer; transition: all 0.15s; color: #2d3748; }
+    .option-btn:hover    { border-color: #38a169; color: #2f855a; background: #e6f6ea; }
+    .option-btn.selected { border-color: #38a169; background: #e6f6ea; color: #2f855a; font-weight: 600; }
+    .option-btn.correct  { border-color: #38a169; background: #f0fff4; color: #276749; font-weight: 600; }
+    .option-btn.wrong    { border-color: #e53e3e; background: #fff5f5; color: #c53030; font-weight: 600; }
+    .option-btn:disabled { cursor: default; }
+    .feedback { margin-top: 0.5rem; font-size: 0.82rem; font-weight: 600; display: none; }
+    .feedback.correct { color: #276749; display: block; }
+    .feedback.wrong   { color: #c53030; display: block; }
+    .section-actions { margin-top: 1.2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .btn-check, .btn-reset { padding: 0.6rem 1.8rem; font-size: 0.95rem; border: none; border-radius: 22px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+    .btn-check        { background: #2f855a; color: white; }
+    .btn-check:hover  { background: #276749; }
+    .btn-reset        { background: white; color: #2f855a; border: 2px solid #2f855a; display: none; }
+    .btn-reset:hover  { background: #e6f6ea; }
+    .section-score { font-size: 0.95rem; color: #4a5568; display: none; }
+    .section-score span { font-weight: 700; color: #2f855a; }
+    hr { border: none; border-top: 2px dashed #e2e8f0; margin: 0 auto 2.5rem; max-width: 750px; }
+    /* ── Reorder ── */
+    .reorder-card { background: white; border-radius: 12px; padding: 1.1rem 1.4rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); margin-bottom: 1rem; }
+    .reorder-card .question-text { margin-bottom: 0.5rem; }
+    .answer-area { min-height: 48px; border: 2px dashed #9ae6b4; border-radius: 10px; background: #f4fdf7; padding: 0.5rem 0.7rem; display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; margin-bottom: 0.8rem; transition: border-color 0.2s; }
+    .answer-area:empty::before { content: 'Click the words below to build your sentence\2026'; color: #a0aec0; font-size: 0.88rem; font-style: italic; }
+    .answer-area.has-error   { border-color: #fc8181; background: #fff5f5; }
+    .answer-area.has-success { border-color: #68d391; background: #f0fff4; }
+    .word-pool { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.3rem; }
+    .word-chip { padding: 0.35rem 0.8rem; border: 2px solid #cbd5e0; border-radius: 8px; background: white; font-size: 0.93rem; cursor: pointer; transition: all 0.15s; color: #2d3748; user-select: none; }
+    .word-chip:hover { border-color: #38a169; background: #e6f6ea; color: #2f855a; }
+    .answer-chip { padding: 0.35rem 0.8rem; border: 2px solid #38a169; border-radius: 8px; background: #e6f6ea; font-size: 0.93rem; cursor: pointer; color: #2f855a; font-weight: 600; transition: all 0.15s; user-select: none; }
+    .answer-chip:hover { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .answer-chip.locked { cursor: default; pointer-events: none; }
+    .answer-chip.chip-correct { border-color: #38a169; background: #f0fff4; color: #276749; }
+    .answer-chip.chip-wrong   { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    .reorder-feedback { font-size: 0.82rem; font-weight: 600; margin-top: 0.4rem; display: none; }
+    .reorder-feedback.correct { color: #276749; display: block; }
+    .reorder-feedback.wrong   { color: #c53030; display: block; }
+    /* ── Use of English (cloze) ── */
+    .uoe-text { background: white; border-radius: 12px; padding: 1.3rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); font-size: 1.02rem; line-height: 2.4; color: #2d3748; margin-bottom: 1rem; }
+    .uoe-gap { font-family: inherit; font-size: 0.95rem; font-weight: 600; color: #2f855a; border: 2px solid #38a169; border-radius: 8px; background: #e6f6ea; padding: 0.15rem 0.5rem; cursor: pointer; }
+    .uoe-gap:disabled { cursor: default; opacity: 1; }
+    .uoe-gap.gap-correct { border-color: #38a169; background: #f0fff4; color: #276749; }
+    .uoe-gap.gap-wrong   { border-color: #e53e3e; background: #fff5f5; color: #c53030; }
+    @media (max-width: 600px) {
+      .option-btn  { padding: 0.65rem 1.1rem; font-size: 1rem; }
+      .word-chip   { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .answer-chip { padding: 0.6rem 1rem;    font-size: 1rem; }
+      .btn-check, .btn-reset { padding: 0.75rem 2rem; font-size: 1rem; width: 100%; }
+      .section-actions { flex-direction: column; align-items: stretch; }
+      .question-text   { font-size: 1rem; }
+      .uoe-text { line-height: 2.8; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="../index.html">&larr; Home</a> &nbsp;/&nbsp; <a href="index.html">B1 Summer Test</a> &nbsp;/&nbsp; Page 8
+</nav>
+
+<div class="page-header">
+  <h1>Page 8 &mdash; Reported Speech, Comparatives &amp; Modals</h1>
+  <p>50 questions &middot; Questions 351&ndash;400 of 500</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — MULTIPLE CHOICE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-1">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Multiple Choice</h2>
+    <span class="section-tag">Questions 1&ndash;27</span>
+  </div>
+  <div class="task-box">Choose the correct form to complete each sentence.</div>
+  <div class="quiz" id="quiz-1"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-1">Check answers</button>
+    <button class="btn-reset" id="reset-1">Try again</button>
+    <span class="section-score" id="score-1"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — WORD CHOICE
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-2">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Word Choice</h2>
+    <span class="section-tag">Questions 28&ndash;41</span>
+  </div>
+  <div class="task-box">Choose the correct word to complete each sentence.</div>
+  <div class="quiz" id="quiz-2"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-2">Check answers</button>
+    <button class="btn-reset" id="reset-2">Try again</button>
+    <span class="section-score" id="score-2"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — REORDER
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-3">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Reorder</h2>
+    <span class="section-tag">Questions 42&ndash;44</span>
+  </div>
+  <div class="task-box">Put the words in the correct order to form a complete sentence.</div>
+  <div id="reorder-quiz"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-3">Check answers</button>
+    <button class="btn-reset" id="reset-3">Try again</button>
+    <span class="section-score" id="score-3"></span>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — USE OF ENGLISH
+══════════════════════════════════════════ -->
+<section class="exercise-section" id="section-4">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Use of English</h2>
+    <span class="section-tag">Questions 45&ndash;50</span>
+  </div>
+  <div class="task-box">Read the text below and choose the correct word for each numbered gap.</div>
+  <div class="uoe-text" id="uoe-text"></div>
+  <div class="section-actions">
+    <button class="btn-check" id="check-4">Check answers</button>
+    <button class="btn-reset" id="reset-4">Try again</button>
+    <span class="section-score" id="score-4"></span>
+  </div>
+</section>
+
+<div style="max-width:750px;margin:0 auto 2rem;text-align:center;">
+  <a href="index.html" style="display:inline-block;padding:0.7rem 2rem;background:#2f855a;color:white;border-radius:22px;text-decoration:none;font-weight:600;font-size:0.95rem;">&larr; Back to B1 Summer Test</a>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════
+   SECTION 1 — MULTIPLE CHOICE (reported speech, -ing/-ed
+   adjectives, gerund as object, comparatives, superlative,
+   diminutivo assoluto, verbs+to/-ing, modal verbs — topics mixed
+   on purpose)
+══════════════════════════════════════════ */
+
+const exercise1 = {
+  type: "fill-blank",
+  questions: [
+    { sentence: "She said she ___ tired.", options: ["is", "was", "were"], answer: "was" },
+    { sentence: "The film was really ___, I almost cried.", options: ["moved", "moving", "move"], answer: "moving" },
+    { sentence: "I really enjoy ___ new recipes.", options: ["cook", "to cook", "cooking"], answer: "cooking" },
+    { sentence: "This book is ___ interesting than the last one.", options: ["more", "most", "much"], answer: "more" },
+    { sentence: "This is ___ restaurant in the city.", options: ["the most good", "the best", "the goodest"], answer: "the best" },
+    { sentence: "It&rsquo;s ___ cold today, take a jacket.", options: ["a bit", "much", "very much"], answer: "a bit" },
+    { sentence: "I stopped ___ two years ago.", options: ["to smoke", "smoking", "smoke"], answer: "smoking" },
+    { sentence: "You ___ see a doctor if the pain continues.", options: ["should", "can", "must"], answer: "should" },
+    { sentence: "He told me he ___ in London.", options: ["lives", "lived", "was living"], answer: "lived" },
+    { sentence: "I was so ___ after the long flight.", options: ["tiring", "tire", "tired"], answer: "tired" },
+    { sentence: "She&rsquo;s very good at ___ languages.", options: ["learn", "learning", "to learn"], answer: "learning" },
+    { sentence: "Today is ___ hot as yesterday.", options: ["as", "so", "such"], answer: "as" },
+    { sentence: "He is ___ student in the class.", options: ["the more intelligent", "the intelligentest", "the most intelligent"], answer: "the most intelligent" },
+    { sentence: "The exam was ___ difficult, but I passed.", options: ["a bit", "many", "much"], answer: "a bit" },
+    { sentence: "On my way home, I stopped ___ some bread.", options: ["buying", "to buy", "buy"], answer: "to buy" },
+    { sentence: "___ you swim when you were a child?", options: ["Should", "Did", "Could"], answer: "Could" },
+    { sentence: "They said they ___ finished the project.", options: ["had", "have", "has"], answer: "had" },
+    { sentence: "This exercise is quite ___.", options: ["confuse", "confused", "confusing"], answer: "confusing" },
+    { sentence: "This exercise is ___ difficult than the previous one.", options: ["less", "more", "least"], answer: "less" },
+    { sentence: "That was ___ day of my life.", options: ["the worse", "the most worse", "the worst"], answer: "the worst" },
+    { sentence: "She&rsquo;s ___ tired after the long journey.", options: ["quite", "quite much", "many"], answer: "quite" },
+    { sentence: "Please remember ___ the door when you leave.", options: ["locking", "lock", "to lock"], answer: "to lock" },
+    { sentence: "You really ___ to apologise to her.", options: ["should", "ought", "must"], answer: "ought" },
+    { sentence: "She said she ___ come to the party.", options: ["would", "will", "would to"], answer: "would" },
+    { sentence: "She felt ___ when she saw the spider.", options: ["frightening", "frighten", "frightened"], answer: "frightened" },
+    { sentence: "She is ___ than her brother.", options: ["more tall", "taller", "tallest"], answer: "taller" },
+    { sentence: "I remember ___ this place when I was a child.", options: ["to visit", "visit", "visiting"], answer: "visiting" }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   SECTION 2 — WORD CHOICE (say vs tell, conjunctions, then vs
+   after, quantifiers, "neither do I" — topics mixed on purpose)
+══════════════════════════════════════════ */
+
+const exercise2 = {
+  type: "fill-blank",
+  questions: [
+    { sentence: "She ___ me that she was busy.", options: ["told", "said", "spoke"], answer: "told" },
+    { sentence: "___ it was raining, they went for a walk.", options: ["Although", "Despite", "However"], answer: "Although" },
+    { sentence: "We had dinner and ___ went to the cinema.", options: ["after", "later than", "then"], answer: "then" },
+    { sentence: "There isn&rsquo;t ___ time left before the exam.", options: ["much", "many", "few"], answer: "much" },
+    { sentence: "&lsquo;I don&rsquo;t like coffee.&rsquo; &lsquo;___.&rsquo;", options: ["So do I", "Neither do I", "Neither I do"], answer: "Neither do I" },
+    { sentence: "He ___ that he would be late.", options: ["told", "spoke", "said"], answer: "said" },
+    { sentence: "The traffic was terrible; ___, we arrived on time.", options: ["although", "however", "despite"], answer: "however" },
+    { sentence: "___ the meeting, we went for coffee.", options: ["After", "Then", "Later"], answer: "After" },
+    { sentence: "___ people came to the concert.", options: ["Much", "A little", "A lot of"], answer: "A lot of" },
+    { sentence: "&lsquo;I can&rsquo;t swim.&rsquo; &lsquo;___.&rsquo;", options: ["Neither can I", "So can I", "Can I neither"], answer: "Neither can I" },
+    { sentence: "Can you ___ me the truth?", options: ["say", "speak", "tell"], answer: "tell" },
+    { sentence: "I finished my homework, and ___ I watched TV.", options: ["then", "after", "afterwards to"], answer: "then" },
+    { sentence: "&lsquo;I love pizza.&rsquo; &lsquo;___.&rsquo;", options: ["Neither do I", "So I do", "So do I"], answer: "So do I" },
+    { sentence: "&lsquo;I&rsquo;m sorry,&rsquo; she ___.", options: ["told", "said", "spoke"], answer: "said" }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   SECTION 3 — REORDER (after/before + -ing)
+══════════════════════════════════════════ */
+
+const reorderQuestions = [
+  { words: ["After", "finishing", "dinner", "they", "watched", "a", "film"], answer: ["After", "finishing", "dinner", "they", "watched", "a", "film"] },
+  { words: ["Before", "leaving", "the", "house", "she", "didn't", "check", "the", "doors"], answer: ["Before", "leaving", "the", "house", "she", "didn't", "check", "the", "doors"] },
+  { words: ["Did", "he", "brush", "his", "teeth", "after", "eating", "breakfast", "?"], answer: ["Did", "he", "brush", "his", "teeth", "after", "eating", "breakfast", "?"] }
+];
+
+/* ══════════════════════════════════════════
+   SECTION 4 — USE OF ENGLISH (CLOZE)
+══════════════════════════════════════════ */
+
+const uoeExercise = {
+  before: "Yesterday, my friend ",
+  parts: [
+    { text: " me that she ", options: ["said", "told", "spoke"], answer: "told" },
+    { text: " moving to a new city. She said her new flat was ", options: ["is", "was", "were"], answer: "was" },
+    { text: " bigger than her old one. I ", options: ["much", "more", "most"], answer: "much" },
+    { text: " very happy for her, but I asked if she ", options: ["am", "was", "were"], answer: "was" },
+    { text: " visit us sometimes. She ", options: ["will", "would", "should"], answer: "would" },
+    { text: " that she would definitely come back to see us.", options: ["said", "told", "spoke"], answer: "said" }
+  ]
+};
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — FILL-BLANK
+══════════════════════════════════════════ */
+
+function buildFillBlank(exercise, containerId, startNum) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  exercise.questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.dataset.index = i;
+    const parts = q.sentence.split('___');
+    const sentenceHTML = parts.length === 2
+      ? `${parts[0]}<span class="blank">___</span>${parts[1]}`
+      : q.sentence;
+    card.innerHTML = `
+      <p class="question-text"><strong>${startNum + i}.</strong> ${sentenceHTML}</p>
+      <div class="options">${q.options.map(o => `<button class="option-btn" data-value="${o}">${o}</button>`).join('')}</div>
+      <div class="feedback"></div>`;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        card.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        card.dataset.selected = btn.dataset.value;
+      });
+    });
+    container.appendChild(card);
+  });
+}
+
+function checkFillBlank(exercise, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .question-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const selected = card.dataset.selected;
+    if (!selected) { allAnswered = false; return; }
+    const q = exercise.questions[i];
+    card.dataset.answered = true;
+    card.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.value === q.answer) btn.classList.add('correct');
+      else if (btn.dataset.value === selected && selected !== q.answer) btn.classList.add('wrong');
+    });
+    const fb = card.querySelector('.feedback');
+    if (selected === q.answer) { score++; fb.className = 'feedback correct'; fb.innerHTML = '&#x2714; Correct'; }
+    else { fb.className = 'feedback wrong'; fb.innerHTML = `&#x2718; Correct answer: <strong>${q.answer}</strong>`; }
+  });
+  if (!allAnswered) { alert('Please answer all questions first.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.questions.length}</span>`;
+  if (score === exercise.questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetFillBlank(exercise, containerId, checkId, resetId, scoreId, startNum) {
+  buildFillBlank(exercise, containerId, startNum);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — REORDER
+══════════════════════════════════════════ */
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function makeChip(word, cls) {
+  const btn = document.createElement('button');
+  btn.className = cls;
+  btn.textContent = word;
+  btn.dataset.word = word;
+  return btn;
+}
+
+function buildReorder(questions, containerId, startNum) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'reorder-card';
+    card.dataset.index = i;
+    const poolWords = shuffle(q.words);
+    card.innerHTML = `
+      <p class="question-text"><strong>${startNum + i}.</strong> Build the sentence using all the words.</p>
+      <div class="answer-area" id="answer-${i}"></div>
+      <div class="word-pool" id="pool-${i}"></div>
+      <div class="reorder-feedback" id="rfb-${i}"></div>`;
+    container.appendChild(card);
+    const pool = card.querySelector(`#pool-${i}`);
+    const answerArea = card.querySelector(`#answer-${i}`);
+    poolWords.forEach(word => {
+      const chip = makeChip(word, 'word-chip');
+      chip.addEventListener('click', () => {
+        if (card.dataset.answered) return;
+        pool.removeChild(chip);
+        const aChip = makeChip(word, 'answer-chip');
+        aChip.addEventListener('click', () => {
+          if (card.dataset.answered) return;
+          answerArea.removeChild(aChip);
+          pool.appendChild(chip);
+        });
+        answerArea.appendChild(aChip);
+      });
+      pool.appendChild(chip);
+    });
+  });
+}
+
+function checkReorder(questions, containerId, checkId, resetId, scoreId, sectionId) {
+  const cards = document.querySelectorAll(`#${containerId} .reorder-card`);
+  let allAnswered = true, score = 0;
+  cards.forEach((card, i) => {
+    const answerArea = card.querySelector(`#answer-${i}`);
+    const chips = answerArea.querySelectorAll('.answer-chip');
+    if (chips.length === 0) { allAnswered = false; return; }
+    if (chips.length !== questions[i].words.length) { allAnswered = false; return; }
+    const userAnswer = Array.from(chips).map(c => c.dataset.word);
+    const correct    = questions[i].answer;
+    const isCorrect  = userAnswer.join(' ') === correct.join(' ');
+    card.dataset.answered = true;
+    card.querySelectorAll('.word-chip').forEach(c => { c.disabled = true; c.style.opacity = '0.4'; });
+    chips.forEach((chip, j) => {
+      chip.classList.add('locked');
+      chip.classList.add(chip.dataset.word === correct[j] ? 'chip-correct' : 'chip-wrong');
+    });
+    const fb = card.querySelector(`#rfb-${i}`);
+    if (isCorrect) {
+      score++;
+      answerArea.classList.add('has-success');
+      fb.className = 'reorder-feedback correct';
+      fb.innerHTML = '&#x2714; Correct';
+    } else {
+      answerArea.classList.add('has-error');
+      fb.className = 'reorder-feedback wrong';
+      fb.innerHTML = `&#x2718; Correct order: ${correct.join(' ')}`;
+    }
+  });
+  if (!allAnswered) { alert('Please place all words before checking.'); return; }
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${questions.length}</span>`;
+  if (score === questions.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetReorder(questions, containerId, checkId, resetId, scoreId, startNum) {
+  buildReorder(questions, containerId, startNum);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   BUILD FUNCTIONS — USE OF ENGLISH (CLOZE)
+══════════════════════════════════════════ */
+
+function buildUseOfEnglish(exercise, textId, startNum) {
+  const el = document.getElementById(textId);
+  let html = exercise.before;
+  exercise.parts.forEach((part, i) => {
+    const opts = shuffle(part.options);
+    html += `<select class="uoe-gap" data-index="${i}"><option value="">(${startNum + i})</option>` +
+      opts.map(o => `<option value="${o}">${o}</option>`).join('') +
+      `</select>${part.text}`;
+  });
+  el.innerHTML = html;
+}
+
+function checkUseOfEnglish(exercise, textId, checkId, resetId, scoreId, sectionId) {
+  const selects = document.querySelectorAll(`#${textId} .uoe-gap`);
+  let allAnswered = true, score = 0;
+  selects.forEach((sel) => { if (!sel.value) allAnswered = false; });
+  if (!allAnswered) { alert('Please fill in all the gaps first.'); return; }
+  selects.forEach((sel, i) => {
+    const part = exercise.parts[i];
+    const isCorrect = sel.value === part.answer;
+    sel.disabled = true;
+    sel.classList.add(isCorrect ? 'gap-correct' : 'gap-wrong');
+    if (isCorrect) score++;
+  });
+  document.getElementById(checkId).style.display = 'none';
+  document.getElementById(resetId).style.display = 'inline-block';
+  const scoreEl = document.getElementById(scoreId);
+  scoreEl.style.display = 'inline';
+  scoreEl.innerHTML = `Score: <span>${score} / ${exercise.parts.length}</span>`;
+  if (score === exercise.parts.length)
+    document.getElementById(sectionId).querySelector('.section-title').classList.add('section-done');
+}
+
+function resetUseOfEnglish(exercise, textId, checkId, resetId, scoreId, startNum) {
+  buildUseOfEnglish(exercise, textId, startNum);
+  document.getElementById(checkId).style.display = 'inline-block';
+  document.getElementById(resetId).style.display = 'none';
+  document.getElementById(scoreId).style.display = 'none';
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+
+buildFillBlank(exercise1, 'quiz-1', 1);
+buildFillBlank(exercise2, 'quiz-2', 28);
+buildReorder(reorderQuestions, 'reorder-quiz', 42);
+buildUseOfEnglish(uoeExercise, 'uoe-text', 45);
+
+document.getElementById('check-1').addEventListener('click', () =>
+  checkFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 'section-1'));
+document.getElementById('reset-1').addEventListener('click', () =>
+  resetFillBlank(exercise1, 'quiz-1', 'check-1', 'reset-1', 'score-1', 1));
+
+document.getElementById('check-2').addEventListener('click', () =>
+  checkFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 'section-2'));
+document.getElementById('reset-2').addEventListener('click', () =>
+  resetFillBlank(exercise2, 'quiz-2', 'check-2', 'reset-2', 'score-2', 28));
+
+document.getElementById('check-3').addEventListener('click', () =>
+  checkReorder(reorderQuestions, 'reorder-quiz', 'check-3', 'reset-3', 'score-3', 'section-3'));
+document.getElementById('reset-3').addEventListener('click', () =>
+  resetReorder(reorderQuestions, 'reorder-quiz', 'check-3', 'reset-3', 'score-3', 42));
+
+document.getElementById('check-4').addEventListener('click', () =>
+  checkUseOfEnglish(uoeExercise, 'uoe-text', 'check-4', 'reset-4', 'score-4', 'section-4'));
+document.getElementById('reset-4').addEventListener('click', () =>
+  resetUseOfEnglish(uoeExercise, 'uoe-text', 'check-4', 'reset-4', 'score-4', 45));
+
+</script>
+</body>
+</html>
